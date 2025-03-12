@@ -1,0 +1,16 @@
+# www.robotstxt.org
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://owlai.agency/sitemap.xml
+
+# Disallow access to certain files
+Disallow: /assets/css/
+Disallow: /assets/js/
+Disallow: /.env
+
+# Allow search engines to access all content pages
+Allow: /index.html
+Allow: /pricing-calculator.html 

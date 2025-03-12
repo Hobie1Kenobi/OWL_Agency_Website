@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  
+  <!-- Background -->
+  <rect x="50" y="50" width="300" height="200" rx="10" ry="10" fill="white" stroke="#ddd" stroke-width="1"/>
+  
+  <!-- Title -->
+  <text x="200" y="35" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Online Store Analysis</text>
+  
+  <!-- Store graphic -->
+  <g transform="translate(120, 120)">
+    <!-- Store building -->
+    <rect x="-50" y="-40" width="100" height="80" fill="#47b2e430" stroke="#47b2e4" stroke-width="2"/>
+    <rect x="-50" y="-40" width="100" height="15" fill="#37517e30" stroke="#37517e" stroke-width="1"/>
+    
+    <!-- Door -->
+    <rect x="-10" y="20" width="20" height="20" fill="#fff" stroke="#47b2e4" stroke-width="1"/>
+    
+    <!-- Windows -->
+    <rect x="-35" y="-15" width="20" height="20" fill="#fff" stroke="#47b2e4" stroke-width="1"/>
+    <rect x="15" y="-15" width="20" height="20" fill="#fff" stroke="#47b2e4" stroke-width="1"/>
+    
+    <!-- Sign -->
+    <rect x="-30" y="-35" width="60" height="8" fill="#fff" stroke="#37517e" stroke-width="1"/>
+    <text x="0" y="-28" font-family="Arial, sans-serif" font-size="6" text-anchor="middle" fill="#37517e">ONLINE STORE</text>
+  </g>
+  
+  <!-- Analytics graphic -->
+  <g transform="translate(280, 120)">
+    <!-- Chart background -->
+    <rect x="-50" y="-40" width="100" height="80" fill="#fff" stroke="#ddd" stroke-width="1"/>
+    
+    <!-- Chart bars -->
+    <rect x="-40" y="30" width="15" height="-20" fill="#47b2e4"/>
+    <rect x="-20" y="30" width="15" height="-40" fill="#47b2e4"/>
+    <rect x="0" y="30" width="15" height="-30" fill="#47b2e4"/>
+    <rect x="20" y="30" width="15" height="-50" fill="#47b2e4"/>
+    
+    <!-- Chart axes -->
+    <line x1="-45" y1="30" x2="40" y2="30" stroke="#333" stroke-width="1"/>
+    <line x1="-45" y1="-35" x2="-45" y2="30" stroke="#333" stroke-width="1"/>
+    
+    <!-- Chart title -->
+    <text x="0" y="-25" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">SALES PERFORMANCE</text>
+  </g>
+  
+  <!-- Connection between store and analytics -->
+  <path d="M170,120 C200,100 230,140 260,120" stroke="#47b2e4" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+  
+  <!-- Data flow circles -->
+  <circle cx="190" cy="115" r="3" fill="#37517e">
+    <animate attributeName="cx" from="170" to="260" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="210" cy="125" r="3" fill="#37517e">
+    <animate attributeName="cx" from="170" to="260" dur="3s" begin="1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="230" cy="115" r="3" fill="#37517e">
+    <animate attributeName="cx" from="170" to="260" dur="3s" begin="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Decorative elements -->
+  <circle cx="80" cy="60" r="15" fill="#47b2e410"/>
+  <circle cx="320" cy="60" r="15" fill="#47b2e410"/>
+  <circle cx="80" cy="240" r="15" fill="#47b2e410"/>
+  <circle cx="320" cy="240" r="15" fill="#47b2e410"/>
+</svg> 
