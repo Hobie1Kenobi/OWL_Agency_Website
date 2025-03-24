@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTS Model Comparison - OWL AI Agency</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .tts-comparison {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .tts-model {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tts-model h3 {
+            color: #4a6da7;
+            margin-top: 0;
+        }
+        
+        .audio-samples {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .audio-sample {
+            background-color: white;
+            border-radius: 6px;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .audio-sample h4 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .model-features {
+            margin-top: 1rem;
+        }
+        
+        .model-features li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .model-badge {
+            display: inline-block;
+            background-color: #4a6da7;
+            color: white;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">OWL AI Agency</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="legal-research.html">Legal Research</a></li>
+                    <li><a href="blog/index.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>TTS Model Comparison</h1>
+                <p>Compare different Text-to-Speech models for the OWL AI Agency website</p>
+            </div>
+        </section>
+
+        <section class="tts-comparison">
+            <h2>Voice Model Comparison</h2>
+            <p>We've tested several high-quality TTS models to find the perfect voice for our legal research platform. Listen to the samples below and compare the quality, naturalness, and professionalism of each voice.</p>
+            
+            <div class="tts-model">
+                <h3>Orpheus TTS <span class="model-badge">Recommended</span></h3>
+                <p>The Orpheus TTS model from Canopy Labs provides exceptionally natural and professional-sounding voices, perfect for legal content.</p>
+                
+                <div class="model-features">
+                    <h4>Features:</h4>
+                    <ul>
+                        <li>Extremely natural-sounding speech with proper intonation</li>
+                        <li>Multiple voice options (Tara, Leah, Leo, etc.)</li>
+                        <li>Support for emotional inflections</li>
+                        <li>Excellent pronunciation of legal terminology</li>
+                    </ul>
+                </div>
+                
+                <div class="audio-samples">
+                    <div class="audio-sample">
+                        <h4>Welcome Message</h4>
+                        <audio controls src="audio/orpheus_welcome.wav"></audio>
+                    </div>
+                    <div class="audio-sample">
+                        <h4>Legal Research</h4>
+                        <audio controls src="audio/orpheus_legal_research.wav"></audio>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tts-model">
+                <h3>Microsoft Azure Neural Voices</h3>
+                <p>Microsoft's neural voices provide professional-quality speech with excellent clarity and natural rhythm.</p>
+                
+                <div class="model-features">
+                    <h4>Features:</h4>
+                    <ul>
+                        <li>High-quality neural voices with natural prosody</li>
+                        <li>Multiple languages and accents available</li>
+                        <li>Adjustable speaking styles (professional, friendly, etc.)</li>
+                        <li>Cloud-based API with reliable performance</li>
+                    </ul>
+                </div>
+                
+                <div class="audio-samples">
+                    <div class="audio-sample">
+                        <h4>Welcome Message</h4>
+                        <audio controls src="audio/azure_welcome.wav"></audio>
+                    </div>
+                    <div class="audio-sample">
+                        <h4>Legal Research</h4>
+                        <audio controls src="audio/azure_legal_research.wav"></audio>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tts-model">
+                <h3>Parler TTS Mini</h3>
+                <p>A lightweight but high-quality TTS model that supports emotional inflections and multiple languages.</p>
+                
+                <div class="model-features">
+                    <h4>Features:</h4>
+                    <ul>
+                        <li>Good quality voices with emotional expression</li>
+                        <li>Lightweight model that can run on less powerful hardware</li>
+                        <li>Open-source and freely available</li>
+                        <li>Multiple voice options available</li>
+                    </ul>
+                </div>
+                
+                <div class="audio-samples">
+                    <div class="audio-sample">
+                        <h4>Welcome Message</h4>
+                        <audio controls src="audio/parler_welcome.wav"></audio>
+                    </div>
+                    <div class="audio-sample">
+                        <h4>Legal Research</h4>
+                        <audio controls src="audio/parler_legal_research.wav"></audio>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>OWL AI Agency</h3>
+                    <p>Revolutionizing legal research with AI-powered automation.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="legal-research.html">Legal Research</a></li>
+                        <li><a href="blog/index.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: contact@owl-ai-agency.com</p>
+                    <p>Phone: (985) 790-1830</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 OWL AI Agency. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

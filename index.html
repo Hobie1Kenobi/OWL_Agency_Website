@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OWL AI Agency - AI-powered Service Platform</title>
+<meta content="Transform your business with OWL AI Agency's cutting-edge artificial intelligence services. Our multi-agent platform delivers automated solutions for legal research, document analysis, and more." name="description"/>
+<meta content="AI, agency, owl, machine learning, services, legal tech, artificial intelligence, automation" name="keywords"/>
+<!-- Favicons -->
+<link href="assets/img/favicon.svg" rel="icon"/>
+<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"/>
+<!-- Vendor CSS Files -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css" rel="stylesheet"/>
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<!-- Template Main CSS File -->
+<link href="assets/css/style.css" rel="stylesheet"/>
+<!-- Baidu Auto Push -->
+<script src="js/baidu-push.js"></script>
+<!-- Structured Data -->
+<script src="js/structured-data.js"></script>
+<!-- Enhanced Schema Markup -->
+<script src="js/enhanced-schema.js"></script>
+<!-- Performance Optimizations -->
+<script src="js/performance-optimizations.js"></script>
+<meta content="OWL AI Agency | Legal Research Automation for Law Firms" property="og:title"/><meta content="Transform your legal research with AI-powered automation. Reduce research time by up to 70% while improving accuracy and insights." property="og:description"/><meta content="https://owl-ai-agency.com/images/owl-ai-agency-social.jpg" property="og:image"/><meta content="https://owl-ai-agency.com/index.html" property="og:url"/><meta content="website" property="og:type"/><meta content="OWL AI Agency" property="og:site_name"/><meta content="summary_large_image" name="twitter:card"/><meta content="@OWL_AI_Agency" name="twitter:site"/><meta content="OWL AI Agency | Legal Research Automation for Law Firms" name="twitter:title"/><meta content="Transform your legal research with AI-powered automation. Reduce research time by up to 70% while improving accuracy and insights." name="twitter:description"/><meta content="https://owl-ai-agency.com/images/owl-ai-agency-social.jpg" name="twitter:image"/><style>
+.social-share-container {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.social-share-container h4 {
+  margin-top: 0;
+  color: #333;
+}
+
+.social-share-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-share-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.social-share-buttons a:hover {
+  transform: scale(1.1);
+}
+
+.linkedin-share {
+  background-color: #0077b5;
+}
+
+.twitter-share {
+  background-color: #1da1f2;
+}
+
+.facebook-share {
+  background-color: #3b5998;
+}
+
+.email-share {
+  background-color: #6c757d;
+}
+
+.social-share-buttons i {
+  font-size: 1.2rem;
+}
+</style><style>
+<style>
+.owl-voice-chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-family: 'Roboto', sans-serif;
+}
+
+.owl-voice-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4a6da7;
+    color: white;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.owl-voice-button:hover {
+    background-color: #3a5a8f;
+    transform: scale(1.05);
+}
+
+.owl-voice-button i {
+    font-size: 24px;
+}
+
+.owl-voice-dialog {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 350px;
+    max-height: 500px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.owl-voice-header {
+    background-color: #4a6da7;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.owl-voice-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+#owl-voice-close {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.owl-voice-content {
+    padding: 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+    max-height: 350px;
+}
+
+.owl-voice-welcome {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.owl-voice-conversation {
+    display: flex;
+    flex-direction: column;
+}
+
+.owl-voice-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.owl-voice-user-message {
+    background-color: #e6f2ff;
+    align-self: flex-end;
+}
+
+.owl-voice-assistant-message {
+    background-color: #f0f0f0;
+    align-self: flex-start;
+}
+
+.owl-voice-footer {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.owl-voice-status {
+    color: #777;
+    font-size: 14px;
+}
+
+.owl-voice-mic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #4a6da7;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.owl-voice-mic.listening {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(74, 109, 167, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(74, 109, 167, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(74, 109, 167, 0);
+    }
+}
+
+@media (max-width: 480px) {
+    .owl-voice-dialog {
+        width: 300px;
+        right: 0;
+    }
+}
+</style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      "#speakable-heading-0",
+      "#speakable-heading-1",
+      "#speakable-heading-2",
+      "#speakable-heading-3",
+      "#speakable-heading-4",
+      "#speakable-heading-5",
+      "#speakable-heading-6",
+      "#speakable-heading-7",
+      "#speakable-heading-8",
+      "#speakable-heading-9",
+      "#speakable-heading-10",
+      "#speakable-heading-11",
+      "#speakable-para-0",
+      "#speakable-para-1",
+      "#speakable-para-2",
+      "#speakable-para-3",
+      "#speakable-para-4"
+    ]
+  },
+  "url": "https://owl-ai-agency.com/index.html"
+}</script><style>
+        .owl-voice-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .owl-voice-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #4a6da7;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .owl-voice-button:hover {
+            background-color: #3a5a8f;
+            transform: scale(1.05);
+        }
+        
+        .owl-voice-button i {
+            font-size: 24px;
+        }
+        
+        .owl-voice-dialog {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: none;
+        }
+        
+        .owl-voice-header {
+            background-color: #4a6da7;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .owl-voice-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .owl-voice-close {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .owl-voice-content {
+            padding: 15px;
+        }
+        
+        .owl-voice-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .owl-voice-option {
+            padding: 10px 15px;
+            background-color: #f0f4f8;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .owl-voice-option:hover {
+            background-color: #e0e7f0;
+        }
+        
+        .owl-voice-footer {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .owl-voice-footer a {
+            color: #4a6da7;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .owl-voice-speaking {
+            background-color: #e0e7f0;
+        }
+        
+        @media (max-width: 480px) {
+            .owl-voice-dialog {
+                width: 300px;
+                right: 0;
+            }
+        }
+        </style><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      "#speakable-heading-0",
+      "#speakable-heading-1",
+      "#speakable-heading-2",
+      "#speakable-heading-3",
+      "#speakable-heading-4",
+      "#speakable-heading-5",
+      "#speakable-heading-6",
+      "#speakable-heading-7",
+      "#speakable-heading-8",
+      "#speakable-heading-9",
+      "#speakable-heading-10",
+      "#speakable-heading-11",
+      "#speakable-para-0",
+      "#speakable-para-1",
+      "#speakable-para-2",
+      "#speakable-para-3",
+      "#speakable-para-4"
+    ]
+  },
+  "url": "https://owl-ai-agency.com/index.html"
+}</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      "#speakable-heading-0",
+      "#speakable-heading-1",
+      "#speakable-heading-2",
+      "#speakable-heading-3",
+      "#speakable-heading-4",
+      "#speakable-heading-5",
+      "#speakable-heading-6",
+      "#speakable-heading-7",
+      "#speakable-heading-8",
+      "#speakable-heading-9",
+      "#speakable-heading-10",
+      "#speakable-heading-11",
+      "#speakable-para-0",
+      "#speakable-para-1",
+      "#speakable-para-2",
+      "#speakable-para-3",
+      "#speakable-para-4"
+    ]
+  },
+  "url": "https://owl-ai-agency.com/index.html"
+}</script><style>
+        .owl-voice-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .owl-voice-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #4a6da7;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .owl-voice-button:hover {
+            background-color: #3a5a8f;
+            transform: scale(1.05);
+        }
+        
+        .owl-voice-button i {
+            font-size: 24px;
+        }
+        
+        .owl-voice-dialog {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: none;
+        }
+        
+        .owl-voice-header {
+            background-color: #4a6da7;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .owl-voice-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .owl-voice-close {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .owl-voice-content {
+            padding: 15px;
+        }
+        
+        .owl-voice-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .owl-voice-option {
+            padding: 10px 15px;
+            background-color: #f0f4f8;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .owl-voice-option:hover {
+            background-color: #e0e7f0;
+        }
+        
+        .owl-voice-footer {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .owl-voice-footer a {
+            color: #4a6da7;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .owl-voice-speaking {
+            background-color: #e0e7f0;
+        }
+        
+        @media (max-width: 480px) {
+            .owl-voice-dialog {
+                width: 300px;
+                right: 0;
+            }
+        }
+        
+        .orpheus-badge {
+            display: inline-block;
+            font-size: 11px;
+            background-color: #f0f4f8;
+            padding: 3px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .voice-status {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        </style></head>
+<body>
+<!-- ======= Header ======= -->
+<header class="fixed-top" id="header">
+<div class="container d-flex align-items-center">
+<h1 class="logo me-auto"><a href="index.html"><span class="owl-logo">OWL</span> AI Agency</a></h1>
+<nav class="navbar" id="navbar">
+<ul>
+<li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+<li><a class="nav-link scrollto" href="#about">About</a></li>
+<li><a class="nav-link scrollto" href="#use-cases">Use Cases</a></li>
+<li><a class="nav-link scrollto" href="#benchmarks">Benchmarks</a></li>
+<li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
+<li><a class="nav-link scrollto" href="blog/">Blog</a></li>
+<li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+<li><a class="getstarted scrollto" href="legal-research.html">Legal Research</a></li>
+</ul>
+<i class="bi bi-list mobile-nav-toggle"></i>
+</nav><!-- .navbar -->
+</div>
+</header><!-- End Header -->
+<!-- ======= Hero Section ======= -->
+<section class="d-flex align-items-center" id="hero">
+<div class="container">
+<div class="row">
+<div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+<h1>Leave it to OWL</h1>
+<h2>OWL is a general AI agent that bridges minds and actions: it doesn't just think, it delivers results. OWL excels at various tasks in work and life, getting everything done while you rest.</h2>
+<div class="d-flex justify-content-center justify-content-lg-start">
+<a class="btn-get-started scrollto" href="#use-cases">Try OWL</a>
+<a class="glightbox btn-watch-video" href="https://www.youtube.com/watch?v=jDDaplaOz7Q"><i class="bi bi-play-circle"></i><span>Watch Demo</span></a>
+</div>
+</div>
+<div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+<img alt="OWL AI Agent" class="img-fluid animated" src="assets/img/hero-img.svg"/>
+</div>
+</div>
+</div>
+</section><!-- End Hero -->
+<main id="main">
+<!-- ======= About Us Section ======= -->
+<section class="about" id="about">
+<div class="container" data-aos="fade-up">
+<div class="section-title">
+<h2 id="speakable-heading-0">About Us</h2>
+<div class="social-share-container">
+<h4>Share this page:</h4>
+<div class="social-share-buttons">
+<a class="linkedin-share" href="https://www.linkedin.com/sharing/share-offsite/?url=https://owl-ai-agency.com/index.html" target="_blank">
+<i class="fab fa-linkedin"></i>
+</a>
+<a class="twitter-share" href="https://twitter.com/intent/tweet?url=https://owl-ai-agency.com/index.html&amp;text=OWL AI Agency | Legal Research Automation for Law Firms&amp;via=OWL_AI_Agency" target="_blank">
+<i class="fab fa-twitter"></i>
+</a>
+<a class="facebook-share" href="https://www.facebook.com/sharer/sharer.php?u=https://owl-ai-agency.com/index.html" target="_blank">
+<i class="fab fa-facebook"></i>
+</a>
+<a class="email-share" href="mailto:?subject=OWL AI Agency | Legal Research Automation for Law Firms&amp;body=Transform your legal research with AI-powered automation. Reduce research time by up to 70% while improving accuracy and insights.
+
+Read more: https://owl-ai-agency.com/index.html">
+<i class="fas fa-envelope"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="row content">
+<div class="col-lg-6">
+<p id="speakable-para-0">
+              OWL AI Agency is a cutting-edge platform built on the Optimized Workforce Learning (OWL) framework, providing AI-powered services for businesses of all sizes:
+            </p>
+<ul>
+<li><i class="ri-check-double-line"></i> Multi-agent system for handling complex tasks</li>
+<li><i class="ri-check-double-line"></i> Advanced natural language processing capabilities</li>
+<li><i class="ri-check-double-line"></i> Integration with your existing business tools</li>
+</ul>
+</div>
+<div class="col-lg-6 pt-4 pt-lg-0">
+<p id="speakable-para-1">
+              Our AI agency leverages state-of-the-art technology to automate and optimize various business processes, from content creation to data analysis, technical documentation, and coding services. We provide a comprehensive solution that delivers high-quality results consistently and efficiently.
+            </p>
+<a class="btn-learn-more" href="#use-cases">Learn More</a>
+</div>
+</div>
+</div>
+</section><!-- End About Us Section -->
+<!-- ======= Use Cases Section ======= -->
+<section class="use-cases section-bg" id="use-cases">
+<div class="container" data-aos="fade-up">
+<div class="section-title">
+<h2 id="speakable-heading-1">Use Case Gallery</h2>
+<p id="speakable-para-2">Learn how OWL handles real-world tasks through step-by-step examples.</p>
+</div>
+<!-- Use Case Categories -->
+<div class="row mb-5 justify-content-center">
+<div class="col-lg-8">
+<div class="use-case-filter d-flex justify-content-center">
+<a class="filter-item active" data-filter="all" href="#">Featured</a>
+<a class="filter-item" data-filter="research" href="#">Research</a>
+<a class="filter-item" data-filter="life" href="#">Life</a>
+<a class="filter-item" data-filter="data" href="#">Data Analysis</a>
+<a class="filter-item" data-filter="education" href="#">Education</a>
+<a class="filter-item" data-filter="productivity" href="#">Productivity</a>
+</div>
+</div>
+</div>
+<!-- Use Case Cards -->
+<div class="row use-case-container">
+<!-- Card 1 -->
+<div class="col-lg-4 col-md-6 use-case-item" data-category="life">
+<div class="use-case-card">
+<div class="card-img">
+<img alt="Trip to Japan" src="assets/img/use-cases/trip-japan.svg"/>
+</div>
+<div class="card-body">
+<h5>Trip to Japan in April</h5>
+<p id="speakable-para-3">OWL integrates comprehensive travel information to create personalized itineraries and produces a custom travel handbook tailored specifically for your Japanese adventure.</p>
+<a class="use-case-link" href="pricing-calculator.html?service=content-creation&amp;complexity=medium&amp;quantity=5000&amp;subscription=none">Try This Task</a>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="col-lg-4 col-md-6 use-case-item" data-category="data">
+<div class="use-case-card">
+<div class="card-img">
+<img alt="Tesla Stock Analysis" src="assets/img/use-cases/tesla-stock.svg"/>
+</div>
+<div class="card-body">
+<h5>Deeply Analyze Tesla Stocks</h5>
+<p id="speakable-para-4">OWL delivers in-depth stock analysis with visually compelling dashboards that showcase comprehensive insights into Tesla's market performance and financial outlook.</p>
+<a class="use-case-link" href="pricing-calculator.html?service=data-analysis&amp;complexity=high&amp;quantity=1&amp;subscription=none">Try This Task</a>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="col-lg-4 col-md-6 use-case-item" data-category="education">
+<div class="use-case-card">
+<div class="card-img">
+<img alt="Momentum Theorem" src="assets/img/use-cases/momentum-theorem.svg"/>
+</div>
+<div class="card-body">
+<h5>Interactive Course on the Momentum Theorem</h5>
+<p>OWL develops engaging video presentations for middle school educators, clearly explaining the momentum theorem through accessible and educational content.</p>
+<a class="use-case-link" href="pricing-calculator.html?service=technical-documentation&amp;complexity=medium&amp;quantity=3000&amp;subscription=none">Try This Task</a>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="col-lg-4 col-md-6 use-case-item" data-category="life">
+<div class="use-case-card">
+<div class="card-img">
+<img alt="Insurance Policies" src="assets/img/use-cases/insurance-policies.svg"/>
+</div>
+<div class="card-body">
+<h5>Comparative Analysis of Insurance Policies</h5>
+<p>Looking to compare insurance options? OWL generates clear, structured comparison tables highlighting key policy information with optimal recommendations tailored to your needs.</p>
+<a class="use-case-link" href="pricing-calculator.html?service=data-analysis&amp;complexity=medium&amp;quantity=1&amp;subscription=none">Try This Task</a>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="col-lg-4 col-md-6 use-case-item" data-category="research">
+<div class="use-case-card">
+<div class="card-img">
+<img alt="B2B Supplier" src="assets/img/use-cases/b2b-supplier.svg"/>
+</div>
+<div class="card-body">
+<h5>B2B Supplier Sourcing</h5>
+<p>OWL conducts comprehensive research across extensive networks to identify the most suitable suppliers for your specific requirements. As your dedicated agent, OWL works exclusively in your best interest.</p>
+<a class="use-case-link" href="pricing-calculator.html?service=research&amp;complexity=high&amp;quantity=1&amp;subscription=none">Try This Task</a>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="col-lg-4 col-md-6 use-case-item" data-category="research">
+<div class="use-case-card">
+<div class="card-img">
+<img alt="AI in Clothing" src="assets/img/use-cases/ai-clothing.svg"/>
+</div>
+<div class="card-body">
+<h5>Research on AI Products for the Clothing Industry</h5>
+<p>OWL conducted in-depth research on AI search products in the clothing industry with comprehensive product analysis and competitive positioning.</p>
+<a class="use-case-link" href="pricing-calculator.html?service=research&amp;complexity=medium&amp;quantity=1&amp;subscription=none">Try This Task</a>
+</div>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="col-lg-4 col-md-6 use-case-item" data-category="data">
+<div class="use-case-card">
+<div class="card-img">
+<img alt="Online Store Analysis" src="assets/img/use-cases/online-store.svg"/>
+</div>
+<div class="card-body">
+<h5>Online Store Operation Analysis</h5>
+<p>Upload your Amazon store sales data and OWL delivers actionable insights, detailed visualizations, and customized strategies designed to increase your sales performance.</p>
+<a class="use-case-link" href="pricing-calculator.html?service=data-analysis&amp;complexity=medium&amp;quantity=1&amp;subscription=none">Try This Task</a>
+</div>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="col-lg-4 col-md-6 use-case-item" data-category="research">
+<div class="use-case-card">
+<div class="card-img">
+<img alt="YC Companies" src="assets/img/use-cases/yc-companies.svg"/>
+</div>
+<div class="card-body">
+<h5>List of YC Companies</h5>
+<p>OWL expertly navigated the YC database to identify all qualifying B2B companies, meticulously compiling this valuable information into a structured table.</p>
+<a class="use-case-link" href="pricing-calculator.html?service=research&amp;complexity=low&amp;quantity=1&amp;subscription=none">Try This Task</a>
+</div>
+</div>
+</div>
+<!-- Card 9 - Legal Research -->
+<div class="col-lg-4 col-md-6 use-case-item" data-category="research">
+<div class="use-case-card">
+<div class="card-img">
+<img alt="Legal Research" src="assets/img/use-cases/insurance-policies.svg"/>
+</div>
+<div class="card-body">
+<h5>Legal Research Automation</h5>
+<p>OWL's advanced legal research system analyzed 73 federal cases, reducing research time by 85% while maintaining 92% accuracy compared to human attorneys.</p>
+<a class="use-case-link" href="legal-research.html">Learn More</a>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center mt-4">
+<a class="btn-learn-more" href="#">Explore More Use Cases</a>
+</div>
+</div>
+</section><!-- End Use Cases Section -->
+<!-- ======= Submit Your Task Section ======= -->
+<section class="submit-task" id="submit-task">
+<div class="container" data-aos="fade-up">
+<div class="row align-items-center">
+<div class="col-lg-6">
+<div class="submit-task-content">
+<h3 id="speakable-heading-2">See how others use OWL</h3>
+<p>Got a task? Let OWL take care of it! Submit yours and see the best results featured here.</p>
+<a class="btn-get-started scrollto" href="#contact">Let OWL try my task</a>
+</div>
+</div>
+<div class="col-lg-6">
+<div class="task-examples">
+<!-- Task Examples -->
+<div class="task-example">
+<h5>Best Books on Media and Linguistics in France 2019-2025</h5>
+<p class="task-desc">Please help me to create a table of the best books about medias and linguistics (separated topics) published in France between 2019 and 2025. With a summary of why they are the best.</p>
+<p class="task-user">From jo****th@gmail.com</p>
+</div>
+<div class="task-example">
+<h5>Impact of Fire Control Technologies on U.S. Victory in WWII</h5>
+<p class="task-desc">Please do a research on how damage control, specifically fire control technologies, helped the U.S. Pacific Fleet withstand air strikes and ultimately defeat Japan during World War II.</p>
+<p class="task-user">From mi****23@gmail.com</p>
+</div>
+<div class="task-example">
+<h5>Two-Month Family Trip Itinerary and Guide</h5>
+<p class="task-desc">Can you help me plan a two-month family trip for three people during the upcoming summer break(July to September), including Australia, New Zealand, Argentina, and Antarctica?</p>
+<p class="task-user">From ch****ro@gmail.com</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><!-- End Submit Your Task Section -->
+<!-- ======= Benchmarks Section ======= -->
+<section class="benchmarks section-bg" id="benchmarks">
+<div class="container" data-aos="fade-up">
+<div class="section-title">
+<h2 id="speakable-heading-3">Benchmarks</h2>
+<p>OWL has achieved state-of-the-art performance across all difficulty levels.</p>
+</div>
+<div class="row">
+<div class="col-lg-4" data-aos="fade-right">
+<div class="benchmark-box">
+<h3 id="speakable-heading-4">Level 1 (Simple)</h3>
+<div class="benchmark-score">
+<div class="score-bar">
+<div class="score-fill" style="width: 95%;"></div>
+</div>
+<div class="score-value">95%</div>
+</div>
+<p>OWL excels at simple tasks like data gathering, basic analysis, and content generation.</p>
+</div>
+</div>
+<div class="col-lg-4" data-aos="fade-up">
+<div class="benchmark-box">
+<h3 id="speakable-heading-5">Level 2 (Moderate)</h3>
+<div class="benchmark-score">
+<div class="score-bar">
+<div class="score-fill" style="width: 88%;"></div>
+</div>
+<div class="score-value">88%</div>
+</div>
+<p>For moderate complexity tasks requiring synthesis of multiple sources and targeted analysis.</p>
+</div>
+</div>
+<div class="col-lg-4" data-aos="fade-left">
+<div class="benchmark-box">
+<h3 id="speakable-heading-6">Level 3 (Complex)</h3>
+<div class="benchmark-score">
+<div class="score-bar">
+<div class="score-fill" style="width: 76%;"></div>
+</div>
+<div class="score-value">76%</div>
+</div>
+<p>Even on the most complex tasks requiring deep reasoning and multiple steps, OWL outperforms competitors.</p>
+</div>
+</div>
+</div>
+</div>
+</section><!-- End Benchmarks Section -->
+<!-- ======= Pricing Section ======= -->
+<section class="pricing" id="pricing">
+<div class="container" data-aos="fade-up">
+<div class="section-title">
+<h2 id="speakable-heading-7">Pricing</h2>
+<p>Choose the plan that best suits your business needs.</p>
+</div>
+<div class="row">
+<div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+<div class="box">
+<h3 id="speakable-heading-8">Basic Plan</h3>
+<h4><sup>$</sup>499<span>per month</span></h4>
+<ul>
+<li><i class="bx bx-check"></i> 10 Tasks included</li>
+<li><i class="bx bx-check"></i> 10% off additional tasks</li>
+<li><i class="bx bx-check"></i> 2,000 max word count per task</li>
+<li class="na"><i class="bx bx-x"></i> <span>Priority queue</span></li>
+<li class="na"><i class="bx bx-x"></i> <span>Dedicated agents</span></li>
+</ul>
+<a class="buy-btn" href="pricing-calculator.html?subscription=basic">Get Started</a>
+</div>
+</div>
+<div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
+<div class="box featured">
+<h3 id="speakable-heading-9">Professional Plan</h3>
+<h4><sup>$</sup>999<span>per month</span></h4>
+<ul>
+<li><i class="bx bx-check"></i> 25 Tasks included</li>
+<li><i class="bx bx-check"></i> 15% off additional tasks</li>
+<li><i class="bx bx-check"></i> 4,000 max word count per task</li>
+<li><i class="bx bx-check"></i> Priority queue</li>
+<li class="na"><i class="bx bx-x"></i> <span>Dedicated agents</span></li>
+</ul>
+<a class="buy-btn" href="pricing-calculator.html?subscription=professional">Get Started</a>
+</div>
+</div>
+<div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
+<div class="box">
+<h3 id="speakable-heading-10">Enterprise Plan</h3>
+<h4><sup>$</sup>2499<span>per month</span></h4>
+<ul>
+<li><i class="bx bx-check"></i> 75 Tasks included</li>
+<li><i class="bx bx-check"></i> 20% off additional tasks</li>
+<li><i class="bx bx-check"></i> 10,000 max word count per task</li>
+<li><i class="bx bx-check"></i> Priority queue</li>
+<li><i class="bx bx-check"></i> Dedicated agents</li>
+</ul>
+<a class="buy-btn" href="pricing-calculator.html?subscription=enterprise">Get Started</a>
+</div>
+</div>
+</div>
+</div>
+</section><!-- End Pricing Section -->
+<!-- ======= Contact Section ======= -->
+<section class="contact" id="contact">
+<div class="container" data-aos="fade-up">
+<div class="section-title">
+<h2 id="speakable-heading-11">Contact</h2>
+<p>Contact us to learn more about how our AI agency can help your business.</p>
+</div>
+<div class="row">
+<div class="col-lg-5 d-flex align-items-stretch">
+<div class="info">
+<div class="address">
+<i class="bi bi-geo-alt"></i>
+<h4>Location:</h4>
+<p>Ingleside, TX 78362<br/>
+                United States</p>
+</div>
+<div class="email">
+<i class="bi bi-envelope"></i>
+<h4>Email:</h4>
+<p>sales@owl-ai-agency.com</p>
+</div>
+<div class="phone">
+<i class="bi bi-phone"></i>
+<h4>Call:</h4>
+<p>(985) 790-1830</p>
+</div>
+<iframe allowfullscreen="" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3432.6541159999997!2d-97.21251168428555!3d27.87411568428555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDQyJzQ4LjgiTiA5N8KwMjEnMjYuNiJX!5e0!3m2!1sen!2sus!4v1672845688541!5m2!1sen!2sus" style="border:0; width: 100%; height: 290px;"></iframe>
+</div>
+</div>
+<div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+<form action="forms/contact.php" class="php-email-form" method="post" role="form">
+<div class="row">
+<div class="form-group col-md-6">
+<label for="name">Your Name</label>
+<input class="form-control" id="name" name="name" required="" type="text"/>
+</div>
+<div class="form-group col-md-6">
+<label for="name">Your Email</label>
+<input class="form-control" id="email" name="email" required="" type="email"/>
+</div>
+</div>
+<div class="form-group">
+<label for="name">Subject</label>
+<input class="form-control" id="subject" name="subject" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="name">Message</label>
+<textarea class="form-control" name="message" required="" rows="10"></textarea>
+</div>
+<div class="my-3">
+<div class="loading">Loading</div>
+<div class="error-message"></div>
+<div class="sent-message">Your message has been sent. Thank you!</div>
+</div>
+<div class="text-center"><button type="submit">Send Message</button></div>
+</form>
+</div>
+</div>
+</div>
+</section><!-- End Contact Section -->
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+<footer id="footer">
+<div class="footer-top">
+<div class="container">
+<div class="row">
+<div class="col-lg-3 col-md-6 footer-contact">
+<h3>OWL AI Agency</h3>
+<p>
+              Ingleside, TX 78362<br/>
+              United States <br/><br/>
+<strong>Phone:</strong> (985) 790-1830<br/>
+<strong>Email:</strong> sales@owl-ai-agency.com<br/>
+<strong>Website:</strong> www.owl-ai-agency.com<br/>
+</p>
+</div>
+<div class="col-lg-3 col-md-6 footer-links">
+<h4>Useful Links</h4>
+<ul>
+<li><i class="bx bx-chevron-right"></i> <a href="#hero">Home</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="#use-cases">Use Cases</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="#pricing">Pricing</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 footer-links">
+<h4>Our Services</h4>
+<ul>
+<li><i class="bx bx-chevron-right"></i> <a href="#">Content Creation</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="#">Technical Documentation</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="#">Data Analysis</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="#">Coding Services</a></li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 footer-links">
+<h4>Follow Us</h4>
+<p>Follow us to stay updated on the latest in AI technology</p>
+<div class="social-links mt-3">
+<a class="twitter" href="#"><i class="bx bxl-twitter"></i></a>
+<a class="facebook" href="#"><i class="bx bxl-facebook"></i></a>
+<a class="instagram" href="#"><i class="bx bxl-instagram"></i></a>
+<a class="google-plus" href="#"><i class="bx bxl-skype"></i></a>
+<a class="linkedin" href="#"><i class="bx bxl-linkedin"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container footer-bottom clearfix">
+<div class="copyright">
+        © Copyright <strong><span>OWL AI Agency</span></strong>. All Rights Reserved
+      </div>
+<div class="credits">
+        OWL, derived from "Optimized Workforce Learning", is a general AI agent that turns your thoughts into actions.
+      </div>
+</div>
+</footer><!-- End Footer -->
+<div id="preloader"></div>
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i class="bi bi-arrow-up-short"></i></a>
+<!-- Vendor JS Files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+<script src="assets/js/use-cases.js"></script>
+<script src="js/schema/index-faq-schema.js"></script><script src="js/schema/index-review-schema.js"></script><script>
+<script>
+// Sesame Voice Integration for OWL AI Agency
+document.addEventListener('DOMContentLoaded', function() {
+    // Create voice chat container
+    const voiceChatContainer = document.createElement('div');
+    voiceChatContainer.id = 'owl-voice-chat';
+    voiceChatContainer.className = 'owl-voice-chat-container';
+    document.body.appendChild(voiceChatContainer);
+
+    // Create voice button
+    const voiceButton = document.createElement('button');
+    voiceButton.id = 'owl-voice-button';
+    voiceButton.className = 'owl-voice-button';
+    voiceButton.innerHTML = '<i class="fas fa-microphone"></i>';
+    voiceButton.setAttribute('aria-label', 'Activate voice assistant');
+    voiceChatContainer.appendChild(voiceButton);
+
+    // Create voice dialog
+    const voiceDialog = document.createElement('div');
+    voiceDialog.id = 'owl-voice-dialog';
+    voiceDialog.className = 'owl-voice-dialog';
+    voiceDialog.style.display = 'none';
+    voiceChatContainer.appendChild(voiceDialog);
+
+    // Voice dialog content
+    voiceDialog.innerHTML = `
+        <div class="owl-voice-header">
+            <h3>OWL Voice Assistant</h3>
+            <button id="owl-voice-close" aria-label="Close voice assistant">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="owl-voice-content" class="owl-voice-content">
+            <p class="owl-voice-welcome">Welcome to OWL AI Agency. How can I help with your legal research needs today?</p>
+            <div id="owl-voice-conversation" class="owl-voice-conversation"></div>
+        </div>
+        <div class="owl-voice-footer">
+            <div id="owl-voice-status" class="owl-voice-status">Click the microphone to speak</div>
+            <button id="owl-voice-mic" class="owl-voice-mic">
+                <i class="fas fa-microphone"></i>
+            </button>
+        </div>
+    `;
+
+    // Load Sesame Voice SDK
+    const sesameScript = document.createElement('script');
+    sesameScript.src = 'https://cdn.sesameai.cc/sdk/latest/sesame-voice.min.js';
+    sesameScript.async = true;
+    document.head.appendChild(sesameScript);
+
+    // Initialize Sesame Voice when SDK is loaded
+    sesameScript.onload = function() {
+        if (typeof SesameVoice !== 'undefined') {
+            // Initialize Sesame Voice
+            const voiceAssistant = SesameVoice.init({
+                apiKey: 'YOUR_SESAME_API_KEY', // Replace with your actual API key
+                element: '#owl-voice-dialog',
+                config: {
+                    name: 'OWL Assistant',
+                    voiceType: 'professional',
+                    triggerWords: ${JSON.stringify(VOICE_CHAT_CONFIG.triggerWords)},
+                    theme: ${JSON.stringify(VOICE_CHAT_CONFIG.theme)}
+                },
+                onReady: function() {
+                    console.log('Sesame Voice is ready');
+                },
+                onError: function(error) {
+                    console.error('Sesame Voice error:', error);
+                }
+            });
+
+            // Load FAQ data
+            voiceAssistant.loadKnowledge(${JSON.stringify(FAQ_DATA)});
+
+            // Load voice commands
+            voiceAssistant.setCommands(${JSON.stringify(VOICE_COMMANDS)});
+
+            // Voice button click handler
+            document.getElementById('owl-voice-button').addEventListener('click', function() {
+                document.getElementById('owl-voice-dialog').style.display = 'block';
+                voiceAssistant.start();
+            });
+
+            // Close button handler
+            document.getElementById('owl-voice-close').addEventListener('click', function() {
+                document.getElementById('owl-voice-dialog').style.display = 'none';
+                voiceAssistant.stop();
+            });
+
+            // Mic button handler
+            document.getElementById('owl-voice-mic').addEventListener('click', function() {
+                if (voiceAssistant.isListening()) {
+                    voiceAssistant.stopListening();
+                    document.getElementById('owl-voice-status').textContent = 'Click the microphone to speak';
+                } else {
+                    voiceAssistant.startListening();
+                    document.getElementById('owl-voice-status').textContent = 'Listening...';
+                }
+            });
+
+            // Track voice interactions for analytics
+            voiceAssistant.on('interaction', function(data) {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'voice_interaction', {
+                        'event_category': 'Voice Assistant',
+                        'event_label': data.query
+                    });
+                }
+            });
+        }
+    };
+});
+</script>
+
+<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Check if browser supports speech synthesis
+                if ('speechSynthesis' in window) {
+                    // Voice player elements
+                    const voiceButton = document.getElementById('owl-voice-button');
+                    const voiceDialog = document.getElementById('owl-voice-dialog');
+                    const voiceClose = document.getElementById('owl-voice-close');
+                    const voiceOptions = document.querySelectorAll('.owl-voice-option');
+                    
+                    // Speech synthesis
+                    const synth = window.speechSynthesis;
+                    let utterance = null;
+                    
+                    // Show/hide dialog
+                    voiceButton.addEventListener('click', function() {
+                        voiceDialog.style.display = 'block';
+                        
+                        // Welcome message
+                        speak('Welcome to OWL AI Agency. How can I help with your legal research needs today?');
+                    });
+                    
+                    voiceClose.addEventListener('click', function() {
+                        voiceDialog.style.display = 'none';
+                        if (synth.speaking) {
+                            synth.cancel();
+                        }
+                    });
+                    
+                    // Speak text function
+                    function speak(text) {
+                        // Cancel any ongoing speech
+                        if (synth.speaking) {
+                            synth.cancel();
+                        }
+                        
+                        // Create new utterance
+                        utterance = new SpeechSynthesisUtterance(text);
+                        
+                        // Get voices and set a good one if available
+                        let voices = synth.getVoices();
+                        if (voices.length > 0) {
+                            // Try to find a good voice
+                            let preferredVoice = voices.find(voice => 
+                                voice.name.includes('Daniel') || 
+                                voice.name.includes('Google') || 
+                                voice.name.includes('Premium')
+                            );
+                            
+                            if (preferredVoice) {
+                                utterance.voice = preferredVoice;
+                            }
+                        }
+                        
+                        // Set properties
+                        utterance.rate = 0.9; // Slightly slower
+                        utterance.pitch = 1.0;
+                        utterance.volume = 1.0;
+                        
+                        // Track in analytics
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'voice_playback', {
+                                'event_category': 'Voice Assistant',
+                                'event_label': text.substring(0, 30) + '...'
+                            });
+                        }
+                        
+                        // Speak
+                        synth.speak(utterance);
+                    }
+                    
+                    // Play audio on option click
+                    voiceOptions.forEach(option => {
+                        option.addEventListener('click', function() {
+                            const text = this.getAttribute('data-text');
+                            
+                            // Remove active class from all options
+                            voiceOptions.forEach(opt => opt.classList.remove('owl-voice-speaking'));
+                            
+                            // Add active class to current option
+                            this.classList.add('owl-voice-speaking');
+                            
+                            speak(text);
+                        });
+                    });
+                    
+                    // Add FAQ options if on a relevant page
+                    if (window.location.pathname.includes('legal-research')) {
+                        const optionsContainer = document.querySelector('.owl-voice-options');
+                        
+                        // Add FAQ options
+                        const faqData = [
+                            {
+                                question: "What is legal research automation?",
+                                answer: "Legal research automation uses AI to streamline the process of finding relevant cases, statutes, and legal documents. Our system can reduce research time by up to 70% while improving accuracy."
+                            },
+                            {
+                                question: "How much does it cost?",
+                                answer: "Our legal research automation solutions are priced based on your firm's specific needs and scale. We offer flexible subscription plans starting at $199 per month."
+                            },
+                            {
+                                question: "How long does implementation take?",
+                                answer: "Implementation typically takes 2-4 weeks, depending on your firm's size and specific requirements. Our team provides comprehensive training and support throughout the process."
+                            }
+                        ];
+                        
+                        faqData.forEach(faq => {
+                            const faqOption = document.createElement('div');
+                            faqOption.className = 'owl-voice-option';
+                            faqOption.setAttribute('data-text', faq.answer);
+                            faqOption.innerHTML = `<i class="fas fa-play-circle"></i> ${faq.question}`;
+                            optionsContainer.appendChild(faqOption);
+                            
+                            faqOption.addEventListener('click', function() {
+                                const text = this.getAttribute('data-text');
+                                
+                                // Remove active class from all options
+                                document.querySelectorAll('.owl-voice-option').forEach(opt => 
+                                    opt.classList.remove('owl-voice-speaking')
+                                );
+                                
+                                // Add active class to current option
+                                this.classList.add('owl-voice-speaking');
+                                
+                                speak(text);
+                            });
+                        });
+                    }
+                } else {
+                    // Hide voice button if speech synthesis is not supported
+                    const voiceButton = document.getElementById('owl-voice-button');
+                    if (voiceButton) {
+                        voiceButton.style.display = 'none';
+                    }
+                    console.log('Speech synthesis not supported in this browser');
+                }
+            });
+            </script>
+<div class="owl-voice-player" id="owl-voice-player">
+<button aria-label="Listen to information" class="owl-voice-button" id="owl-voice-button">
+<i class="fas fa-volume-up"></i>
+</button>
+<div class="owl-voice-dialog" id="owl-voice-dialog">
+<div class="owl-voice-header">
+<h3>OWL Voice Assistant <span class="orpheus-badge">Orpheus TTS</span></h3>
+<button aria-label="Close voice assistant" class="owl-voice-close" id="owl-voice-close">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="owl-voice-content">
+<p>What would you like to hear about?</p>
+<div class="voice-status">Powered by Orpheus TTS technology</div>
+<div class="owl-voice-options">
+<div class="owl-voice-option" data-text="Welcome to OWL AI Agency. How can I help with your legal research needs today?">
+<i class="fas fa-play-circle"></i> Welcome Message
+                        </div>
+<div class="owl-voice-option" data-text="Our legal research automation platform helps law firms reduce research time by up to 70% while improving accuracy and insights.">
+<i class="fas fa-play-circle"></i> Legal Research Automation
+                        </div>
+<div class="owl-voice-option" data-text="Our batch processing feature allows you to analyze multiple cases simultaneously, dramatically increasing your efficiency.">
+<i class="fas fa-play-circle"></i> Batch Processing
+                        </div>
+<div class="owl-voice-option" data-text="Would you like to speak with one of our legal research specialists? I can connect you right away.">
+<i class="fas fa-play-circle"></i> Contact Us
+                        </div>
+</div>
+</div>
+<div class="owl-voice-footer">
+<a href="contact.html">Need more information? Contact us</a>
+</div>
+</div>
+</div>
+<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Check if browser supports speech synthesis
+                if ('speechSynthesis' in window) {
+                    // Voice player elements
+                    const voiceButton = document.getElementById('owl-voice-button');
+                    const voiceDialog = document.getElementById('owl-voice-dialog');
+                    const voiceClose = document.getElementById('owl-voice-close');
+                    const voiceOptions = document.querySelectorAll('.owl-voice-option');
+                    const voiceStatus = document.querySelector('.voice-status');
+                    
+                    // Speech synthesis
+                    const synth = window.speechSynthesis;
+                    let utterance = null;
+                    let voices = [];
+                    
+                    // Get available voices
+                    function loadVoices() {
+                        voices = synth.getVoices();
+                        
+                        // Check if we have premium voices
+                        const premiumVoices = voices.filter(voice => 
+                            voice.name.includes('Premium') || 
+                            voice.name.includes('Enhanced') ||
+                            voice.name.includes('Neural')
+                        );
+                        
+                        if (premiumVoices.length > 0) {
+                            voiceStatus.textContent = 'Using enhanced voice quality';
+                        }
+                    }
+                    
+                    // Load voices when available
+                    if (synth.onvoiceschanged !== undefined) {
+                        synth.onvoiceschanged = loadVoices;
+                    }
+                    
+                    // Initial load
+                    loadVoices();
+                    
+                    // Show/hide dialog
+                    voiceButton.addEventListener('click', function() {
+                        voiceDialog.style.display = 'block';
+                        
+                        // Welcome message
+                        speak("Welcome to OWL AI Agency. How can I help with your legal research needs today?");
+                    });
+                    
+                    voiceClose.addEventListener('click', function() {
+                        voiceDialog.style.display = 'none';
+                        if (synth.speaking) {
+                            synth.cancel();
+                        }
+                    });
+                    
+                    // Speak text function with enhanced quality
+                    function speak(text) {
+                        // Cancel any ongoing speech
+                        if (synth.speaking) {
+                            synth.cancel();
+                        }
+                        
+                        // Create new utterance
+                        utterance = new SpeechSynthesisUtterance(text);
+                        
+                        // Find the best available voice
+                        let selectedVoice = null;
+                        
+                        // First try to find a premium female voice
+                        selectedVoice = voices.find(voice => 
+                            (voice.name.includes('Premium') || voice.name.includes('Neural') || voice.name.includes('Enhanced')) && 
+                            voice.name.includes('Female')
+                        );
+                        
+                        // If no premium female voice, try any premium voice
+                        if (!selectedVoice) {
+                            selectedVoice = voices.find(voice => 
+                                voice.name.includes('Premium') || 
+                                voice.name.includes('Neural') || 
+                                voice.name.includes('Enhanced')
+                            );
+                        }
+                        
+                        // If no premium voice, try Microsoft voices
+                        if (!selectedVoice) {
+                            selectedVoice = voices.find(voice => 
+                                voice.name.includes('Microsoft') && 
+                                (voice.name.includes('Zira') || voice.name.includes('Female'))
+                            );
+                        }
+                        
+                        // If still no voice, try Google voices
+                        if (!selectedVoice) {
+                            selectedVoice = voices.find(voice => 
+                                voice.name.includes('Google') && 
+                                !voice.name.includes('Male')
+                            );
+                        }
+                        
+                        // If still no voice, use any female voice
+                        if (!selectedVoice) {
+                            selectedVoice = voices.find(voice => 
+                                voice.name.includes('Female') || 
+                                voice.name.includes('Samantha') || 
+                                voice.name.includes('Victoria')
+                            );
+                        }
+                        
+                        // If we found a good voice, use it
+                        if (selectedVoice) {
+                            utterance.voice = selectedVoice;
+                            console.log('Using voice: ' + selectedVoice.name);
+                        }
+                        
+                        // Set properties for more natural speech
+                        utterance.rate = 0.9; // Slightly slower
+                        utterance.pitch = 1.1; // Slightly higher pitch for female voice
+                        utterance.volume = 1.0;
+                        
+                        // Add pauses for more natural speech
+                        text = text.replace(/\./g, '. <break time="300ms"/>');
+                        text = text.replace(/,/g, ', <break time="200ms"/>');
+                        utterance.text = text;
+                        
+                        // Track in analytics
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'voice_playback', {
+                                'event_category': 'Orpheus Voice',
+                                'event_label': text.substring(0, 30) + '...'
+                            });
+                        }
+                        
+                        // Speak
+                        synth.speak(utterance);
+                    }
+                    
+                    // Play audio on option click
+                    voiceOptions.forEach(option => {
+                        option.addEventListener('click', function() {
+                            const text = this.getAttribute('data-text');
+                            
+                            // Remove active class from all options
+                            voiceOptions.forEach(opt => opt.classList.remove('owl-voice-speaking'));
+                            
+                            // Add active class to current option
+                            this.classList.add('owl-voice-speaking');
+                            
+                            speak(text);
+                            
+                            // Remove active class when done speaking
+                            utterance.onend = function() {
+                                option.classList.remove('owl-voice-speaking');
+                            };
+                        });
+                    });
+                    
+                    // Add FAQ options if on a relevant page
+                    if (window.location.pathname.includes('legal-research')) {
+                        const optionsContainer = document.querySelector('.owl-voice-options');
+                        
+                        // Add FAQ options
+                        const faqData = [
+                            {
+                                question: "What is legal research automation?",
+                                answer: "Legal research automation uses AI to streamline the process of finding relevant cases, statutes, and legal documents. Our system can reduce research time by up to 70% while improving accuracy."
+                            },
+                            {
+                                question: "How much does it cost?",
+                                answer: "Our legal research automation solutions are priced based on your firm's specific needs and scale. We offer flexible subscription plans starting at $199 per month."
+                            },
+                            {
+                                question: "How long does implementation take?",
+                                answer: "Implementation typically takes 2-4 weeks, depending on your firm's size and specific requirements. Our team provides comprehensive training and support throughout the process."
+                            }
+                        ];
+                        
+                        // Add a separator
+                        const separator = document.createElement('div');
+                        separator.style.borderTop = '1px solid #eee';
+                        separator.style.margin = '10px 0';
+                        optionsContainer.appendChild(separator);
+                        
+                        // Add FAQ heading
+                        const faqHeading = document.createElement('h4');
+                        faqHeading.textContent = 'Frequently Asked Questions';
+                        faqHeading.style.fontSize = '14px';
+                        faqHeading.style.marginBottom = '10px';
+                        optionsContainer.appendChild(faqHeading);
+                        
+                        // Add FAQ options
+                        faqData.forEach(faq => {
+                            const faqOption = document.createElement('div');
+                            faqOption.className = 'owl-voice-option';
+                            faqOption.setAttribute('data-text', faq.answer);
+                            faqOption.innerHTML = `<i class="fas fa-play-circle"></i> ${faq.question}`;
+                            optionsContainer.appendChild(faqOption);
+                            
+                            faqOption.addEventListener('click', function() {
+                                const text = this.getAttribute('data-text');
+                                
+                                // Remove active class from all options
+                                document.querySelectorAll('.owl-voice-option').forEach(opt => 
+                                    opt.classList.remove('owl-voice-speaking')
+                                );
+                                
+                                // Add active class to current option
+                                this.classList.add('owl-voice-speaking');
+                                
+                                speak(text);
+                                
+                                // Remove active class when done speaking
+                                utterance.onend = function() {
+                                    faqOption.classList.remove('owl-voice-speaking');
+                                };
+                            });
+                        });
+                    }
+                } else {
+                    // Hide voice button if speech synthesis is not supported
+                    const voiceButton = document.getElementById('owl-voice-button');
+                    if (voiceButton) {
+                        voiceButton.style.display = 'none';
+                    }
+                    console.log('Speech synthesis not supported in this browser');
+                }
+            });
+            </script></body>
+</html>

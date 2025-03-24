@@ -1,0 +1,8 @@
+{
+  "subscription_key": "YOUR_AZURE_SUBSCRIPTION_KEY",
+  "region": "eastus",
+  "voice_name": "en-US-JennyNeural",
+  "style": "professional",
+  "rate": "0",
+  "pitch": "0"
+}

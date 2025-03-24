@@ -1,0 +1,206 @@
+<?xml version="1.0" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://owl-ai-agency.com/</loc>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/hero-img.svg</image:loc>
+      <image:title>OWL AI Agent</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/trip-japan.svg</image:loc>
+      <image:title>Trip to Japan</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/tesla-stock.svg</image:loc>
+      <image:title>Tesla Stock Analysis</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/momentum-theorem.svg</image:loc>
+      <image:title>Momentum Theorem</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/insurance-policies.svg</image:loc>
+      <image:title>Insurance Policies</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/b2b-supplier.svg</image:loc>
+      <image:title>B2B Supplier</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/ai-clothing.svg</image:loc>
+      <image:title>AI in Clothing</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/online-store.svg</image:loc>
+      <image:title>Online Store Analysis</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/yc-companies.svg</image:loc>
+      <image:title>YC Companies</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/insurance-policies.svg</image:loc>
+      <image:title>Legal Research</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://owl-ai-agency.com/legal-research.html</loc>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/assets/img/use-cases/insurance-policies.svg</image:loc>
+      <image:title>Legal Research</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://owl-ai-agency.com/blog/batch-processing-legal-research.html</loc>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/batch-processing.jpg</image:loc>
+      <image:title>Batch Processing for Legal Research</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/traditional-research.jpg</image:loc>
+      <image:title>Traditional Legal Research</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/batch-research.jpg</image:loc>
+      <image:title>Batch Processing Research</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/team/team-2.jpg</image:loc>
+      <image:title>team-2.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/comments-1.jpg</image:loc>
+      <image:title>comments-1.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/comments-2.jpg</image:loc>
+      <image:title>comments-2.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/comments-3.jpg</image:loc>
+      <image:title>comments-3.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-1.jpg</image:loc>
+      <image:title>blog-recent-1.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-2.jpg</image:loc>
+      <image:title>blog-recent-2.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-3.jpg</image:loc>
+      <image:title>blog-recent-3.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-4.jpg</image:loc>
+      <image:title>blog-recent-4.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-5.jpg</image:loc>
+      <image:title>blog-recent-5.jpg</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://owl-ai-agency.com/blog/</loc>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/batch-processing.jpg</image:loc>
+      <image:title>Batch Processing for Legal Research</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/legal-research-automation.jpg</image:loc>
+      <image:title>Legal Research Automation</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/document-automation.jpg</image:loc>
+      <image:title>Document Automation</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/xrp-payments.jpg</image:loc>
+      <image:title>XRP Payments</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/ai-case-analysis.jpg</image:loc>
+      <image:title>AI Case Analysis</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/batch-processing.jpg</image:loc>
+      <image:title>batch-processing.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/legal-research-automation.jpg</image:loc>
+      <image:title>legal-research-automation.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/document-automation.jpg</image:loc>
+      <image:title>document-automation.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/xrp-payments.jpg</image:loc>
+      <image:title>xrp-payments.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/ai-case-analysis.jpg</image:loc>
+      <image:title>ai-case-analysis.jpg</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://owl-ai-agency.com/blog/legal-research-automation.html</loc>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/legal-research-automation.jpg</image:loc>
+      <image:title>Legal Research Automation</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/legal-research-before.jpg</image:loc>
+      <image:title>Traditional Legal Research</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/legal-research-after.jpg</image:loc>
+      <image:title>AI-Powered Legal Research</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/team/team-1.jpg</image:loc>
+      <image:title>team-1.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/comments-1.jpg</image:loc>
+      <image:title>comments-1.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/comments-2.jpg</image:loc>
+      <image:title>comments-2.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/comments-3.jpg</image:loc>
+      <image:title>comments-3.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/comments-4.jpg</image:loc>
+      <image:title>comments-4.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/comments-5.jpg</image:loc>
+      <image:title>comments-5.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-1.jpg</image:loc>
+      <image:title>blog-recent-1.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-2.jpg</image:loc>
+      <image:title>blog-recent-2.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-3.jpg</image:loc>
+      <image:title>blog-recent-3.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-4.jpg</image:loc>
+      <image:title>blog-recent-4.jpg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://owl-ai-agency.com/../assets/img/blog/blog-recent-5.jpg</image:loc>
+      <image:title>blog-recent-5.jpg</image:title>
+    </image:image>
+  </url>
+</urlset>

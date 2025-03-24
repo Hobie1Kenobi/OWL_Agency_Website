@@ -1,0 +1,20 @@
+{
+  "welcome": "Welcome to OWL AI Agency. How can I help with your legal research needs today?",
+  "legal_research": "Our legal research automation platform helps law firms reduce research time by up to 70% while improving accuracy and insights.",
+  "batch_processing": "Our batch processing feature allows you to analyze multiple cases simultaneously, dramatically increasing your efficiency.",
+  "contact": "Would you like to speak with one of our legal research specialists? I can connect you right away.",
+  "faqs": [
+    {
+      "question": "What is legal research automation?",
+      "answer": "Legal research automation uses AI to streamline the process of finding relevant cases, statutes, and legal documents. Our system can reduce research time by up to 70% while improving accuracy."
+    },
+    {
+      "question": "How much does it cost?",
+      "answer": "Our legal research automation solutions are priced based on your firm's specific needs and scale. We offer flexible subscription plans starting at $199 per month."
+    },
+    {
+      "question": "How long does implementation take?",
+      "answer": "Implementation typically takes 2-4 weeks, depending on your firm's size and specific requirements. Our team provides comprehensive training and support throughout the process."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  
+  <!-- Background elements -->
+  <rect x="50" y="50" width="300" height="200" rx="10" ry="10" fill="white" stroke="#ddd" stroke-width="1"/>
+  
+  <!-- Title -->
+  <text x="200" y="35" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Trip to Japan</text>
+  
+  <!-- Map Background -->
+  <rect x="75" y="75" width="250" height="150" fill="#e6f7ff" stroke="#47b2e4" stroke-width="1" rx="5" ry="5"/>
+  
+  <!-- Japan Outline -->
+  <path d="M300,120 C305,115 310,118 315,120 C320,125 325,130 325,135 C323,140 320,145 315,150 C310,155 305,153 300,150 C295,145 290,140 290,135 C290,130 295,125 300,120" 
+        fill="#ff9999" stroke="#e06666" stroke-width="1"/>
+  
+  <!-- Other Land Masses (Simplified) -->
+  <path d="M80,100 C110,95 150,105 170,110 C190,113 200,120 210,125 C220,130 225,140 225,150 C220,160 200,170 180,175 C160,180 140,175 120,170 C100,165 90,155 85,145 C80,135 75,125 80,100" 
+        fill="#d9ead3" stroke="#93c47d" stroke-width="1"/>
+  
+  <!-- Ocean Details -->
+  <path d="M120,140 Q130,135 140,140" stroke="#47b2e4" stroke-width="1" fill="none"/>
+  <path d="M160,150 Q170,145 180,150" stroke="#47b2e4" stroke-width="1" fill="none"/>
+  <path d="M230,130 Q240,125 250,130" stroke="#47b2e4" stroke-width="1" fill="none"/>
+  <path d="M250,160 Q260,155 270,160" stroke="#47b2e4" stroke-width="1" fill="none"/>
+  
+  <!-- Airplane -->
+  <g>
+    <!-- Flight Path (Dotted Line) -->
+    <path d="M100,150 C150,120 200,130 300,120" stroke="#999" stroke-width="1.5" stroke-dasharray="5,5" fill="none"/>
+    
+    <!-- Animated Airplane -->
+    <g transform="translate(0,0)">
+      <animateMotion 
+          path="M100,150 C150,120 200,130 300,120" 
+          begin="0s" dur="5s" repeatCount="indefinite" rotate="auto"/>
+      
+      <!-- Airplane Body -->
+      <path d="M-15,0 L5,0 L10,-5 L5,-10 L-15,-10 Z" fill="#47b2e4"/>
+      <!-- Airplane Wing -->
+      <path d="M-5,-5 L-5,-15 L-10,-20 L-15,-15 L-15,-5 Z" fill="#47b2e4"/>
+      <!-- Airplane Tail -->
+      <path d="M-15,-10 L-20,-15 L-20,-5 L-15,0 Z" fill="#47b2e4"/>
+      <!-- Windows -->
+      <circle cx="-5" cy="-5" r="1.5" fill="white"/>
+      <circle cx="0" cy="-5" r="1.5" fill="white"/>
+    </g>
+  </g>
+  
+  <!-- Origin Point -->
+  <circle cx="100" cy="150" r="5" fill="#999"/>
+  <text x="85" y="170" font-family="Arial, sans-serif" font-size="8" fill="#333">Start</text>
+  
+  <!-- Destination Point -->
+  <circle cx="300" cy="120" r="5" fill="#e06666"/>
+  <text x="300" y="110" font-family="Arial, sans-serif" font-size="8" fill="#333">Japan</text>
+  
+  <!-- Sun -->
+  <circle cx="330" cy="70" r="15" fill="#ffdd99">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M330,50 L330,55" stroke="#ffdd99" stroke-width="2"/>
+  <path d="M330,85 L330,90" stroke="#ffdd99" stroke-width="2"/>
+  <path d="M310,70 L315,70" stroke="#ffdd99" stroke-width="2"/>
+  <path d="M345,70 L350,70" stroke="#ffdd99" stroke-width="2"/>
+  <path d="M315,55 L320,60" stroke="#ffdd99" stroke-width="2"/>
+  <path d="M340,55 L345,60" stroke="#ffdd99" stroke-width="2"/>
+  <path d="M315,85 L320,80" stroke="#ffdd99" stroke-width="2"/>
+  <path d="M340,85 L345,80" stroke="#ffdd99" stroke-width="2"/>
+  
+  <!-- Mount Fuji -->
+  <path d="M290,140 L300,115 L310,140" fill="#f1f1f1" stroke="#ddd" stroke-width="1"/>
+  
+  <!-- Cherry Blossoms -->
+  <g transform="translate(315, 135)">
+    <circle cx="0" cy="0" r="3" fill="#ffcccc">
+      <animate attributeName="r" values="3;3.5;3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="5" cy="-2" r="3" fill="#ffcccc">
+      <animate attributeName="r" values="3;3.5;3" dur="2s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="3" cy="4" r="3" fill="#ffcccc">
+      <animate attributeName="r" values="3;3.5;3" dur="2s" begin="0.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="-2" cy="3" r="3" fill="#ffcccc">
+      <animate attributeName="r" values="3;3.5;3" dur="2s" begin="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="-4" cy="-2" r="3" fill="#ffcccc">
+      <animate attributeName="r" values="3;3.5;3" dur="2s" begin="1.6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg> 

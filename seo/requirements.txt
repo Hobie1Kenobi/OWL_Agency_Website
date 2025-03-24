@@ -1,0 +1,11 @@
+requests==2.31.0
+pandas==2.1.0
+beautifulsoup4==4.12.2
+schedule==1.2.0
+google-api-python-client==2.97.0
+google-auth==2.22.0
+python-dotenv==1.0.0
+lxml==4.9.3
+nltk==3.8.1
+openai==1.6.1
+newsapi-python==0.2.7

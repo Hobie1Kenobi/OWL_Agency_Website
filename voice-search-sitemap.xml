@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:voice="http://www.google.com/schemas/sitemap-voice/1.0">
+  <url>
+    <loc>https://owl-ai-agency.com/index.html</loc>
+    <voice:voice>
+      <voice:enabled>true</voice:enabled>
+      <voice:commands>
+        <voice:command>tell me about legal research automation</voice:command>
+        <voice:command>how does batch processing work</voice:command>
+        <voice:command>what is OWL AI Agency</voice:command>
+      </voice:commands>
+    </voice:voice>
+  </url>
+  <url>
+    <loc>https://owl-ai-agency.com/legal-research.html</loc>
+    <voice:voice>
+      <voice:enabled>true</voice:enabled>
+      <voice:commands>
+        <voice:command>tell me about legal research automation</voice:command>
+        <voice:command>how does batch processing work</voice:command>
+        <voice:command>what is OWL AI Agency</voice:command>
+        <voice:command>what is legal research automation</voice:command>
+        <voice:command>how much does it cost</voice:command>
+        <voice:command>how long does implementation take</voice:command>
+      </voice:commands>
+    </voice:voice>
+  </url>
+  <url>
+    <loc>https://owl-ai-agency.com/blog/index.html</loc>
+    <voice:voice>
+      <voice:enabled>true</voice:enabled>
+      <voice:commands>
+        <voice:command>tell me about legal research automation</voice:command>
+        <voice:command>how does batch processing work</voice:command>
+        <voice:command>what is OWL AI Agency</voice:command>
+      </voice:commands>
+    </voice:voice>
+  </url>
+  <url>
+    <loc>https://owl-ai-agency.com/blog/legal-research-automation.html</loc>
+    <voice:voice>
+      <voice:enabled>true</voice:enabled>
+      <voice:commands>
+        <voice:command>tell me about legal research automation</voice:command>
+        <voice:command>how does batch processing work</voice:command>
+        <voice:command>what is OWL AI Agency</voice:command>
+        <voice:command>what is legal research automation</voice:command>
+        <voice:command>how much does it cost</voice:command>
+        <voice:command>how long does implementation take</voice:command>
+      </voice:commands>
+    </voice:voice>
+  </url>
+</urlset>

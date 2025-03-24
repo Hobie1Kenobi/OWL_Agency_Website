@@ -1,0 +1,25 @@
+# www.robotstxt.org
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://owl-ai-agency.com/sitemap.xml
+
+# Disallow access to sensitive files
+Disallow: /.env
+Disallow: /seo/directory_submission_templates/
+Disallow: /seo/directory_submission_tracker.csv
+
+# Allow search engines to access all content pages
+Allow: /index.html
+Allow: /legal-research.html
+Allow: /pricing-calculator.html
+Allow: /blog/
+Allow: /blog/legal-research-automation.html
+Allow: /blog/batch-processing-legal-research.html
+
+# Crawl delay for bots (in seconds)
+Crawl-delay: 1
+# Voice Search Sitemap
+Sitemap: https://owl-ai-agency.com/voice-search-sitemap.xml

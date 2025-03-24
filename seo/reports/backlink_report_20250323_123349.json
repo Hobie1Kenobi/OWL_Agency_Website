@@ -1,0 +1,119 @@
+{
+    "timestamp": "2025-03-23T12:33:49.799389",
+    "website": "site.owl-ai-agency.com",
+    "total_backlinks": 0,
+    "tier1_backlinks": 0,
+    "tier2_backlinks": 0,
+    "tier3_backlinks": 0,
+    "backlink_details": [
+        {
+            "directory": "Avvo",
+            "url": "avvo.com",
+            "tier": 1,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "FindLaw",
+            "url": "findlaw.com",
+            "tier": 1,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "Justia",
+            "url": "justia.com",
+            "tier": 1,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "HG.org",
+            "url": "hg.org",
+            "tier": 2,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "Martindale",
+            "url": "martindale.com",
+            "tier": 2,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "Nolo",
+            "url": "nolo.com",
+            "tier": 2,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "LawLink",
+            "url": "lawlink.com",
+            "tier": 2,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "Lawyer.com",
+            "url": "lawyer.com",
+            "tier": 2,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "LegalMatch",
+            "url": "legalmatch.com",
+            "tier": 2,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "Priori Legal",
+            "url": "priorilegal.com",
+            "tier": 2,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "Legal Tech Directory",
+            "url": "legaltechdirectory.com",
+            "tier": 3,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "Stanford CodeX",
+            "url": "techindex.law.stanford.edu",
+            "tier": 3,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "Legal IT Professionals",
+            "url": "legalitprofessionals.com",
+            "tier": 3,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "Legal IT Insider",
+            "url": "legaltechnology.com",
+            "tier": 3,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        },
+        {
+            "directory": "ILTA",
+            "url": "iltanet.org",
+            "tier": 3,
+            "has_backlink": false,
+            "check_date": "2025-03-23"
+        }
+    ],
+    "new_backlinks": 0,
+    "lost_backlinks": 0,
+    "new_backlink_details": [],
+    "lost_backlink_details": []
+}
