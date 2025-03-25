@@ -1,25 +1,94 @@
-# www.robotstxt.org
+# OWL AI Agency Robots.txt - Optimized for maximum search engine visibility
+# Last updated: 2025-06-21
 
-User-agent: *
+# Google bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /assets/img/
+Allow: /blog/img/
+Disallow: /assets/img/admin/
+
+User-agent: Googlebot-Video
+Allow: /assets/video/
+Allow: /blog/video/
+
+User-agent: Googlebot-Mobile
 Allow: /
 
-# Sitemap location
-Sitemap: https://owl-ai-agency.com/sitemap.xml
+# Bing bots
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
 
-# Disallow access to sensitive files
+User-agent: AdIdxBot
+Allow: /
+
+# Yahoo bot
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Yandex bot
+User-agent: Yandex
+Allow: /
+Crawl-delay: 3
+
+# Baidu bot
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 3
+
+# DuckDuckGo bot
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# All other bots
+User-agent: *
+Allow: /
+Crawl-delay: 2
+
+# Block sensitive directories and files
 Disallow: /.env
 Disallow: /seo/directory_submission_templates/
 Disallow: /seo/directory_submission_tracker.csv
+Disallow: /*?*print=
+Disallow: /*?*filter=
+Disallow: /*?*sort=
+Disallow: /*?utm_*
+Disallow: /*?ref=
+Disallow: /tmp/
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /cgi-bin/
+Disallow: /error_log
+Disallow: /*.sql$
+Disallow: /*.log$
+Disallow: /*.bak$
 
-# Allow search engines to access all content pages
+# Allow critical content directories 
 Allow: /index.html
 Allow: /legal-research.html
 Allow: /pricing-calculator.html
 Allow: /blog/
 Allow: /blog/legal-research-automation.html
 Allow: /blog/batch-processing-legal-research.html
+Allow: /blog/xrp-payments.html
+Allow: /blog/top-ai-legal-assistants-2025.html
+Allow: /blog/document-automation.html
+Allow: /content-creation-ruleset.html
 
-# Crawl delay for bots (in seconds)
-Crawl-delay: 1
-# Voice Search Sitemap
+# Clean parameters
+Allow: /*?page=
+Allow: /*?id=
+Allow: /*?lang=
+
+# Sitemaps
+Sitemap: https://owl-ai-agency.com/sitemap.xml
 Sitemap: https://owl-ai-agency.com/voice-search-sitemap.xml
+Sitemap: https://owl-ai-agency.com/image-sitemap.xml
+Sitemap: https://owl-ai-agency.com/video-sitemap.xml
+Sitemap: https://owl-ai-agency.com/news-sitemap.xml
