@@ -107,7 +107,8 @@ async def submit_intake(payload: LegalResearchIntake) -> IntakeResponse:
         "You'll receive a scoped proposal with timeline and deliverables.",
     ]
     if payload.plan.value != "consultation":
-        next_steps.append("After proposal approval, proceed to payment to start your research project.")
+        next_steps.append("Proceed to payment to unlock your private research workspace immediately.")
+        next_steps.append("After payment, run the six-agent paralegal pipeline on your cases.")
 
     return IntakeResponse(
         success=True,
@@ -123,3 +124,13 @@ def get_intake(intake_id: str) -> dict | None:
     if not path.exists():
         return None
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def update_intake(intake_id: str, updates: dict) -> dict | None:
+    record = get_intake(intake_id)
+    if not record:
+        return None
+    record.update(updates)
+    path = INTAKE_DIR / f"{intake_id}.json"
+    path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+    return record

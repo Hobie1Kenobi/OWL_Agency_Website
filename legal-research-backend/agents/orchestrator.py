@@ -22,10 +22,31 @@ class ParalegalOrchestrator:
         ("filing", "Filing Agent", "Assembly, certificates & service"),
     ]
 
-    async def run_demo(self, case_id: str = "carpenter_v_us") -> dict[str, Any]:
+    async def run_demo(
+        self,
+        case_id: str = "carpenter_v_us",
+        custom_query: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         pipeline_started = time.perf_counter()
         case = load_case(case_id)
-        state = PipelineState(case_id=case_id, metadata={"case": case})
+        if custom_query:
+            scenario = dict(case.get("demo_scenario", {}))
+            scenario["research_question"] = custom_query.get("research_question", scenario.get("research_question"))
+            if custom_query.get("key_facts"):
+                scenario["key_facts"] = custom_query["key_facts"]
+            if custom_query.get("relief_sought"):
+                scenario["relief_sought"] = custom_query["relief_sought"]
+            if custom_query.get("case_name"):
+                scenario["client_name"] = custom_query["case_name"]
+            case = dict(case)
+            case["demo_scenario"] = scenario
+            if custom_query.get("jurisdiction"):
+                case["demo_scenario"]["jurisdiction"] = custom_query["jurisdiction"]
+            if custom_query.get("practice_area"):
+                case["issue"] = (
+                    f"{custom_query['practice_area']}: {custom_query.get('research_question', case['issue'])[:200]}"
+                )
+        state = PipelineState(case_id=case_id, metadata={"case": case, "custom_query": custom_query})
 
         live = await legal_sources.gather_carpenter_sources()
         state.live_sources = live
