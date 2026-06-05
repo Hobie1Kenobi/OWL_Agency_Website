@@ -46,16 +46,31 @@ API docs: http://localhost:8000/docs
 6. Add environment variable: `ALLOWED_ORIGINS=https://owl-ai-agency.com,https://hobie1kenobi.github.io`
 7. Deploy
 
-### Option B — Native Python
+### Option B — Native Python (current service)
+
+Render **cannot convert** an existing Python service to Docker. Use this path:
 
 1. **Root Directory:** `legal-research-backend`
-2. Add **on the Web Service itself** (not only an Environment Group):
-   - `PYTHON_VERSION` = `3.11.11` (must be fully qualified: major.minor.patch)
-3. Ensure `.python-version` exists in `legal-research-backend/` (already in repo)
-4. Build: `pip install -r requirements.txt`
-5. Start: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+2. **Build Command:** `./build.sh` (or `pip install --upgrade pip && pip install -r requirements.txt`)
+3. **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
+4. On the **Web Service → Environment** tab (not only Environment Group), add:
+   - `PYTHON_VERSION` = `3.11.11` (fully qualified)
+   - `ALLOWED_ORIGINS` = `https://owl-ai-agency.com,https://hobie1kenobi.github.io`
+5. When saving env vars, choose **Save, rebuild, and deploy**
 
-> **Note:** Environment Groups only work if **linked** to your Web Service under Environment → Link Environment Group.
+Requirements use `pydantic>=2.13` which has pre-built wheels for Python 3.14, so builds succeed even if `PYTHON_VERSION` is not applied.
+
+### Render CLI (optional)
+
+Install: https://render.com/docs/cli
+
+```bash
+render login
+render services list
+render services update srv-YOUR_ID --env-var PYTHON_VERSION=3.11.11 --env-var ALLOWED_ORIGINS=https://owl-ai-agency.com,https://hobie1kenobi.github.io
+```
+
+Then trigger Manual Deploy in the dashboard.
 
 ### Keep-Alive (Optional)
 
