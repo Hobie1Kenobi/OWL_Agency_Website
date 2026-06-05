@@ -9,6 +9,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from agents.orchestrator import ParalegalOrchestrator
 from data import load_case
+from models.intake import IntakeResponse, LegalResearchIntake
+from services.intake_service import get_intake, submit_intake
 from services.legal_sources import list_public_sources
 
 ALLOWED_ORIGINS = os.getenv(
@@ -79,3 +81,24 @@ async def run_demo():
 async def run_demo_get():
     """GET alias for easy testing and keep-alive pings."""
     return await run_demo()
+
+
+@app.post("/api/intake", response_model=IntakeResponse)
+async def create_intake(payload: LegalResearchIntake):
+    """Submit a legal research service intake request."""
+    return await submit_intake(payload)
+
+
+@app.get("/api/intake/{intake_id}")
+async def read_intake(intake_id: str):
+    """Look up intake status by reference number."""
+    record = get_intake(intake_id)
+    if not record:
+        return {"error": "Intake not found", "intake_id": intake_id}
+    return {
+        "intake_id": record["intake_id"],
+        "status": record.get("status", "received"),
+        "submitted_at": record["submitted_at"],
+        "plan": record["plan"],
+        "firm_name": record["firm_name"],
+    }

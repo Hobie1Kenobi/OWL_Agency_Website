@@ -74,6 +74,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 <!-- Template Main CSS File -->
 <link href="assets/css/style.css" rel="stylesheet"/>
+<link href="assets/css/legal-research-intake.css" rel="stylesheet"/>
 <!-- Baidu Auto Push -->
 <script src="js/baidu-push.js"></script>
 <!-- Structured Data -->
@@ -795,7 +796,7 @@
 <li><a class="nav-link scrollto" href="index.html#benchmarks">Benchmarks</a></li>
 <li><a class="nav-link scrollto" href="index.html#pricing">Pricing</a></li>
 <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
-<li><a class="getstarted scrollto" href="#pricing">Get Started</a></li>
+<li><a class="getstarted scrollto" href="#intake">Get Started</a></li>
 </ul>
 <i class="bi bi-list mobile-nav-toggle"></i>
 </nav><!-- .navbar -->
@@ -971,7 +972,7 @@ Read more: https://owl-ai-agency.com/legal-research.html">
                 </div>
 </div>
 <div class="text-center mt-4">
-<a class="btn-get-started scrollto" data-plan="starter" href="#payment">Select Plan</a>
+<a class="btn-get-started scrollto" data-plan="starter" href="#intake">Get Started</a>
 </div>
 </div>
 </div>
@@ -1000,7 +1001,7 @@ Read more: https://owl-ai-agency.com/legal-research.html">
                 </div>
 </div>
 <div class="text-center mt-4">
-<a class="btn-get-started scrollto" data-plan="professional" href="#payment">Select Plan</a>
+<a class="btn-get-started scrollto" data-plan="professional" href="#intake">Get Started</a>
 </div>
 </div>
 </div>
@@ -1029,7 +1030,7 @@ Read more: https://owl-ai-agency.com/legal-research.html">
                 </div>
 </div>
 <div class="text-center mt-4">
-<a class="btn-get-started scrollto" data-plan="enterprise" href="#payment">Select Plan</a>
+<a class="btn-get-started scrollto" data-plan="enterprise" href="#intake">Get Started</a>
 </div>
 </div>
 </div>
@@ -1084,6 +1085,134 @@ Read more: https://owl-ai-agency.com/legal-research.html">
     </div>
 </div>
 </section><!-- End Demo Section -->
+
+<!-- ======= Intake Section ======= -->
+<section class="intake-section section-bg" id="intake">
+<div class="container" data-aos="fade-up">
+<div class="section-title">
+<h2>Start Your Legal Research Project</h2>
+<p>Tell us about your case and research needs. Our team will respond within one business day with a scoped proposal.</p>
+</div>
+<div class="row justify-content-center">
+<div class="col-lg-10">
+<div class="intake-form-card">
+<div class="intake-steps">
+<span class="intake-step active">1. Your Info</span>
+<span class="intake-step active">2. Research Details</span>
+<span class="intake-step">3. Proposal &amp; Payment</span>
+</div>
+<div id="intake-form-wrap">
+<span class="intake-plan-badge" id="intake-plan-badge" style="display:none;">Selected plan</span>
+<form id="legal-intake-form" novalidate>
+<div class="row">
+<div class="col-md-6 mb-3">
+<label class="form-label" for="intake-name">Full Name *</label>
+<input class="form-control" id="intake-name" name="full_name" required type="text" placeholder="Jane Smith"/>
+<div class="intake-error" id="intake-name-error"></div>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="intake-email">Email *</label>
+<input class="form-control" id="intake-email" name="email" required type="email" placeholder="jane@lawfirm.com"/>
+<div class="intake-error" id="intake-email-error"></div>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="intake-phone">Phone</label>
+<input class="form-control" id="intake-phone" name="phone" type="tel" placeholder="(555) 123-4567"/>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="intake-firm">Law Firm / Organization *</label>
+<input class="form-control" id="intake-firm" name="firm_name" required type="text" placeholder="Smith &amp; Associates"/>
+<div class="intake-error" id="intake-firm-error"></div>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="intake-firm-size">Firm Size</label>
+<select class="form-select" id="intake-firm-size" name="firm_size">
+<option value="">Select...</option>
+<option value="solo">Solo practitioner</option>
+<option value="2-10">2–10 attorneys</option>
+<option value="11-50">11–50 attorneys</option>
+<option value="51-200">51–200 attorneys</option>
+<option value="200+">200+ attorneys</option>
+</select>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="intake-plan">Service Plan *</label>
+<select class="form-select" id="intake-plan" name="plan" required>
+<option value="consultation">Free Consultation</option>
+<option value="starter">Starter — $3,000 (up to 25 cases)</option>
+<option value="professional">Professional — $6,000 (up to 75 cases)</option>
+<option value="enterprise">Enterprise — $12,000 (unlimited)</option>
+</select>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="intake-jurisdiction">Jurisdiction *</label>
+<input class="form-control" id="intake-jurisdiction" name="jurisdiction" required type="text" placeholder="e.g. U.S. Supreme Court, 6th Circuit, California"/>
+<div class="intake-error" id="intake-jurisdiction-error"></div>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="intake-practice">Practice Area *</label>
+<input class="form-control" id="intake-practice" name="practice_area" required type="text" placeholder="e.g. Criminal defense, Fourth Amendment"/>
+<div class="intake-error" id="intake-practice-error"></div>
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label" for="intake-cases">Estimated Cases</label>
+<input class="form-control" id="intake-cases" name="case_count" min="1" type="number" placeholder="25"/>
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label" for="intake-urgency">Turnaround</label>
+<select class="form-select" id="intake-urgency" name="urgency">
+<option value="standard">Standard</option>
+<option value="expedited">Expedited (48hr)</option>
+<option value="urgent">Urgent (24hr)</option>
+</select>
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label" for="intake-contact-pref">Preferred Contact</label>
+<select class="form-select" id="intake-contact-pref" name="preferred_contact">
+<option value="email">Email</option>
+<option value="phone">Phone</option>
+<option value="either">Either</option>
+</select>
+</div>
+<div class="col-12 mb-3">
+<label class="form-label" for="intake-question">Research Question / Project Description *</label>
+<textarea class="form-control" id="intake-question" name="research_question" required rows="5" placeholder="Describe the legal issues, cases involved, desired deliverables (memos, briefs, precedent analysis), and any deadlines..."></textarea>
+<div class="intake-error" id="intake-question-error"></div>
+</div>
+<div class="col-md-6 mb-3">
+<div class="form-check mt-2">
+<input class="form-check-input" id="intake-has-docs" name="has_documents" type="checkbox"/>
+<label class="form-check-label" for="intake-has-docs">I have case documents ready to share after proposal approval</label>
+</div>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="intake-referral">How did you hear about us?</label>
+<input class="form-control" id="intake-referral" name="referral_source" type="text" placeholder="Optional"/>
+</div>
+<div class="col-12 mt-3">
+<button class="intake-submit-btn" id="intake-submit" type="submit">
+<i class="fas fa-paper-plane me-2"></i>Submit Research Request
+</button>
+<p class="text-muted small text-center mt-3 mb-0">By submitting, you agree to be contacted about your legal research project. We treat all submissions as confidential.</p>
+</div>
+</div>
+</form>
+</div>
+<div class="intake-success" id="intake-success">
+<i class="fas fa-check-circle" style="font-size: 3rem; color: #47b2e4;"></i>
+<h3 class="mt-3">Request Received!</h3>
+<p id="intake-success-message"></p>
+<div class="ref-id" id="intake-ref-id"></div>
+<h5>Next Steps</h5>
+<ul id="intake-next-steps"></ul>
+<a class="btn-get-started mt-3" href="#payment" id="intake-go-payment" style="display:none;">Proceed to Payment</a>
+<a class="btn-learn-more ms-2 mt-3" href="legal-research-demo.html">View Demo Again</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><!-- End Intake Section -->
 
 <!-- ======= Payment Section ======= -->
 <section class="payment section-bg" id="payment">
@@ -1269,6 +1398,8 @@ Read more: https://owl-ai-agency.com/legal-research.html">
 <script src="https://js.stripe.com/v3/"></script>
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+<script src="assets/js/legal-research-config.js"></script>
+<script src="assets/js/legal-research-intake.js"></script>
 <script src="assets/js/legal-research.js"></script>
 <script src="js/schema/legal-research-faq-schema.js"></script><script src="js/schema/legal-research-review-schema.js"></script><script>
 <script>

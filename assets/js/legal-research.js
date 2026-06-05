@@ -161,9 +161,14 @@
         
         // Update payment form
         updatePaymentForm(selectedPlanName);
-        
-        // Scroll to payment section
-        document.getElementById('payment').scrollIntoView({ behavior: 'smooth' });
+
+        if (window.OWLIntake && window.OWLIntake.setPlan) {
+          window.OWLIntake.setPlan(selectedPlanName);
+        }
+
+        var intakeEl = document.getElementById('intake');
+        var target = intakeEl || document.getElementById('payment');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
     });
     
@@ -211,5 +216,14 @@
     // Initialize with default plan
     updatePaymentForm(selectedPlan);
   });
+
+  window.OWLLegalResearch = {
+    setPlan: function(plan) {
+      if (planPrices[plan]) {
+        selectedPlan = plan;
+        updatePaymentForm(plan);
+      }
+    }
+  };
   
 })();

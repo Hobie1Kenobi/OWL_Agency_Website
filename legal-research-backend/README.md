@@ -83,7 +83,20 @@ Render free tier sleeps after 15 min idle. Use [cron-job.org](https://cron-job.o
 | GET | `/health` | Health check |
 | GET | `/api/sources` | List public legal data systems |
 | GET | `/api/cases` | Available demo cases |
-| POST | `/api/demo/run` | Run full agent pipeline |
+| POST | `/api/intake` | Submit legal research intake form |
+| GET | `/api/intake/{id}` | Look up intake by reference number |
+
+### Email notifications (optional)
+
+Add to Render environment:
+
+| Variable | Description |
+|----------|-------------|
+| `RESEND_API_KEY` | API key from [resend.com](https://resend.com) (free tier) |
+| `INTAKE_NOTIFY_EMAIL` | Where intake alerts go (default: sales@owl-ai-agency.com) |
+| `INTAKE_FROM_EMAIL` | Sender address (must be verified in Resend) |
+
+Intakes are saved locally on the server even without email configured.
 
 ## Demo Case
 
