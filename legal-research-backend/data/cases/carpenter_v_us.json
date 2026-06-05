@@ -1,0 +1,77 @@
+{
+  "case_id": "carpenter_v_us",
+  "full_name": "Carpenter v. United States",
+  "citation": "585 U.S. 946 (2018)",
+  "docket": "16-402",
+  "court": "Supreme Court of the United States",
+  "decision_date": "2018-06-22",
+  "vote": "5-4",
+  "author": "Chief Justice John G. Roberts Jr.",
+  "dissent_authors": ["Justice Kennedy", "Justice Alito", "Justice Thomas", "Justice Gorsuch"],
+  "constitutional_provision": "Fourth Amendment",
+  "issue": "Whether the Government's acquisition of historical cell-site location information (CSLI) from wireless carriers constitutes a Fourth Amendment search requiring a warrant.",
+  "holding": "The Government's acquisition of seven days or more of historical cell-site records is a Fourth Amendment search; police generally must obtain a warrant supported by probable cause.",
+  "facts_summary": "Timothy Carpenter and Timothy Sanders were charged with nine armed robberies in Michigan and Ohio. FBI agents obtained 127 days of historical cell-site location information (CSLI) for Carpenter's mobile phone from MetroPCS and Sprint, pursuant to court orders under the Stored Communications Act (18 U.S.C. § 2703(d)) — a standard below probable cause. The records placed Carpenter's phone at robbery locations during the crimes. Carpenter moved to suppress the CSLI, arguing a warrant was required. The District Court and Sixth Circuit denied suppression.",
+  "procedural_history": [
+    "United States v. Carpenter, 819 F.3d 880 (6th Cir. 2016) — affirmed denial of suppression",
+    "Certiorari granted, 583 U.S. ___ (2017)"
+  ],
+  "key_precedents": [
+    {
+      "case": "Katz v. United States",
+      "citation": "389 U.S. 347 (1967)",
+      "principle": "Fourth Amendment protects people, not places; reasonable expectation of privacy test.",
+      "url": "https://www.law.cornell.edu/supremecourt/text/389/347"
+    },
+    {
+      "case": "United States v. Jones",
+      "citation": "565 U.S. 400 (2012)",
+      "principle": "GPS tracking of vehicle for 28 days is a search; trespass and privacy theories.",
+      "url": "https://www.law.cornell.edu/supremecourt/text/565/400"
+    },
+    {
+      "case": "Riley v. California",
+      "citation": "573 U.S. 373 (2014)",
+      "principle": "Warrant required to search digital contents of cell phone incident to arrest.",
+      "url": "https://www.law.cornell.edu/supremecourt/text/573/373"
+    },
+    {
+      "case": "Smith v. Maryland",
+      "citation": "442 U.S. 735 (1979)",
+      "principle": "Pen register / numbers dialed — third-party doctrine; limited by Carpenter.",
+      "url": "https://www.law.cornell.edu/supremecourt/text/442/735"
+    },
+    {
+      "case": "United States v. Miller",
+      "citation": "425 U.S. 435 (1976)",
+      "principle": "Bank records — no reasonable expectation of privacy in information voluntarily conveyed to third parties.",
+      "url": "https://www.law.cornell.edu/supremecourt/text/425/435"
+    }
+  ],
+  "statutes": [
+    {
+      "citation": "18 U.S.C. § 2703",
+      "title": "Stored Communications Act — Required disclosure of customer communications or records",
+      "url": "https://www.law.cornell.edu/uscode/text/18/2703"
+    },
+    {
+      "citation": "U.S. Const. amend. IV",
+      "title": "Fourth Amendment — Search and Seizure",
+      "url": "https://www.law.cornell.edu/constitution-conan/amendment-4"
+    }
+  ],
+  "demo_scenario": {
+    "client_name": "Timothy Carpenter",
+    "representation": "Defense counsel challenging CSLI evidence",
+    "research_question": "Did the FBI's warrantless acquisition of 127 days of historical cell-site location records violate the Fourth Amendment?",
+    "jurisdiction": "United States Supreme Court (on certiorari from Sixth Circuit)",
+    "relief_sought": "Suppression of CSLI evidence; reversal of convictions"
+  },
+  "external_links": {
+    "oyez": "https://www.oyez.org/cases/2017/16-402",
+    "cornell_lii": "https://www.law.cornell.edu/supremecourt/text/18/946",
+    "courtlistener": "https://www.courtlistener.com/opinion/4379486/carpenter-v-united-states/",
+    "justia": "https://supreme.justia.com/cases/federal/us/585/16-402/",
+    "supremecourt_gov": "https://www.supremecourt.gov/opinions/17pdf/16-402_h315.pdf"
+  }
+}
