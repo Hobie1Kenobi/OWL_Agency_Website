@@ -1,0 +1,126 @@
+/* Legal Research Intake Form */
+
+.intake-section {
+  background: #f8f9fa;
+}
+
+.intake-form-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(55, 81, 126, 0.12);
+  padding: 2.5rem;
+}
+
+.intake-form-card .form-label {
+  font-weight: 600;
+  color: #37517e;
+  font-size: 0.9rem;
+}
+
+.intake-form-card .form-control,
+.intake-form-card .form-select {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  padding: 10px 14px;
+}
+
+.intake-form-card .form-control:focus,
+.intake-form-card .form-select:focus {
+  border-color: #47b2e4;
+  box-shadow: 0 0 0 0.2rem rgba(71, 178, 228, 0.15);
+}
+
+.intake-plan-badge {
+  display: inline-block;
+  background: #e7f6fc;
+  color: #37517e;
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.intake-success {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+}
+
+.intake-success.visible {
+  display: block;
+}
+
+.intake-success .ref-id {
+  font-family: 'Courier New', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #47b2e4;
+  background: #f0f9fd;
+  padding: 12px 24px;
+  border-radius: 8px;
+  display: inline-block;
+  margin: 1rem 0;
+}
+
+.intake-success ul {
+  text-align: left;
+  max-width: 480px;
+  margin: 1.5rem auto 0;
+}
+
+.intake-form-wrap.hidden {
+  display: none;
+}
+
+.intake-error {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.intake-submit-btn {
+  background: #47b2e4;
+  border: none;
+  color: #fff;
+  padding: 14px 32px;
+  font-weight: 600;
+  border-radius: 50px;
+  width: 100%;
+  transition: all 0.3s;
+}
+
+.intake-submit-btn:hover:not(:disabled) {
+  background: #37517e;
+}
+
+.intake-submit-btn:disabled {
+  opacity: 0.7;
+}
+
+.intake-steps {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.intake-step {
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 50px;
+  background: #e9ecef;
+  color: #6c757d;
+}
+
+.intake-step.active {
+  background: #47b2e4;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .intake-form-card {
+    padding: 1.5rem;
+  }
+}

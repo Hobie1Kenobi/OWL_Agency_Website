@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: owl-legal-research-api
+    runtime: docker
+    plan: free
+    rootDir: legal-research-backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: "https://owl-ai-agency.com,https://hobie1kenobi.github.io,http://localhost:5500"

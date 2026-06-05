@@ -33,6 +33,9 @@ logs
 .eslintcache
 .cache
 .parcel-cache
+__pycache__/
+*.pyc
+legal-research-backend/data/intakes/*.json
 
 # Editor directories and files
 .idea
