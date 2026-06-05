@@ -36,13 +36,26 @@ API docs: http://localhost:8000/docs
 
 ## Deploy to Render (Free Tier)
 
+### Option A — Docker (recommended, always Python 3.11)
+
 1. Push this repo to GitHub
-2. Create account at [render.com](https://render.com) (no credit card for free tier)
-3. **New → Blueprint** → connect repo → Render reads `render.yaml`
-4. Or **New → Web Service** → set root directory to `legal-research-backend`
-5. Build: `pip install -r requirements.txt`
-6. Start: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-7. Update `assets/js/legal-research-config.js` with your Render URL
+2. Render Dashboard → your Web Service → **Settings**
+3. Set **Language** to **Docker**
+4. **Root Directory:** `legal-research-backend`
+5. **Dockerfile Path:** `Dockerfile` (relative to root directory)
+6. Add environment variable: `ALLOWED_ORIGINS=https://owl-ai-agency.com,https://hobie1kenobi.github.io`
+7. Deploy
+
+### Option B — Native Python
+
+1. **Root Directory:** `legal-research-backend`
+2. Add **on the Web Service itself** (not only an Environment Group):
+   - `PYTHON_VERSION` = `3.11.11` (must be fully qualified: major.minor.patch)
+3. Ensure `.python-version` exists in `legal-research-backend/` (already in repo)
+4. Build: `pip install -r requirements.txt`
+5. Start: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+
+> **Note:** Environment Groups only work if **linked** to your Web Service under Environment → Link Environment Group.
 
 ### Keep-Alive (Optional)
 
