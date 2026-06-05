@@ -115,15 +115,16 @@
 
   function renderMetrics(data) {
     const agents = data.agents || [];
-    const totalMs = agents.reduce(function (sum, a) { return sum + (a.duration_ms || 0); }, 0);
+    const agentMs = agents.reduce(function (sum, a) { return sum + (a.duration_ms || 0); }, 0);
+    const pipelineMs = (data.metadata && data.metadata.processing_time_ms) || agentMs;
     const docs = Object.keys(data.documents || {}).length;
+    const liveCount = (data.metadata && data.metadata.live_source_count) ||
+      (data.live_sources || []).filter(function (s) { return s.status === 'live'; }).length;
 
     document.getElementById('metric-agents').textContent = agents.length;
     document.getElementById('metric-docs').textContent = docs;
-    document.getElementById('metric-time').textContent = (totalMs / 1000).toFixed(1) + 's';
-    document.getElementById('metric-sources').textContent = (data.live_sources || []).filter(function (s) {
-      return s.status === 'live';
-    }).length;
+    document.getElementById('metric-time').textContent = (pipelineMs / 1000).toFixed(1) + 's';
+    document.getElementById('metric-sources').textContent = liveCount;
   }
 
   function renderLiveSources(liveSources) {

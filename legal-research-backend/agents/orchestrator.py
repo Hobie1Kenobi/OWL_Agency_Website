@@ -23,11 +23,15 @@ class ParalegalOrchestrator:
     ]
 
     async def run_demo(self, case_id: str = "carpenter_v_us") -> dict[str, Any]:
+        pipeline_started = time.perf_counter()
         case = load_case(case_id)
         state = PipelineState(case_id=case_id, metadata={"case": case})
 
         live = await legal_sources.gather_carpenter_sources()
         state.live_sources = live
+        live_count = sum(1 for source in live if source.get("status") == "live")
+        state.metadata["live_source_count"] = live_count
+        state.metadata["total_source_checks"] = len(live)
 
         for agent_id, name, role in self.AGENTS:
             started = time.perf_counter()
@@ -37,7 +41,9 @@ class ParalegalOrchestrator:
             await asyncio.sleep(0.4)
 
         state.documents = generate_all_documents(case, state)
-        return state.to_dict()
+        payload = state.to_dict()
+        payload["metadata"]["processing_time_ms"] = int((time.perf_counter() - pipeline_started) * 1000)
+        return payload
 
     async def _run_agent(
         self,
@@ -60,11 +66,14 @@ class ParalegalOrchestrator:
     async def _research_agent(
         self, name: str, role: str, case: dict[str, Any], state: PipelineState
     ) -> AgentResult:
+        live_sources = [s for s in state.live_sources if s.get("status") == "live"]
         sources = [
-            {"name": "Cornell LII", "url": case["external_links"]["cornell_lii"], "type": "opinion"},
-            {"name": "Oyez", "url": case["external_links"]["oyez"], "type": "metadata"},
-            {"name": "CourtListener", "url": case["external_links"]["courtlistener"], "type": "opinion"},
-            {"name": "GovInfo — 18 U.S.C. § 2703", "url": case["statutes"][0]["url"], "type": "statute"},
+            {
+                "name": s.get("source", "unknown"),
+                "url": s.get("url") or s.get("pdf_url") or s.get("canonical_url", "#"),
+                "type": "live_verified",
+            }
+            for s in live_sources
         ]
         return AgentResult(
             agent_id="research",
@@ -74,7 +83,7 @@ class ParalegalOrchestrator:
             summary=(
                 f"Retrieved primary materials for {case['full_name']}. "
                 f"Confirmed docket {case['docket']}, {case['vote']} decision ({case['decision_date']}). "
-                f"Indexed {len(sources)} public sources — no API keys required."
+                f"Live verification across {len(live_sources)} public databases — no API keys required."
             ),
             outputs={
                 "issues_identified": [case["issue"]],
