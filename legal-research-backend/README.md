@@ -85,6 +85,13 @@ Render free tier sleeps after 15 min idle. Use [cron-job.org](https://cron-job.o
 | GET | `/api/cases` | Available demo cases |
 | POST | `/api/intake` | Submit legal research intake form |
 | GET | `/api/intake/{id}` | Look up intake by reference number |
+| GET | `/api/tiers` | List paid tier entitlements |
+| GET | `/api/config/stripe` | Stripe publishable key for checkout |
+| POST | `/api/payment/create-intent` | Create Stripe PaymentIntent for intake |
+| POST | `/api/payment/confirm` | Confirm payment and activate workspace |
+| GET | `/api/workspace/{token}` | Customer workspace (tier, credits, jobs) |
+| POST | `/api/workspace/{token}/research` | Run tier-gated paralegal pipeline |
+| GET | `/api/workspace/{token}/jobs/{id}` | Download research job deliverables |
 
 ### Email notifications (optional)
 
@@ -97,6 +104,21 @@ Add to Render environment:
 | `INTAKE_FROM_EMAIL` | Sender address (must be verified in Resend) |
 
 Intakes are saved locally on the server even without email configured.
+
+### Stripe payments (required for paid tiers)
+
+| Variable | Description |
+|----------|-------------|
+| `STRIPE_SECRET_KEY` | Secret key from [Stripe Dashboard](https://dashboard.stripe.com/apikeys) |
+| `STRIPE_PUBLISHABLE_KEY` | Publishable key (exposed via `/api/config/stripe`) |
+
+**Customer flow:** Intake → Payment → Workspace at `legal-research-workspace.html?token=...`
+
+| Tier | Price | Research runs | Documents per run |
+|------|-------|---------------|-------------------|
+| Starter | $3,000 | 25 | Memo, Brief, TOA |
+| Professional | $6,000 | 75 | Full 6-document package |
+| Enterprise | $12,000 | Unlimited | Full package + API key |
 
 ## Demo Case
 

@@ -96,12 +96,20 @@
     }
   }
 
+  function activateStep3() {
+    document.querySelectorAll('.intake-step').forEach(function (el, i) {
+      if (i < 2) el.classList.add('active');
+      if (i === 2) el.classList.add('active');
+    });
+  }
+
   function showSuccess(result) {
     document.getElementById('intake-form-wrap').classList.add('hidden');
     var success = document.getElementById('intake-success');
     success.classList.add('visible');
     document.getElementById('intake-ref-id').textContent = result.intake_id;
     document.getElementById('intake-success-message').textContent = result.message;
+    activateStep3();
 
     var stepsList = document.getElementById('intake-next-steps');
     stepsList.innerHTML = '';
@@ -111,16 +119,34 @@
       stepsList.appendChild(li);
     });
 
+    var plan = document.getElementById('intake-plan').value;
     var paymentLink = document.getElementById('intake-go-payment');
-    if (paymentLink && result.intake_id) {
+
+    if (window.OWLLegalResearch && window.OWLLegalResearch.setIntake) {
+      window.OWLLegalResearch.setIntake(
+        result.intake_id,
+        plan,
+        document.getElementById('intake-email').value.trim(),
+        document.getElementById('intake-name').value.trim()
+      );
+    }
+
+    if (paymentLink && result.intake_id && plan !== 'consultation') {
       paymentLink.href = '#payment';
       paymentLink.style.display = 'inline-block';
+      paymentLink.textContent = 'Proceed to Payment — Unlock Workspace';
       paymentLink.addEventListener('click', function () {
-        if (window.OWLLegalResearch && window.OWLLegalResearch.setPlan) {
-          var plan = document.getElementById('intake-plan').value;
-          if (plan !== 'consultation') window.OWLLegalResearch.setPlan(plan);
+        if (window.OWLLegalResearch && window.OWLLegalResearch.setIntake) {
+          window.OWLLegalResearch.setIntake(
+            result.intake_id,
+            plan,
+            document.getElementById('intake-email').value.trim(),
+            document.getElementById('intake-name').value.trim()
+          );
         }
       });
+    } else if (paymentLink) {
+      paymentLink.style.display = 'none';
     }
 
     success.scrollIntoView({ behavior: 'smooth', block: 'center' });

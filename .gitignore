@@ -36,6 +36,7 @@ logs
 __pycache__/
 *.pyc
 legal-research-backend/data/intakes/*.json
+legal-research-backend/data/projects/*.json
 
 # Editor directories and files
 .idea

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legal Research Workspace | OWL AI Agency</title>
+  <meta name="description" content="Your private OWL Legal Research workspace — run the six-agent paralegal pipeline, generate court-ready documents, and export reports."/>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Jost:400,600,700" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <link href="assets/css/style.css" rel="stylesheet"/>
+  <link href="assets/css/legal-research-workspace.css" rel="stylesheet"/>
+</head>
+<body>
+
+<header class="fixed-top header-inner-pages" id="header">
+  <div class="container d-flex align-items-center">
+    <h1 class="logo me-auto"><a href="index.html"><span class="owl-logo">OWL</span> AI Agency</a></h1>
+    <nav class="navbar" id="navbar">
+      <ul>
+        <li><a class="nav-link" href="legal-research.html">Legal Research</a></li>
+        <li><a class="nav-link" href="#research-form">New Research</a></li>
+        <li><a class="nav-link" href="#faq-ws">Help</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="ws-locked" class="ws-locked" style="display:none;">
+  <i class="fas fa-lock fa-3x text-muted mb-4"></i>
+  <h2>Workspace Access Required</h2>
+  <p class="text-muted">Complete your intake and payment to unlock your private research workspace.</p>
+  <a href="legal-research.html#intake" class="btn btn-primary mt-3">Get Started</a>
+</div>
+
+<div id="ws-app" style="display:none;">
+  <section class="ws-hero">
+    <div class="container">
+      <span class="tier-badge" id="ws-tier-badge">Loading...</span>
+      <h1 id="ws-welcome">Your Legal Research Workspace</h1>
+      <p class="mb-0" id="ws-firm-line"></p>
+    </div>
+  </section>
+
+  <main class="py-5">
+    <div class="container">
+
+      <div class="ws-stats" id="ws-stats"></div>
+
+      <h3 class="mb-3"><i class="fas fa-route me-2 text-primary"></i>Getting Started</h3>
+      <div class="onboard-steps" id="ws-onboarding"></div>
+
+      <div class="tier-features" id="ws-tier-features"></div>
+
+      <section id="research-form" class="research-form-card">
+        <h3><i class="fas fa-search me-2 text-primary"></i>Submit a Research Request</h3>
+        <p class="text-muted">Frame your question clearly — our six agents need issue, jurisdiction, facts, and desired relief to produce filing-ready work product.</p>
+
+        <div class="question-guide">
+          <h5><i class="fas fa-lightbulb me-2"></i>How to Ask the Right Question</h5>
+          <p class="small mb-2">A strong research request includes:</p>
+          <ul class="small mb-3">
+            <li><strong>Issue:</strong> The specific legal question (e.g., "Was the warrantless CSLI search lawful?")</li>
+            <li><strong>Jurisdiction:</strong> Court and circuit (e.g., "U.S. Supreme Court / Sixth Circuit on cert")</li>
+            <li><strong>Facts:</strong> Key undisputed facts affecting the analysis</li>
+            <li><strong>Relief:</strong> What your client needs (suppression, summary judgment, etc.)</li>
+          </ul>
+          <p class="small fw-bold mb-2">Click an example to pre-fill:</p>
+          <div id="example-questions"></div>
+        </div>
+
+        <form id="research-query-form" novalidate>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="rq-case">Case / Matter Name *</label>
+              <input class="form-control" id="rq-case" required placeholder="e.g. State v. Martinez"/>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="rq-jurisdiction">Jurisdiction *</label>
+              <input class="form-control" id="rq-jurisdiction" required placeholder="e.g. N.D. California, 9th Circuit"/>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="rq-practice">Practice Area *</label>
+              <input class="form-control" id="rq-practice" required placeholder="e.g. Fourth Amendment / Criminal Defense"/>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="rq-relief">Relief Sought</label>
+              <input class="form-control" id="rq-relief" placeholder="e.g. Motion to suppress cell-site records"/>
+            </div>
+            <div class="col-12 mb-3">
+              <label class="form-label" for="rq-facts">Key Facts</label>
+              <textarea class="form-control" id="rq-facts" rows="3" placeholder="Summarize the facts that matter — what happened, what evidence is at issue, procedural posture..."></textarea>
+            </div>
+            <div class="col-12 mb-3">
+              <label class="form-label" for="rq-question">Research Question * <span class="text-muted small">(min 20 characters)</span></label>
+              <textarea class="form-control" id="rq-question" required rows="4" placeholder="State the precise legal question you need answered. Example: Whether 127 days of historical cell-site location information obtained via § 2703(d) order without a warrant violates the Fourth Amendment under Carpenter..."></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary btn-lg" id="rq-submit" type="submit">
+                <i class="fas fa-play-circle me-2"></i>Run Paralegal Pipeline
+              </button>
+              <p class="text-muted small mt-2 mb-0"><i class="fas fa-info-circle me-1"></i>Each run uses one case credit from your package. AI output requires attorney review before filing.</p>
+            </div>
+          </div>
+        </form>
+        <div id="rq-status" class="alert mt-3" style="display:none;"></div>
+      </section>
+
+      <section id="ws-jobs-section" style="display:none;">
+        <h3 class="mb-3"><i class="fas fa-folder-open me-2 text-primary"></i>Your Research Jobs</h3>
+        <div class="row">
+          <div class="col-lg-4" id="ws-job-list"></div>
+          <div class="col-lg-8">
+            <div id="ws-job-detail" class="research-form-card">
+              <p class="text-muted">Select a job to view deliverables.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ws-api-section" style="display:none;" class="research-form-card mb-4">
+        <h4><i class="fas fa-key me-2"></i>Enterprise API Access</h4>
+        <p class="text-muted small">Use this key to call <code>POST /api/workspace/{token}/research</code> programmatically.</p>
+        <div class="api-key-box" id="ws-api-key"></div>
+      </section>
+
+      <section id="faq-ws" class="faq-ws mt-5">
+        <h3 class="mb-4"><i class="fas fa-question-circle me-2 text-primary"></i>Workspace FAQ</h3>
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">What does each research run produce?</button></h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Each run deploys six agents — Research, Precedent, Analysis, Citation, Brief Writer, and Filing — against live public legal databases. Deliverables depend on your tier: Starter includes memo, brief, and table of authorities; Professional and Enterprise add motions, appellate excerpts, and certificates of service.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">How should I phrase my research question?</button></h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Ask one focused question per run. Start with whether/whether not framing: "Whether [action] violates [law] given [key facts]." Include jurisdiction, procedural posture, and relief sought. Avoid compound questions — run separate jobs for distinct issues.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">What is a "case credit"?</button></h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">One credit = one full paralegal pipeline run on one matter. Starter includes 25 credits, Professional 75, Enterprise unlimited. Credits do not expire during your active project period.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">Can I upload case documents?</button></h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Describe key facts in the research form for now. Document upload is processed by our team after intake — email sales@owl-ai-agency.com with your reference number and we'll integrate files into your project.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">Do I still need attorney review?</button></h2>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body"><strong>Yes, always.</strong> OWL produces draft-quality research and filings to accelerate your work — not to replace professional judgment. Verify citations, update facts, and adapt arguments before any court filing.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<footer id="footer" class="mt-5">
+  <div class="container footer-bottom clearfix py-4">
+    <div class="copyright">&copy; <strong>OWL AI Agency</strong>. All Rights Reserved</div>
+    <div class="credits"><a href="legal-research.html">Legal Research Platform</a></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/legal-research-config.js"></script>
+<script src="assets/js/legal-research-workspace.js"></script>
+</body>
+</html>
