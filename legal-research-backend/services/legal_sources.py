@@ -96,7 +96,7 @@ async def fetch_cornell_opinion(path: str) -> dict[str, Any]:
         if not response:
             return {"source": "cornell_lii", "url": url, "excerpt": None, "status": "unavailable"}
 
-        soup = BeautifulSoup(response.text, "lxml")
+        soup = BeautifulSoup(response.text, "html.parser")
         article = soup.find("article") or soup.find("div", class_="field-body")
         text = article.get_text("\n", strip=True) if article else ""
         excerpt = text[:1200] + ("..." if len(text) > 1200 else "")
@@ -111,7 +111,7 @@ async def fetch_courtlistener_opinion(slug: str) -> dict[str, Any]:
         if not response:
             return {"source": "courtlistener", "url": url, "title": None, "status": "unavailable"}
 
-        soup = BeautifulSoup(response.text, "lxml")
+        soup = BeautifulSoup(response.text, "html.parser")
         title_el = soup.find("h1")
         title = title_el.get_text(strip=True) if title_el else None
         return {"source": "courtlistener", "url": url, "title": title, "status": "live"}
@@ -125,7 +125,7 @@ async def search_cornell(query: str) -> dict[str, Any]:
         if not response:
             return {"source": "cornell_lii_search", "url": url, "results": [], "status": "unavailable"}
 
-        soup = BeautifulSoup(response.text, "lxml")
+        soup = BeautifulSoup(response.text, "html.parser")
         results = []
         for item in soup.select(".search-result, .search-results li, ol.search-results > li")[:5]:
             link = item.find("a")

@@ -8,6 +8,6 @@ services:
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
-        value: "3.11.0"
+        value: "3.11.11"
       - key: ALLOWED_ORIGINS
         value: "https://owl-ai-agency.com,https://hobie1kenobi.github.io,http://localhost:8000,http://127.0.0.1:5500"
