@@ -86,6 +86,38 @@ Allow: /*?page=
 Allow: /*?id=
 Allow: /*?lang=
 
+# AI / LLM crawlers (GEO)
+# Explicit allow for generative engine indexing
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 # Sitemaps
 Sitemap: https://owl-ai-agency.com/sitemap.xml
 Sitemap: https://owl-ai-agency.com/voice-search-sitemap.xml
