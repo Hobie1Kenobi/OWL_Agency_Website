@@ -98,6 +98,32 @@
       <div class="row" id="public-sources-list"></div>
     </section>
 
+    <section id="demo-lead-capture" class="demo-lead-capture mt-5 visible">
+      <div class="demo-lead-inner">
+        <h3><i class="fas fa-envelope me-2"></i>Get demo follow-up</h3>
+        <p class="mb-3">Enter your email for next steps, comparison guides, and a free consultation link—no full intake required.</p>
+        <form id="demo-lead-form" class="row g-2 align-items-end">
+          <div class="col-md-4">
+            <label class="form-label small">Email *</label>
+            <input type="email" name="email" class="form-control" required placeholder="you@lawfirm.com"/>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small">Name</label>
+            <input type="text" name="full_name" class="form-control" placeholder="Jane Attorney"/>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small">Firm</label>
+            <input type="text" name="firm_name" class="form-control" placeholder="Your LLP"/>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Send Me Next Steps</button>
+          </div>
+        </form>
+        <div id="demo-lead-message" class="demo-lead-message" style="display:none;"></div>
+        <p class="small text-muted mt-2 mb-0">Compare options: <a href="compare/owl-vs-chatgpt-legal-research.html">OWL vs ChatGPT</a> · <a href="compare/owl-vs-manual-legal-research.html">OWL vs Manual</a></p>
+      </div>
+    </section>
+
     <section class="mt-5 bg-light p-4 rounded">
       <h3>About This Demo Case</h3>
       <p>In <strong>Carpenter v. United States</strong>, the Supreme Court held (5–4) that the Government's acquisition of seven days or more of historical cell-site location information is a Fourth Amendment search requiring a warrant. The FBI had obtained 127 days of Timothy Carpenter's CSLI using court orders under the Stored Communications Act — a standard below probable cause.</p>
@@ -120,5 +146,6 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/legal-research-config.js"></script>
 <script src="assets/js/legal-research-demo.js"></script>
+<script src="assets/js/demo-lead-capture.js"></script>
 </body>
 </html>

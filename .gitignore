@@ -36,6 +36,7 @@ logs
 __pycache__/
 *.pyc
 legal-research-backend/data/intakes/*.json
+legal-research-backend/data/demo_leads/*.json
 legal-research-backend/data/projects/*.json
 seo/.env
 seo/outreach_agent/zoho_tokens.json

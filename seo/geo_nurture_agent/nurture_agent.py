@@ -103,17 +103,26 @@ def _build_email(stage: int, lead: dict) -> tuple[str, str, str]:
     return subject, html, text
 
 
-def load_intake_records() -> list[dict]:
+def _load_records_from_dir(directory: Path, pattern: str) -> list[dict]:
     records = []
-    intake_dir = config.INTAKE_DIR
-    if not intake_dir.exists():
+    if not directory.exists():
         return records
-    for path in sorted(intake_dir.glob("OWL-*.json")):
+    for path in sorted(directory.glob(pattern)):
         try:
             records.append(json.loads(path.read_text(encoding="utf-8")))
         except (json.JSONDecodeError, OSError):
             continue
     return records
+
+
+def load_intake_records() -> list[dict]:
+    intakes = _load_records_from_dir(config.INTAKE_DIR, "OWL-*.json")
+    demos = _load_records_from_dir(config.DEMO_LEADS_DIR, "DEMO-*.json")
+    for record in demos:
+        record.setdefault("intake_id", record.get("lead_id"))
+        record.setdefault("plan", "consultation")
+        record.setdefault("demo_viewed", True)
+    return intakes + demos
 
 
 def _days_since(iso_ts: str) -> float:
@@ -163,7 +172,10 @@ def send_stage_to_lead(lead: dict, stage: int, *, dry_run: bool = False) -> dict
 
 
 def update_intake_nurture(intake_id: str, stage: int) -> None:
-    path = config.INTAKE_DIR / f"{intake_id}.json"
+    if intake_id.startswith("DEMO-"):
+        path = config.DEMO_LEADS_DIR / f"{intake_id}.json"
+    else:
+        path = config.INTAKE_DIR / f"{intake_id}.json"
     if not path.exists():
         return
     record = json.loads(path.read_text(encoding="utf-8"))

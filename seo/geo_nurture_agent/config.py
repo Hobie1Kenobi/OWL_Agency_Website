@@ -9,6 +9,7 @@ SEO_DIR = AGENT_DIR.parent
 SITE_ROOT = SEO_DIR.parent
 BACKEND_DIR = SITE_ROOT / "legal-research-backend"
 INTAKE_DIR = BACKEND_DIR / "data" / "intakes"
+DEMO_LEADS_DIR = BACKEND_DIR / "data" / "demo_leads"
 REPORTS_DIR = AGENT_DIR / "reports"
 LEADS_FILE = AGENT_DIR / "nurture_leads.csv"
 GEO_CONFIG_FILE = AGENT_DIR / "geo_config.json"

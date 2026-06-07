@@ -72,6 +72,8 @@ Disallow: /*.bak$
 # Allow critical content directories 
 Allow: /index.html
 Allow: /legal-research.html
+Allow: /llms.txt
+Allow: /compare/
 Allow: /pricing-calculator.html
 Allow: /blog/
 Allow: /blog/legal-research-automation.html

@@ -18,8 +18,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from agents.orchestrator import ParalegalOrchestrator
 from data import load_case
+from models.demo_lead import DemoLeadResponse, DemoLeadSubmit
 from models.intake import IntakeResponse, LegalResearchIntake
 from models.project import PaymentConfirmRequest, PaymentIntentRequest, ResearchQueryRequest
+from services.demo_lead_service import submit_demo_lead
 from services.intake_service import get_intake, submit_intake
 from services.legal_sources import list_public_sources
 from services.payment_service import (
@@ -119,6 +121,11 @@ async def run_demo():
 @app.get("/api/demo/run")
 async def run_demo_get():
     return await run_demo()
+
+
+@app.post("/api/demo-lead", response_model=DemoLeadResponse)
+async def create_demo_lead(payload: DemoLeadSubmit):
+    return await submit_demo_lead(payload)
 
 
 @app.post("/api/intake", response_model=IntakeResponse)

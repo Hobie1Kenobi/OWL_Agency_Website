@@ -1,0 +1,39 @@
+.comparison-hero {
+  background: linear-gradient(135deg, #1a2a4a 0%, #2d5a87 100%);
+  color: #fff;
+  padding: 120px 0 60px;
+}
+.comparison-hero .answer-capsule {
+  background: rgba(255, 255, 255, 0.12);
+  border-left: 4px solid #5dade2;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.comparison-table th {
+  background: #f4f7fb;
+  width: 28%;
+}
+.comparison-table td, .comparison-table th {
+  vertical-align: top;
+  padding: 0.85rem 1rem;
+}
+.comparison-table .owl-col {
+  background: #f0f9ff;
+}
+.geo-faq article {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.compare-hub-card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: 100%;
+  transition: box-shadow 0.2s;
+}
+.compare-hub-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
