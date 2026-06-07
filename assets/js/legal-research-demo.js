@@ -194,6 +194,7 @@
       renderMetrics(demoData);
       renderLiveSources(demoData.live_sources);
       if (results) results.classList.add('visible');
+      document.dispatchEvent(new CustomEvent('owl-demo-complete', { detail: { case: demoData.metadata } }));
     } catch (err) {
       setStatus(
         'Could not reach the backend API. Start it locally: cd legal-research-backend && pip install -r requirements.txt && uvicorn main:app --reload — or deploy to Render (see legal-research-backend/README.md).',
