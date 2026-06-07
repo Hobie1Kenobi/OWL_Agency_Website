@@ -1,0 +1,15 @@
+{
+  "platform": "betalist",
+  "url": "https://betalist.com/submit",
+  "fields": {
+    "product_name": "OWL Legal Research",
+    "company": "OWL AI Agency",
+    "website": "https://owl-ai-agency.com",
+    "demo": "https://owl-ai-agency.com/legal-research-demo.html?autostart=1",
+    "description": "AI-powered legal research automation with batch processing, document merging, and Bluebook citation formatting. Helps law firms reduce research time by up to 70% while improving accuracy.",
+    "contact_name": "Hobie Cunningham",
+    "contact_email": "hobiecunningham@owl-ai-agency.com",
+    "phone": "+1-985-790-1830",
+    "tags": "legal research, AI, paralegal, law firm, citations"
+  }
+}

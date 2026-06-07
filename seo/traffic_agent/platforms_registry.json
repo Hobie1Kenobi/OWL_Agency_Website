@@ -1,0 +1,35 @@
+{
+  "tiers": {
+    "instant": "No account signup — API ping, archive, or site-owned action",
+    "env_credentials": "Uses credentials already in legal-research-backend/.env",
+    "email_no_account": "Public tip/submission email — send via Zoho (no portal login)",
+    "draft_only": "Account required — agent generates ready-to-post copy",
+    "manual_account": "You must create account — tracked for later"
+  },
+  "platforms": [
+    {"id": "indexnow", "name": "IndexNow (Bing/Yandex)", "tier": "instant", "action": "indexnow_ping", "priority": 1},
+    {"id": "bing_ping", "name": "Bing Sitemap Ping", "tier": "instant", "action": "bing_sitemap_ping", "priority": 2},
+    {"id": "pingomatic", "name": "Pingomatic RPC", "tier": "instant", "action": "pingomatic", "priority": 3},
+    {"id": "wayback", "name": "Internet Archive (Wayback Save)", "tier": "instant", "action": "wayback_save", "priority": 4},
+    {"id": "cloudflare_purge", "name": "Cloudflare Cache Purge", "tier": "env_credentials", "action": "cloudflare_purge", "priority": 5},
+    {"id": "llms_refresh", "name": "Regenerate llms.txt", "tier": "instant", "action": "llms_refresh", "priority": 6},
+    {"id": "cross_link_syndication", "name": "On-site syndication hub", "tier": "instant", "action": "site_syndication", "priority": 7},
+    {"id": "tip_technolawyer", "name": "TechnoLawyer Tip", "tier": "email_no_account", "action": "email_tip", "to": "tips@technolawyer.com", "subject_template": "Legal tech tip: verified six-agent SCOTUS demo", "priority": 10},
+    {"id": "tip_lawyerist", "name": "Lawyerist News Tip", "tier": "email_no_account", "action": "email_tip", "to": "editor@lawyerist.com", "subject_template": "Story tip: AI legal research with live citation verification", "priority": 11},
+    {"id": "product_hunt", "name": "Product Hunt Launch", "tier": "draft_only", "action": "generate_post", "post_type": "product_hunt", "priority": 20},
+    {"id": "hacker_news", "name": "Hacker News Show HN", "tier": "draft_only", "action": "generate_post", "post_type": "hacker_news", "priority": 21},
+    {"id": "quora_citations", "name": "Quora — AI citations answer", "tier": "draft_only", "action": "generate_post", "post_type": "quora", "priority": 22},
+    {"id": "quora_cost", "name": "Quora — legal research cost answer", "tier": "draft_only", "action": "generate_post", "post_type": "quora_cost", "priority": 23},
+    {"id": "indie_hackers", "name": "Indie Hackers Build Thread", "tier": "draft_only", "action": "generate_post", "post_type": "indie_hackers", "priority": 24},
+    {"id": "devto", "name": "Dev.to Article", "tier": "draft_only", "action": "generate_post", "post_type": "devto", "priority": 25},
+    {"id": "alternativeto", "name": "AlternativeTo Listing", "tier": "manual_account", "action": "form_payload", "url": "https://alternativeto.net/manage/new/", "priority": 30},
+    {"id": "saashub", "name": "SaaSHub Listing", "tier": "manual_account", "action": "form_payload", "url": "https://www.saashub.com/services/submit", "priority": 31},
+    {"id": "betalist", "name": "BetaList Submit", "tier": "manual_account", "action": "form_payload", "url": "https://betalist.com/submit", "priority": 32},
+    {"id": "haro", "name": "HARO / Connectively", "tier": "manual_account", "action": "form_payload", "url": "https://www.helpareporter.com/sources/", "priority": 33},
+    {"id": "qwoted", "name": "Qwoted Expert", "tier": "manual_account", "action": "form_payload", "url": "https://app.qwoted.com/", "priority": 34},
+    {"id": "medium", "name": "Medium Publication", "tier": "manual_account", "action": "form_payload", "url": "https://medium.com/new-story", "priority": 35},
+    {"id": "legal_hackers", "name": "Legal Hackers Slack", "tier": "manual_account", "action": "form_payload", "url": "https://legalhackers.org/", "priority": 36},
+    {"id": "google_business", "name": "Google Business Profile Posts", "tier": "manual_account", "action": "form_payload", "url": "https://business.google.com/", "priority": 37},
+    {"id": "youtube_demo", "name": "YouTube Demo Upload", "tier": "manual_account", "action": "form_payload", "url": "https://studio.youtube.com/", "priority": 38}
+  ]
+}

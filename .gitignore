@@ -43,6 +43,7 @@ seo/outreach_agent/zoho_tokens.json
 seo/outreach_agent/send_log.jsonl
 seo/outreach_agent/drafts/
 seo/geo_nurture_agent/reports/
+seo/traffic_agent/traffic_log.jsonl
 
 # Editor directories and files
 .idea
