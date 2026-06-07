@@ -1,0 +1,29 @@
+{
+  "sequence_name": "legal_research_intake",
+  "stages": [
+    {
+      "stage": 0,
+      "delay_days": 0,
+      "subject": "Welcome to OWL Legal Research — your next steps",
+      "preview": "Your intake is received. Here is the live demo and what happens next."
+    },
+    {
+      "stage": 1,
+      "delay_days": 3,
+      "subject": "How firms use OWL: Carpenter case study walkthrough",
+      "preview": "See how six agents verify 12 live sources on a real Fourth Amendment matter."
+    },
+    {
+      "stage": 2,
+      "delay_days": 7,
+      "subject": "Manual research vs. OWL: time and accuracy comparison",
+      "preview": "Where paralegals spend hours, OWL's pipeline delivers verified drafts in one workspace."
+    },
+    {
+      "stage": 3,
+      "delay_days": 14,
+      "subject": "Ready to scope your first research run?",
+      "preview": "Book a free consultation or unlock your private workspace today."
+    }
+  ]
+}

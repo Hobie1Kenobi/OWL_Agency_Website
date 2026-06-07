@@ -37,6 +37,11 @@ __pycache__/
 *.pyc
 legal-research-backend/data/intakes/*.json
 legal-research-backend/data/projects/*.json
+seo/.env
+seo/outreach_agent/zoho_tokens.json
+seo/outreach_agent/send_log.jsonl
+seo/outreach_agent/drafts/
+seo/geo_nurture_agent/reports/
 
 # Editor directories and files
 .idea

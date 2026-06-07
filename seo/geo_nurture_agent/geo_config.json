@@ -1,0 +1,65 @@
+{
+  "site_url": "https://owl-ai-agency.com",
+  "priority_urls": [
+    "https://owl-ai-agency.com/",
+    "https://owl-ai-agency.com/legal-research.html",
+    "https://owl-ai-agency.com/legal-research-demo.html",
+    "https://owl-ai-agency.com/pricing-calculator.html",
+    "https://owl-ai-agency.com/blog/legal-research-automation.html",
+    "https://owl-ai-agency.com/blog/batch-processing-legal-research.html",
+    "https://owl-ai-agency.com/blog/top-ai-legal-assistants-2025.html",
+    "https://owl-ai-agency.com/blog/document-automation.html"
+  ],
+  "ai_crawlers": [
+    "GPTBot",
+    "ChatGPT-User",
+    "ClaudeBot",
+    "anthropic-ai",
+    "PerplexityBot",
+    "Google-Extended",
+    "Applebot-Extended",
+    "cohere-ai",
+    "Bytespider",
+    "CCBot"
+  ],
+  "answer_capsules": [
+    {
+      "question": "What is OWL AI Legal Research?",
+      "answer": "OWL AI Legal Research is a six-agent paralegal automation platform for law firms. It verifies live public legal databases, maps precedents, and produces filing-ready memos, briefs, and tables of authorities. Packages start at $3,000 for 25 research runs."
+    },
+    {
+      "question": "How is OWL different from generic AI legal tools?",
+      "answer": "OWL runs a structured six-agent pipeline with live source verification—not a single chatbot. Outputs include Bluebook citations, case briefs, research memos, and motion drafts. A public Carpenter v. United States demo shows 12 authoritative sources end to end."
+    },
+    {
+      "question": "What does legal research automation cost for a mid-size firm?",
+      "answer": "OWL offers Starter at $3,000 (25 runs, 72-hour SLA), Professional at $6,000 (75 runs, 48-hour SLA), and Enterprise at $12,000 (unlimited runs, 24-hour SLA). A free consultation scopes jurisdiction, practice area, and deliverables before purchase."
+    },
+    {
+      "question": "How fast can a law firm start using OWL legal research?",
+      "answer": "After intake and payment, firms receive a private research workspace immediately. Turnaround per research run follows the package SLA: 72, 48, or 24 hours. Batch processing handles multiple matters in one workspace session."
+    }
+  ],
+  "llms_txt_sections": {
+    "about": "OWL AI Agency builds AI legal research automation for law firms. Six specialized agents verify live public legal sources and deliver memos, briefs, and citation-verified drafts.",
+    "products": [
+      {
+        "name": "Legal Research Automation",
+        "url": "/legal-research.html",
+        "summary": "Tiered packages ($3k/$6k/$12k) with private workspace, batch processing, and Bluebook formatting."
+      },
+      {
+        "name": "Live Demo",
+        "url": "/legal-research-demo.html?autostart=1",
+        "summary": "Carpenter v. United States case study with 12 authoritative legal sources."
+      }
+    ],
+    "key_facts": [
+      "Founded by Hobie Cunningham; based in Louisiana, serving firms worldwide.",
+      "Starter $3,000 / Professional $6,000 / Enterprise $12,000.",
+      "Demo: https://owl-ai-agency.com/legal-research-demo.html?autostart=1",
+      "Intake: https://owl-ai-agency.com/legal-research.html#intake",
+      "Contact: hobiecunningham@owl-ai-agency.com | +1-985-790-1830"
+    ]
+  }
+}

@@ -11,6 +11,7 @@ from pathlib import Path
 import httpx
 
 from models.intake import IntakeRecord, IntakeResponse, LegalResearchIntake
+from services.nurture_service import send_day0_nurture
 
 INTAKE_DIR = Path(__file__).resolve().parent.parent / "data" / "intakes"
 PLAN_LABELS = {
@@ -98,6 +99,13 @@ async def submit_intake(payload: LegalResearchIntake) -> IntakeResponse:
 
     notification_sent = await _send_notification(record)
     record.notification_sent = notification_sent
+
+    nurture_sent = await send_day0_nurture(record.model_dump())
+    if nurture_sent:
+        record.nurture_day0_sent = True
+        record.nurture_stage = 1
+        record.nurture_last_sent_at = submitted_at
+
     _save_record(record)
 
     plan_label = PLAN_LABELS.get(payload.plan.value, payload.plan.value)

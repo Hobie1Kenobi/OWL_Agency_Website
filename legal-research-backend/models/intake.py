@@ -56,3 +56,7 @@ class IntakeRecord(LegalResearchIntake):
     submitted_at: str
     status: str = "received"
     notification_sent: bool = False
+    nurture_stage: int = 0
+    nurture_day0_sent: bool = False
+    nurture_last_sent_at: Optional[str] = None
+    nurture_opt_out: bool = False
