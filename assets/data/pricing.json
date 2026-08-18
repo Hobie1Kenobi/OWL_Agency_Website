@@ -14,7 +14,7 @@
         "No account or credit card",
         "Carpenter v. United States working example"
       ],
-      "ctaHref": "verify.html",
+      "ctaHref": "/verify",
       "ctaLabel": "Verify a citation"
     },
     "perDocument": {
@@ -29,7 +29,7 @@
         "Citation verification across the document",
         "No monthly commitment"
       ],
-      "ctaHref": "contact.html",
+      "ctaHref": "/contact",
       "ctaLabel": "Request per-document pricing"
     },
     "firm": {
@@ -45,7 +45,7 @@
         "Verification audit log",
         "Monthly firm access"
       ],
-      "ctaHref": "contact.html",
+      "ctaHref": "/contact",
       "ctaLabel": "Talk about Firm"
     },
     "enterprise": {
@@ -60,7 +60,7 @@
         "Custom fair-use and audit requirements",
         "Direct sales support"
       ],
-      "ctaHref": "contact.html",
+      "ctaHref": "/contact",
       "ctaLabel": "Contact sales"
     }
   }

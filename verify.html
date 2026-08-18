@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="canonical" href="https://owl-ai-agency.com/verify"/>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Verify Citations — Carpenter v. United States | OWL AI Agency</title>
-  <meta name="description" content="Verify citations against public legal sources. Run the Carpenter v. United States example. OWL is a verification layer, not a replacement for legal research or legal advice."/>
+  <link rel="canonical" href="https://owl-ai-agency.com/verify"/>
+  <title>Verify a Legal Citation — Free Check | OWL AI Agency</title>
+  <meta name="description" content="Paste a citation or a paragraph. OWL runs five verification checks: existence, citation format, holding support, verification path, and a human review flag. No signup."/>
+  <meta property="og:title" content="Verify a Legal Citation — Free Check | OWL AI Agency"/>
+  <meta property="og:description" content="Paste a citation or a paragraph. OWL runs five verification checks. No signup, no card."/>
+  <meta property="og:url" content="https://owl-ai-agency.com/verify"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="OWL AI Agency"/>
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg"/>
   <link rel="alternate icon" type="image/png" href="assets/img/favicon.png"/>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
   <link href="assets/css/style.css" rel="stylesheet"/>
-  <link href="assets/css/legal-research-demo.css" rel="stylesheet"/>
+  <link href="assets/css/verify.css" rel="stylesheet"/>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,126 +32,86 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD",
-      "description": "Free single citation-check example"
+      "description": "Free single citation check. No account required."
     },
     "provider": {
-      "@type": "Organization",
+      "@type": "Person",
       "name": "OWL AI Agency",
       "email": "hobiecunningham@owl-ai-agency.com",
-      "telephone": "+1-985-790-1830",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Ingleside",
-        "addressRegion": "TX",
-        "postalCode": "78362",
-        "addressCountry": "US"
-      }
+      "telephone": "+1-985-790-1830"
     }
   }
   </script>
 </head>
 <body>
-
 <header class="fixed-top header-inner-pages" id="header">
   <div class="container d-flex align-items-center">
-    <h1 class="logo me-auto"><a href="index.html"><span class="owl-logo">OWL</span> AI Agency</a></h1>
+    <h1 class="logo me-auto"><a href="/"><span class="owl-logo">OWL</span> AI Agency</a></h1>
     <nav class="navbar" id="navbar">
       <ul>
-        <li><a class="nav-link" href="index.html">Home</a></li>
-        <li><a class="nav-link" href="about.html">About</a></li>
-        <li><a class="nav-link active" href="verify.html">Verify</a></li>
-        <li><a class="nav-link" href="legal-research.html">Legal Research</a></li>
-        <li><a class="nav-link" href="pricing.html">Pricing</a></li>
-        <li><a class="nav-link" href="blog/">Blog</a></li>
-        <li><a class="nav-link" href="contact.html">Contact</a></li>
-        <li><a class="getstarted" href="#run-demo">Run example</a></li>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link active" href="/verify">Verify</a></li>
+        <li><a class="nav-link" href="/legal-research">How it works</a></li>
+        <li><a class="nav-link" href="/pricing">Pricing</a></li>
+        <li><a class="nav-link" href="/blog/">Blog</a></li>
+        <li><a class="nav-link" href="/about">About</a></li>
+        <li><a class="nav-link" href="/contact">Contact</a></li>
+        <li><a class="getstarted" href="#verify-form">Verify free</a></li>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav>
   </div>
 </header>
 
-<section class="legal-demo-hero">
+<section class="verify-hero">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-8">
-        <span class="case-badge"><i class="fas fa-landmark me-2"></i>Working example — no signup</span>
-        <h1>Verify citations: Carpenter v. United States</h1>
-        <p class="lead mb-2">585 U.S. 946 (2018) · Fourth Amendment · Cell-Site Location Information</p>
-        <p class="mb-4">Legal AI should not just answer. It should verify. This page runs a public-source citation check on Carpenter so you can see the verification trail before you file.</p>
-        <a href="#run-demo" class="btn btn-light btn-lg me-2"><i class="fas fa-play-circle me-2"></i>Run verification example</a>
-        <a href="pricing.html" class="btn btn-outline-light btn-lg">See pricing</a>
-      </div>
-      <div class="col-lg-4 text-center d-none d-lg-block">
-        <i class="fas fa-balance-scale" style="font-size: 120px; opacity: 0.3;"></i>
-      </div>
-    </div>
+    <p class="mb-2"><span class="badge bg-light text-dark">No signup · No card · First check free</span></p>
+    <h1>Verify a citation before you file it</h1>
+    <p class="lead mb-0">Legal AI should not just answer. It should verify. Paste a citation or a paragraph that contains citations. OWL runs five checks and shows the verification path — including explicit failure when a cite is missing, ambiguous, or the source is down.</p>
   </div>
 </section>
 
-<main id="main" class="py-5">
+<main id="main" class="py-4">
   <div class="container">
-
-    <!-- TODO: connect live citation-paste endpoint -->
-    <p class="alert alert-light border">This page currently verifies the Carpenter v. United States example. Arbitrary paste-any-citation is not connected yet.</p>
-
-    <section id="run-demo" class="mb-5">
-      <div class="section-title text-center">
-        <h2>Citation verification example</h2>
-        <p>Research → Precedent → Analysis → Citation → Brief Writing → Filing</p>
-      </div>
-      <div class="text-center mb-4">
-        <button id="btn-run-demo" class="btn-run-demo">
-          <i class="fas fa-play-circle me-2"></i>Run Carpenter verification
-        </button>
-      </div>
-      <div id="demo-status" class="demo-status info" style="display:none;"></div>
-      <div id="agent-pipeline" class="agent-pipeline"></div>
-    </section>
-
-    <section id="demo-results">
-      <div class="metrics-row">
-        <div class="metric-box"><div class="value" id="metric-agents">6</div><div class="label">Agents Deployed</div></div>
-        <div class="metric-box"><div class="value" id="metric-docs">6</div><div class="label">Documents Generated</div></div>
-        <div class="metric-box"><div class="value" id="metric-time">—</div><div class="label">Processing Time</div></div>
-        <div class="metric-box"><div class="value" id="metric-sources">—</div><div class="label">Live Sources Verified</div></div>
-      </div>
-
-      <div class="doc-viewer">
-        <ul id="doc-tabs" class="doc-tabs"></ul>
-        <div id="doc-content" class="doc-content">
-          <pre class="p-4 text-muted">Run the example to generate court-formatted documents with source verification.</pre>
+    <section class="verify-panel" aria-labelledby="paste-heading">
+      <h2 id="paste-heading" class="h4 mb-3">Paste a citation or a paragraph</h2>
+      <form id="verify-form">
+        <label for="citation-input">Citation text</label>
+        <textarea class="form-control" id="citation-input" name="citation" rows="6" required placeholder="Example: Carpenter v. United States, 585 U.S. 946 (2018)"></textarea>
+        <div class="verify-actions">
+          <button type="submit" class="btn btn-primary" id="verify-submit">Run five checks</button>
+          <button type="button" class="btn btn-outline-primary" data-verify-prefill="carpenter">Try Carpenter v. United States</button>
         </div>
+        <p class="small text-muted mt-3 mb-1">Also try the three failure states so you can see they are not silent:</p>
+        <div class="verify-prefills">
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="not_found">Citation not found</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="ambiguous">Ambiguous citation</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="source_unavailable">Source unavailable</button>
+        </div>
+      </form>
+      <div id="verify-status" class="verify-status" hidden role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="verify-results" class="mt-4" hidden aria-live="polite"></section>
+
+    <section id="verify-convert" class="verify-convert mt-4" hidden>
+      <h2 class="h4">After you review these checks</h2>
+      <p>The free check covers one citation. A full brief or memo needs a document-level pass. Pricing is framed against the cost of one bad citation, not hours saved.</p>
+      <a class="btn btn-primary me-2 mb-2" href="/contact">Verify a full brief</a>
+      <a class="btn btn-outline-primary mb-2" href="/pricing?from=verify">See pricing</a>
+    </section>
+
+    <section class="mt-5">
+      <h2 class="h4">The five checks</h2>
+      <div class="row g-3">
+        <div class="col-md"><p class="mb-0"><strong>Existence.</strong> Does this case exist in the reporter?</p></div>
+        <div class="col-md"><p class="mb-0"><strong>Citation format.</strong> Is the cite well-formed and does it resolve?</p></div>
+        <div class="col-md"><p class="mb-0"><strong>Holding support.</strong> Does the case stand for the proposition?</p></div>
+        <div class="col-md"><p class="mb-0"><strong>Verification path.</strong> What was checked, against what source?</p></div>
+        <div class="col-md"><p class="mb-0"><strong>Human review flag.</strong> Where does a person still have to look?</p></div>
       </div>
-
-      <div class="sources-panel">
-        <h3><i class="fas fa-link me-2"></i>Live source verification</h3>
-        <p class="small text-muted">Agents query these public systems during each run — no API keys required.</p>
-        <div id="live-sources"></div>
-      </div>
+      <p class="small text-muted mt-3 mb-0">OWL is a verification layer, not an AI lawyer, a paralegal replacement, or a Westlaw competitor. This page does not publish unsourced accuracy percentages.</p>
     </section>
-
-    <section class="mt-5 pt-4 text-center">
-      <h2>After you review the example</h2>
-      <p>For a full brief or memo, see pricing. For a scoped engagement, contact us.</p>
-      <a href="pricing.html" class="btn-get-started me-2">See pricing</a>
-      <a href="contact.html" class="btn-learn-more">Contact OWL</a>
-    </section>
-
-    <section class="mt-5 pt-5">
-      <div class="section-title">
-        <h2>Connected public legal systems</h2>
-        <p>Verification uses free, open legal data sources—not a closed research database substitute.</p>
-      </div>
-      <div class="row" id="public-sources-list"></div>
-    </section>
-
-    <section class="mt-5 bg-light p-4 rounded">
-      <h3>About this example</h3>
-      <p>In <strong>Carpenter v. United States</strong>, the Supreme Court held (5–4) that the Government's acquisition of seven days or more of historical cell-site location information is a Fourth Amendment search requiring a warrant. The FBI had obtained 127 days of Timothy Carpenter's CSLI using court orders under the Stored Communications Act — a standard below probable cause.</p>
-      <p class="mb-0">The example retrieves authorities from Cornell LII and Oyez, maps the precedent chain from <em>Katz</em> through <em>Jones</em> and <em>Riley</em>, and shows Bluebook citations that a human reviewer still must check before filing.</p>
-    </section>
-
   </div>
 </main>
 
@@ -167,19 +131,19 @@
         <div class="col-lg-3 col-md-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><i class="bx bx-chevron-right"></i> <a href="index.html">Home</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="about.html">About</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="verify.html">Verify</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="pricing.html">Pricing</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="contact.html">Contact</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/about">About</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/verify">Verify</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/pricing">Pricing</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/contact">Contact</a></li>
           </ul>
         </div>
         <div class="col-lg-6 col-md-6 footer-links">
           <h4>Product</h4>
           <ul>
-            <li><i class="bx bx-chevron-right"></i> <a href="verify.html">Citation verification</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="legal-research.html">Legal research</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="blog/">Blog</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/verify">Citation verification</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/legal-research">How it works</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/blog/">Blog</a></li>
           </ul>
         </div>
       </div>
@@ -191,11 +155,11 @@
   </div>
 </footer>
 
-<a href="verify.html" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+<a href="#header" class="back-to-top d-flex align-items-center justify-content-center" aria-label="Back to top"><i class="bi bi-arrow-up-short"></i></a>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/legal-research-config.js"></script>
-<script src="assets/js/legal-research-demo.js"></script>
+<script src="assets/js/verify-api.js"></script>
+<script src="assets/js/verify-page.js"></script>
 </body>
 </html>
