@@ -175,10 +175,12 @@
   }
 
   /**
-   * Initiate glightbox 
+   * Initiate glightbox
    */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+  if (typeof GLightbox === 'function') {
+    GLightbox({
+      selector: '.glightbox'
+    });
+  }
 
 })(); 
