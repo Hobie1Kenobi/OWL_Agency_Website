@@ -5,7 +5,7 @@
     {
       question: 'What is OWL AI Legal Research?',
       answer:
-        'OWL AI Legal Research is a six-agent paralegal automation platform for law firms. It verifies live public legal databases, maps precedents, and produces filing-ready memos, briefs, and tables of authorities. Packages start at $3,000 for 25 research runs.'
+        'OWL is a citation verification layer for law firms. It checks citations against live public legal sources so attorneys can review AI or human research before filing. It is not a lawyer, paralegal replacement, or Westlaw/Lexis competitor.'
     },
     {
       question: 'How is OWL different from generic AI legal tools?',
@@ -20,7 +20,7 @@
     {
       question: 'How fast can a law firm start using OWL legal research?',
       answer:
-        'After intake and payment, firms receive a private research workspace immediately. Turnaround per research run follows the package SLA: 72, 48, or 24 hours. Batch processing handles multiple matters in one workspace session.'
+        'Start with the public Carpenter verification example, then contact OWL for per-document or firm verification. Human review of all outputs is required.'
     }
   ];
 

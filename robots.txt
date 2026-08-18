@@ -63,6 +63,7 @@ Disallow: /*?ref=
 Disallow: /tmp/
 Disallow: /admin/
 Disallow: /includes/
+Disallow: /archive/
 Disallow: /cgi-bin/
 Disallow: /error_log
 Disallow: /*.sql$
@@ -72,9 +73,11 @@ Disallow: /*.bak$
 # Allow critical content directories 
 Allow: /index.html
 Allow: /legal-research.html
+Allow: /verify
+Allow: /pricing
+Allow: /about
+Allow: /contact
 Allow: /llms.txt
-Allow: /compare/
-Allow: /pricing-calculator.html
 Allow: /blog/
 Allow: /blog/legal-research-automation.html
 Allow: /blog/batch-processing-legal-research.html

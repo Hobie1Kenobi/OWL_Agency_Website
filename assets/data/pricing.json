@@ -1,0 +1,67 @@
+{
+  "currency": "USD",
+  "valueFrame": "Priced against the cost of one bad citation—not hours saved.",
+  "tiers": {
+    "free": {
+      "id": "free",
+      "name": "Free",
+      "price": 0,
+      "priceLabel": "$0",
+      "cadence": null,
+      "summary": "One citation check. No card required.",
+      "features": [
+        "1 citation check",
+        "No account or credit card",
+        "Carpenter v. United States working example"
+      ],
+      "ctaHref": "verify.html",
+      "ctaLabel": "Verify a citation"
+    },
+    "perDocument": {
+      "id": "per-document",
+      "name": "Per-document",
+      "price": null,
+      "priceLabel": "Contact for per-document pricing",
+      "cadence": "per_document",
+      "summary": "Flat price per brief or memo verified. No subscription.",
+      "features": [
+        "One brief or memo per engagement",
+        "Citation verification across the document",
+        "No monthly commitment"
+      ],
+      "ctaHref": "contact.html",
+      "ctaLabel": "Request per-document pricing"
+    },
+    "firm": {
+      "id": "firm",
+      "name": "Firm",
+      "price": 6000,
+      "priceLabel": "$6,000",
+      "cadence": "month",
+      "source": "Professional package figure from legal-research.html",
+      "summary": "Monthly plan for unlimited documents up to a fair-use cap, with a verification audit log.",
+      "features": [
+        "Unlimited documents up to a fair-use cap",
+        "Verification audit log",
+        "Monthly firm access"
+      ],
+      "ctaHref": "contact.html",
+      "ctaLabel": "Talk about Firm"
+    },
+    "enterprise": {
+      "id": "enterprise",
+      "name": "Enterprise / API",
+      "price": null,
+      "priceLabel": "Contact",
+      "cadence": "custom",
+      "summary": "API access and custom verification workflows for larger desks.",
+      "features": [
+        "API integration",
+        "Custom fair-use and audit requirements",
+        "Direct sales support"
+      ],
+      "ctaHref": "contact.html",
+      "ctaLabel": "Contact sales"
+    }
+  }
+}

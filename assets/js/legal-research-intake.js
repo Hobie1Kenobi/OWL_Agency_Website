@@ -79,8 +79,8 @@
       has_documents: document.getElementById('intake-has-docs').checked,
       preferred_contact: document.getElementById('intake-contact-pref').value,
       referral_source: document.getElementById('intake-referral').value.trim() || null,
-      demo_viewed: window.location.pathname.indexOf('legal-research-demo') !== -1 ||
-        document.referrer.indexOf('legal-research-demo') !== -1
+      demo_viewed: window.location.pathname.indexOf('verify') !== -1 ||
+        document.referrer.indexOf('verify') !== -1
     };
   }
 
@@ -178,7 +178,7 @@
       }
       showSuccess(result);
     } catch (err) {
-      alert('Could not submit intake: ' + err.message + '\n\nEmail us directly at sales@owl-ai-agency.com');
+      alert('Could not submit intake: ' + err.message + '\n\nEmail us directly at hobiecunningham@owl-ai-agency.com');
     } finally {
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Submit Research Request';

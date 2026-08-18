@@ -127,27 +127,6 @@ const faqSchema = {
   ]
 };
 
-const reviewSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Review',
-  reviewRating: {
-    '@type': 'Rating',
-    ratingValue: '5',
-    bestRating: '5'
-  },
-  author: {
-    '@type': 'Person',
-    name: 'John Smith'
-  },
-  reviewBody: "OWL AI Agency's legal research automation has transformed our practice. We've reduced research time by 70% while maintaining high accuracy. The ROI has been exceptional.",
-  datePublished: '2024-02-15',
-  itemReviewed: {
-    '@type': 'Service',
-    name: 'OWL AI Legal Research Automation',
-    url: SITE + '/legal-research.html'
-  }
-};
-
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -162,7 +141,7 @@ const breadcrumbSchema = {
       '@type': 'ListItem',
       position: 2,
       name: 'Legal Research',
-      item: SITE + '/legal-research.html'
+      item: SITE + '/legal-research'
     }
   ]
 };
@@ -171,12 +150,12 @@ function injectSchemas() {
   const path = window.location.pathname.replace(/\/$/, '') || '/';
   const schemas = [organizationSchema];
 
-  if (path === '/' || path === '/index.html' || path === '/legal-research.html') {
+  if (path === '/' || path === '/index.html' || path === '/legal-research.html' || path === '/legal-research') {
     schemas.push(legalResearchServiceSchema);
   }
 
-  if (path === '/legal-research.html') {
-    schemas.push(faqSchema, reviewSchema, breadcrumbSchema);
+  if (path === '/legal-research.html' || path === '/legal-research') {
+    schemas.push(faqSchema, breadcrumbSchema);
   }
 
   schemas.forEach(function (schema) {
