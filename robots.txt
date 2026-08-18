@@ -1,98 +1,28 @@
-# OWL AI Agency Robots.txt - Optimized for maximum search engine visibility
-# Last updated: 2025-06-21
+# OWL AI Agency robots.txt
+# Last updated: 2026-08-18
 
-# Google bots
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Googlebot-Image
-Allow: /assets/img/
-Allow: /blog/img/
-Disallow: /assets/img/admin/
-
-User-agent: Googlebot-Video
-Allow: /assets/video/
-Allow: /blog/video/
-
-User-agent: Googlebot-Mobile
-Allow: /
-
-# Bing bots
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 2
-
-User-agent: AdIdxBot
-Allow: /
-
-# Yahoo bot
-User-agent: Slurp
-Allow: /
-Crawl-delay: 2
-
-# Yandex bot
-User-agent: Yandex
-Allow: /
-Crawl-delay: 3
-
-# Baidu bot
-User-agent: Baiduspider
-Allow: /
-Crawl-delay: 3
-
-# DuckDuckGo bot
-User-agent: DuckDuckBot
-Allow: /
-Crawl-delay: 1
-
-# All other bots
 User-agent: *
 Allow: /
-Crawl-delay: 2
-
-# Block sensitive directories and files
+Allow: /verify
+Disallow: /archive/
 Disallow: /.env
 Disallow: /seo/directory_submission_templates/
 Disallow: /seo/directory_submission_tracker.csv
-Disallow: /*?*print=
-Disallow: /*?*filter=
-Disallow: /*?*sort=
-Disallow: /*?utm_*
-Disallow: /*?ref=
 Disallow: /tmp/
 Disallow: /admin/
 Disallow: /includes/
-Disallow: /archive/
 Disallow: /cgi-bin/
 Disallow: /error_log
 Disallow: /*.sql$
 Disallow: /*.log$
 Disallow: /*.bak$
 
-# Allow critical content directories 
-Allow: /index.html
-Allow: /legal-research.html
-Allow: /verify
-Allow: /pricing
-Allow: /about
-Allow: /contact
-Allow: /llms.txt
-Allow: /blog/
-Allow: /blog/legal-research-automation.html
-Allow: /blog/batch-processing-legal-research.html
-Allow: /blog/xrp-payments.html
-Allow: /blog/top-ai-legal-assistants-2025.html
-Allow: /blog/document-automation.html
-Allow: /content-creation-ruleset.html
+User-agent: Googlebot
+Allow: /
 
-# Clean parameters
-Allow: /*?page=
-Allow: /*?id=
-Allow: /*?lang=
+User-agent: Bingbot
+Allow: /
 
-# AI / LLM crawlers (GEO)
-# Explicit allow for generative engine indexing
 User-agent: GPTBot
 Allow: /
 
@@ -111,21 +41,5 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: cohere-ai
-Allow: /
-
-User-agent: Bytespider
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-# Sitemaps
 Sitemap: https://owl-ai-agency.com/sitemap.xml
-Sitemap: https://owl-ai-agency.com/voice-search-sitemap.xml
 Sitemap: https://owl-ai-agency.com/image-sitemap.xml
-Sitemap: https://owl-ai-agency.com/video-sitemap.xml
-Sitemap: https://owl-ai-agency.com/news-sitemap.xml

@@ -1,507 +1,180 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Legal Technology Blog - OWL AI Agency</title>
-<meta content="Stay updated with the latest insights on legal technology, AI automation, and the future of law practice." name="description"/>
-<meta content="legal research automation, AI legal research, legal tech blog, law firm automation, legal document automation, XRP payments for legal services" name="keywords"/>
-<!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
-<link rel="alternate icon" type="image/png" href="../assets/img/favicon.png">
-<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-<!-- Vendor CSS Files -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-<!-- Template Main CSS File -->
-<link href="../assets/css/style.css" rel="stylesheet">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="canonical" href="https://owl-ai-agency.com/blog/"/>
+<title>Citation Verification Blog | OWL AI Agency</title>
+<meta name="description" content="Notes on verifying AI-generated citations, audit trails, and why legal research automation is incomplete without a verification layer."/>
+<meta property="og:title" content="Citation Verification Blog | OWL AI Agency"/>
+<meta property="og:description" content="Notes on verifying AI-generated citations, audit trails, and why legal research automation is incomplete without a verification layer."/>
+<meta property="og:url" content="https://owl-ai-agency.com/blog/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="OWL AI Agency"/>
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg"/>
+<link rel="alternate icon" type="image/png" href="/assets/img/favicon.png"/>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Jost:400,500,600,700" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
 <style>
-    .blog-hero {
-        background: linear-gradient(rgba(55, 81, 126, 0.9), rgba(55, 81, 126, 0.7)), url('../assets/img/hero-bg.jpg');
-        background-size: cover;
-        background-position: center;
-        padding: 120px 0 80px;
-        color: #fff;
-    }
-
-    .blog-card {
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px;
-        transition: all 0.3s;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    .blog-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .blog-image-wrapper {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .blog-image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.3s;
-    }
-
-    .blog-image-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(55, 81, 126, 0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-
-    .blog-card:hover .blog-image-overlay {
-        opacity: 1;
-    }
-
-    .blog-card:hover .blog-image {
-        transform: scale(1.1);
-    }
-
-    .blog-image-actions {
-        display: flex;
-        gap: 15px;
-    }
-
-    .blog-image-actions a {
-        width: 40px;
-        height: 40px;
-        background: #fff;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #37517e;
-        transition: all 0.3s;
-    }
-
-    .blog-image-actions a:hover {
-        background: #47b2e4;
-        color: #fff;
-    }
-
-    .blog-image-actions i {
-        font-size: 20px;
-    }
-
-    .blog-content {
-        padding: 25px;
-    }
-
-    .blog-date {
-        color: #777;
-        font-size: 0.9rem;
-        margin-bottom: 10px;
-    }
-
-    .blog-title {
-        color: #37517e;
-        margin-bottom: 15px;
-        font-size: 1.5rem;
-        font-weight: 600;
-    }
-
-    .blog-excerpt {
-        color: #444;
-        margin-bottom: 20px;
-        line-height: 1.6;
-    }
-
-    .blog-link {
-        color: #47b2e4;
-        text-decoration: none;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .blog-link:hover {
-        color: #209dd8;
-    }
+.blog-hero { background: linear-gradient(rgba(55, 81, 126, 0.92), rgba(55, 81, 126, 0.75)); padding: 120px 0 72px; color: #fff; }
+.blog-card { background: #fff; border-radius: 10px; box-shadow: 0 5px 25px rgba(0,0,0,0.08); padding: 24px; height: 100%; margin-bottom: 24px; }
+.blog-card h2 { font-size: 1.25rem; color: #37517e; }
 </style>
 </head>
 <body>
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-        <div class="container d-flex align-items-center">
-            <h1 class="logo me-auto">
-                <a href="../index.html">
-                    <span class="owl-logo">OWL</span> AI Agency
-                </a>
-            </h1>
-
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link" href="../index.html">Home</a></li>
-                    <li><a class="nav-link" href="../verify.html">Verify</a></li>
-                    <li><a class="nav-link active" href="index.html">Blog</a></li>
-                    <li><a class="nav-link" href="../legal-research.html">Legal Research</a></li>
-                    <li><a class="nav-link" href="../pricing.html">Pricing</a></li>
-                    <li><a class="getstarted" href="../contact.html">Contact</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav>
-        </div>
-    </header>
-
-    <main id="main">
-        <!-- ======= Blog Hero Section ======= -->
-        <section class="blog-hero">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h1>Legal Technology Insights</h1>
-                        <p class="mt-3">Stay updated with the latest trends, insights, and innovations in legal technology and AI automation.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ======= Blog Posts Section ======= -->
-        <section class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <div class="image-wrapper">
-                                <img src="../assets/img/blog/ai-legal-assistants.jpg" alt="Top AI Legal Assistants" class="img-fluid">
-                                <div class="image-overlay">
-                                    <div class="image-actions">
-                                        <a href="../assets/img/blog/ai-legal-assistants.jpg" class="glightbox" data-gallery="blog-gallery">
-                                            <i class="bi bi-zoom-in"></i>
-                                        </a>
-                                        <a href="top-ai-legal-assistants-2025.html">
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <span class="date">March 24, 2025</span>
-                                <h5 class="card-title">
-                                    <a href="top-ai-legal-assistants-2025.html">Top AI Legal Assistants: A Comprehensive Guide (2025)</a>
-                                </h5>
-                                <p class="card-text">An in-depth comparison of the leading AI legal assistants, helping law firms choose the right tools for their practice.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <div class="blog-image-wrapper">
-                                <img src="../assets/img/blog/legal-research-automation.jpg" alt="Legal Research Automation" class="blog-image">
-                                <div class="blog-image-overlay">
-                                    <div class="blog-image-actions">
-                                        <a href="../assets/img/blog/legal-research-automation.jpg" class="glightbox" data-gallery="blog-gallery" data-title="AI-Powered Legal Research Automation">
-                                            <i class="bi bi-zoom-in"></i>
-                                        </a>
-                                        <a href="legal-research-automation.html">
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <div class="blog-date">January 5, 2025</div>
-                                <h3 class="blog-title">AI-Powered Legal Research Automation</h3>
-                                <p class="blog-excerpt">Discover how AI is revolutionizing legal research, making it faster and more accurate than ever before.</p>
-                                <a href="legal-research-automation.html" class="blog-link">
-                                    Read More <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <div class="blog-image-wrapper">
-                                <img src="../assets/img/blog/legal-research-batch.jpg" alt="Batch Processing Legal Research" class="blog-image">
-                                <div class="blog-image-overlay">
-                                    <div class="blog-image-actions">
-                                        <a href="../assets/img/blog/legal-research-batch.jpg" class="glightbox" data-gallery="blog-gallery" data-title="Batch Processing in Legal Research">
-                                            <i class="bi bi-zoom-in"></i>
-                                        </a>
-                                        <a href="batch-processing-legal-research.html">
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <div class="blog-date">January 18, 2025</div>
-                                <h3 class="blog-title">Batch Processing in Legal Research</h3>
-                                <p class="blog-excerpt">Learn how batch processing can streamline your legal research workflow and improve efficiency.</p>
-                                <a href="batch-processing-legal-research.html" class="blog-link">
-                                    Read More <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <div class="blog-image-wrapper">
-                                <img src="../assets/img/blog/legal-automation-2025.jpg" alt="Legal Automation in 2025" class="blog-image">
-                                <div class="blog-image-overlay">
-                                    <div class="blog-image-actions">
-                                        <a href="../assets/img/blog/legal-automation-2025.jpg" class="glightbox" data-gallery="blog-gallery" data-title="Legal Automation in 2025">
-                                            <i class="bi bi-zoom-in"></i>
-                                        </a>
-                                        <a href="legal-automation-2025.html">
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <div class="blog-date">January 30, 2025</div>
-                                <h3 class="blog-title">Legal Automation in 2025</h3>
-                                <p class="blog-excerpt">Explore the future of legal automation and how it will transform the practice of law by 2025.</p>
-                                <a href="legal-automation-2025.html" class="blog-link">
-                                    Read More <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <div class="blog-image-wrapper">
-                                <img src="../assets/img/blog/xrp-payments.jpg" alt="XRP Payments in Legal Practice" class="blog-image">
-                                <div class="blog-image-overlay">
-                                    <div class="blog-image-actions">
-                                        <a href="../assets/img/blog/xrp-payments.jpg" class="glightbox" data-gallery="blog-gallery" data-title="XRP Payments in Legal Practice">
-                                            <i class="bi bi-zoom-in"></i>
-                                        </a>
-                                        <a href="xrp-payments.html">
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <div class="blog-date">February 12, 2025</div>
-                                <h3 class="blog-title">XRP Payments in Legal Practice</h3>
-                                <p class="blog-excerpt">Learn how XRP payments are revolutionizing financial transactions in legal practices, offering faster and more secure solutions.</p>
-                                <a href="xrp-payments.html" class="blog-link">
-                                    Read More <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <div class="blog-image-wrapper">
-                                <img src="../assets/img/blog/document-automation.jpg" alt="Document Automation" class="blog-image">
-                                <div class="blog-image-overlay">
-                                    <div class="blog-image-actions">
-                                        <a href="../assets/img/blog/document-automation.jpg" class="glightbox" data-gallery="blog-gallery" data-title="Document Automation Revolution">
-                                            <i class="bi bi-zoom-in"></i>
-                                        </a>
-                                        <a href="document-automation.html">
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <div class="blog-date">February 25, 2025</div>
-                                <h3 class="blog-title">Document Automation Revolution</h3>
-                                <p class="blog-excerpt">Discover how document automation is transforming legal document preparation and management.</p>
-                                <a href="document-automation.html" class="blog-link">
-                                    Read More <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <div class="blog-image-wrapper">
-                                <img src="../assets/img/blog/ai-case-analysis.jpg" alt="AI Case Analysis" class="blog-image">
-                                <div class="blog-image-overlay">
-                                    <div class="blog-image-actions">
-                                        <a href="../assets/img/blog/ai-case-analysis.jpg" class="glightbox" data-gallery="blog-gallery" data-title="AI Case Analysis Guide">
-                                            <i class="bi bi-zoom-in"></i>
-                                        </a>
-                                        <a href="ai-case-analysis.html">
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <div class="blog-date">March 8, 2025</div>
-                                <h3 class="blog-title">AI Case Analysis Guide</h3>
-                                <p class="blog-excerpt">A comprehensive guide to using AI for case analysis and legal research optimization.</p>
-                                <a href="ai-case-analysis.html" class="blog-link">
-                                    Read More <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <div class="blog-image-wrapper">
-                                <img src="../assets/img/blog/batch-processing-revolution.jpg" alt="Batch Processing Revolution" class="blog-image">
-                                <div class="blog-image-overlay">
-                                    <div class="blog-image-actions">
-                                        <a href="../assets/img/blog/batch-processing-revolution.jpg" class="glightbox" data-gallery="blog-gallery" data-title="The Batch Processing Revolution">
-                                            <i class="bi bi-zoom-in"></i>
-                                        </a>
-                                        <a href="batch-processing-legal-research-revolution.html">
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <div class="blog-date">March 20, 2025</div>
-                                <h3 class="blog-title">The Batch Processing Revolution</h3>
-                                <p class="blog-excerpt">How batch processing is revolutionizing legal document analysis and research workflows.</p>
-                                <a href="batch-processing-legal-research-revolution.html" class="blog-link">
-                                    Read More <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <div class="image-wrapper">
-                                <img src="../assets/img/blog/legal-document-automation-2024.jpg" alt="Legal Document Automation Guide" class="img-fluid">
-                                <div class="image-overlay">
-                                    <div class="image-actions">
-                                        <a href="../assets/img/blog/legal-document-automation-2024.jpg" class="glightbox" data-gallery="blog-gallery">
-                                            <i class="bi bi-zoom-in"></i>
-                                        </a>
-                                        <a href="mastering-legal-document-automation.html">
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <span class="date">March 24, 2025</span>
-                                <h5 class="card-title">
-                                    <a href="mastering-legal-document-automation.html">Mastering Legal Document Automation: Interactive Guide (2025)</a>
-                                </h5>
-                                <p class="card-text">Discover how AI-powered legal document automation is transforming law firms. Interactive guide with demos, ROI calculator, and real case studies.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>OWL AI Agency</h3>
-                        <p>
-                            Ingleside, TX 78362<br>
-                            United States <br><br>
-                            <strong>Phone:</strong> <a href="tel:+19857901830">(985) 790-1830</a><br>
-                            <strong>Email:</strong> <a href="mailto:hobiecunningham@owl-ai-agency.com">hobiecunningham@owl-ai-agency.com</a><br>
-                        </p>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../index.html">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../about.html">About</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../verify.html">Verify</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../pricing.html">Pricing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../verify.html">Citation verification</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../legal-research.html">Legal Research</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../pricing.html">Pricing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../about.html">About</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="../contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Follow Us</h4>
-                        <div class="social-links mt-3">
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>OWL AI Agency</span></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-                    Designed by <a href="../index.html">OWL AI Agency</a>
-                </div>
-            </div>
-        </div>
-    <div class="container"><p class="small text-muted">OWL is a verification tool, not legal advice, and does not create an attorney-client relationship. Human review of all outputs is required.</p></div>
+<header class="fixed-top" id="header">
+<div class="container d-flex align-items-center">
+<h1 class="logo me-auto"><a href="/"><span class="owl-logo">OWL</span> AI Agency</a></h1>
+<nav class="navbar" id="navbar">
+<ul>
+<li><a class="nav-link" href="/">Home</a></li>
+<li><a class="nav-link" href="/verify">Verify</a></li>
+<li><a class="nav-link" href="/legal-research">How it works</a></li>
+<li><a class="nav-link" href="/pricing">Pricing</a></li>
+<li><a class="nav-link active" href="/blog/">Blog</a></li>
+<li><a class="nav-link" href="/about">About</a></li>
+<li><a class="nav-link" href="/contact">Contact</a></li>
+<li><a class="getstarted" href="/verify">Verify a citation</a></li>
+</ul>
+<i class="bi bi-list mobile-nav-toggle"></i>
+</nav>
+</div>
+</header>
+<main id="main">
+<section class="blog-hero">
+<div class="container">
+<h1>Citation verification notes</h1>
+<p class="mt-3 mb-0">Legal AI should not just answer. It should verify. <a class="text-white text-decoration-underline" href="/verify">Run a free citation check</a>.</p>
+</div>
+</section>
+<section class="py-5">
+<div class="container">
+<div class="row">
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">August 18, 2026</p>
+<h2><a href="/blog/verifying-ai-generated-citations">Verifying AI-generated citations before filing</a></h2>
+<p>Five checks, including explicit failure states, before a generated cite goes into a brief.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">August 18, 2026</p>
+<h2><a href="/blog/verification-audit-trail">What a verification audit trail should contain</a></h2>
+<p>What was checked, against what source, and where a person still had to look.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">March 25, 2025</p>
+<h2><a href="/blog/batch-processing-legal-research">Batch legal research multiplies citation risk</a></h2>
+<p>Volume does not reduce the duty to verify each cite.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">March 24, 2025</p>
+<h2><a href="/blog/top-ai-legal-assistants-2025">AI legal assistants still need a verification layer</a></h2>
+<p>Drafting tools are not a verification path.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">March 24, 2025</p>
+<h2><a href="/blog/batch-processing-legal-research-revolution">Batch processing still requires a verification path</a></h2>
+<p>Scaling research without a trail just scales unverified cites.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">March 24, 2025</p>
+<h2><a href="/blog/mastering-legal-document-automation">Master document automation without invented citations</a></h2>
+<p>Unsourced ROI stories removed. The verification step remains.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">March 23, 2025</p>
+<h2><a href="/blog/legal-research-automation">Legal research automation is incomplete without verification</a></h2>
+<p>Speed is not the filing problem. Unverified citations are.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">March 22, 2025</p>
+<h2><a href="/blog/ai-case-analysis">AI case analysis still needs holding support</a></h2>
+<p>A summary is not proof that the case supports the sentence.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">March 15, 2025</p>
+<h2><a href="/blog/document-automation">Document automation still needs citation verification</a></h2>
+<p>Assembly is production. Verification is the check before filing.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">February 20, 2024</p>
+<h2><a href="/blog/legal-automation-2025">Legal automation in 2025 still ends with human review</a></h2>
+<p>Automation drafts. A person still signs the brief.</p>
+</div>
+</div>
+<div class="col-lg-4 col-md-6">
+<div class="blog-card">
+<p class="text-muted mb-1">June 15, 2025</p>
+<h2><a href="/blog/xrp-payments">Payments are adjacent to citation verification</a></h2>
+<p>Retained URL. Product is verification, not a payments network.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer id="footer">
+<div class="footer-top">
+<div class="container">
+<div class="row">
+<div class="col-lg-3 col-md-6 footer-contact">
+<h3>OWL AI Agency</h3>
+<p>
+Ingleside, TX 78362<br/>
+United States<br/><br/>
+<strong>Phone:</strong> <a href="tel:+19857901830">(985) 790-1830</a><br/>
+<strong>Email:</strong> <a href="mailto:hobiecunningham@owl-ai-agency.com">hobiecunningham@owl-ai-agency.com</a>
+</p>
+</div>
+<div class="col-lg-3 col-md-6 footer-links">
+<h4>Useful Links</h4>
+<ul>
+<li><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/about">About</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/verify">Verify</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/pricing">Pricing</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/contact">Contact</a></li>
+</ul>
+</div>
+<div class="col-lg-6 col-md-6 footer-links">
+<h4>Product</h4>
+<ul>
+<li><i class="bx bx-chevron-right"></i> <a href="/verify">Citation verification</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/legal-research">How it works</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/blog/">Blog</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="container footer-bottom clearfix">
+<div class="copyright">&copy; <strong>OWL AI Agency</strong>. All Rights Reserved</div>
+<div class="credits">OWL is a verification tool, not legal advice, and does not create an attorney-client relationship. Human review of all outputs is required.</div>
+</div>
 </footer>
-
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/waypoints@4.0.1/lib/noframework.waypoints.min.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="../assets/js/main.js"></script>
-
-    <script>
-        // Initialize GLightbox
-        const lightbox = GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true,
-            autoplayVideos: true
-        });
-    </script>
+<a href="#header" class="back-to-top d-flex align-items-center justify-content-center" aria-label="Back to top"><i class="bi bi-arrow-up-short"></i></a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>
