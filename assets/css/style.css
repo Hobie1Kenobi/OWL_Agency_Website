@@ -422,6 +422,42 @@ h1, h2, h3, h4, h5, h6 {
   background: #209dd8;
 }
 
+.legal-hero .btn-get-started,
+.about .content .btn-get-started {
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 50px;
+  color: #fff;
+  background: #47b2e4;
+  margin: 10px 10px 0 0;
+}
+
+.legal-hero .btn-get-started:hover,
+.about .content .btn-get-started:hover {
+  background: #209dd8;
+  color: #fff;
+}
+
+.legal-hero .btn-learn-more {
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  display: inline-block;
+  padding: 8px 26px;
+  border-radius: 50px;
+  color: #fff;
+  border: 2px solid #fff;
+  margin: 10px 0 0 0;
+}
+
+.legal-hero .btn-learn-more:hover {
+  background: #fff;
+  color: #37517e;
+}
+
 #hero .btn-watch-video {
   font-size: 16px;
   display: flex;
@@ -1335,4 +1371,46 @@ section {
   color: #444;
   font-size: 14px;
   line-height: 1.6;
+}
+
+.breadcrumbs {
+  padding: 15px 0;
+  background: #f3f5fa;
+  min-height: 40px;
+  margin-top: 72px;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.breadcrumbs ol li + li {
+  padding-left: 10px;
+}
+
+.breadcrumbs ol li + li::before {
+  content: "/";
+  padding-right: 10px;
+  color: #4668a2;
+}
+
+.faq .faq-item {
+  padding: 20px 0;
+  border-bottom: 1px solid #eef0ef;
+}
+
+.faq .faq-item h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #37517e;
+  margin-bottom: 10px;
+}
+
+.faq .faq-item p {
+  margin-bottom: 0;
 } 

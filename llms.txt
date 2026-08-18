@@ -1,14 +1,15 @@
 # OWL AI Agency
 
-> OWL is a citation verification tool for legal research. Legal AI should not just answer. It should verify. OWL is not an AI lawyer, not a paralegal replacement, and not a Westlaw or Lexis competitor.
+> OWL is a citation verification tool for legal research. Legal AI should not just answer. It should verify. OWL is not an AI lawyer, not a paralegal replacement, and not a Westlaw or Lexis competitor. Verification is not legal advice.
 
 ## Canonical site
 https://owl-ai-agency.com
 
 ## Product
-- [Verify](https://owl-ai-agency.com/verify): Paste a citation or a paragraph. Five checks — existence, citation format, holding support, verification path, human review flag. First check free, no signup.
-- [How it works](https://owl-ai-agency.com/legal-research): Verification layer on research you already have.
-- [Pricing](https://owl-ai-agency.com/pricing): Free, per-document, firm, enterprise/API. Framed against the cost of one bad citation.
+- Primary: [Verify](https://owl-ai-agency.com/verify) — paste a citation or a paragraph. First check free, no signup.
+- Five checks: existence, citation format, holding support, verification path, human review flag. Failures are explicit (citation not found, ambiguous citation, source unavailable).
+- [How it works](https://owl-ai-agency.com/legal-research): methodology for the five checks.
+- [Pricing](https://owl-ai-agency.com/pricing): Free, per-document, firm, enterprise/API. Framed against the cost of one bad citation, not hours saved. No invented ROI figures.
 
 ## NAP
 - OWL AI Agency
@@ -18,7 +19,13 @@ https://owl-ai-agency.com
 
 ## Answer capsules
 ### What is OWL?
-OWL checks whether cited authorities can be confirmed against public legal sources so a human reviewer can decide what to file.
+OWL is a citation verification layer on research you already have. It checks whether cited authorities can be confirmed against public legal sources so a human reviewer can decide what to file. It does not replace a lawyer, a paralegal, or a research database. Verification is not legal advice.
+
+### How is it different from ChatGPT for citations?
+ChatGPT and similar models generate answers that may include invented or misapplied cites. OWL does not replace that research; it verifies citations that already exist in a paste or a SAMPLE excerpt: existence, citation format, holding support, a visible verification path, and a human-review flag. A person still signs the brief.
+
+### What is a verification audit trail?
+A verification audit trail records the pasted string, which of the five checks ran, which public source was used, and whether the result was pass, fail, or needs review. It is not a chatbot screenshot. See https://owl-ai-agency.com/blog/verification-audit-trail and https://owl-ai-agency.com/verify.
 
 ### Does OWL replace a lawyer or paralegal?
 No. Human review of all outputs is required. OWL does not create an attorney-client relationship and is not legal advice.
