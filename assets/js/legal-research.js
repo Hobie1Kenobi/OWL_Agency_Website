@@ -89,9 +89,9 @@
       '<i class="fas fa-check-circle" style="font-size: 60px; color: #47b2e4; margin-bottom: 20px;"></i>' +
       '<h3>Payment Successful!</h3>' +
       '<p>Your ' + selectedPlan + ' workspace is now active.</p>' +
-      '<a href="legal-research-workspace.html?token=' + accessToken + '" class="btn-get-started btn-lg mt-3">' +
-      '<i class="fas fa-arrow-right me-2"></i>Open Your Workspace</a>' +
-      '<p class="text-muted small mt-3">Bookmark this page — your private research portal.</p></div>';
+      '<a href="contact.html" class="btn-get-started btn-lg mt-3">' +
+      '<i class="fas fa-arrow-right me-2"></i>Contact OWL</a>' +
+      '<p class="text-muted small mt-3">We will confirm access after payment.</p></div>';
   }
 
   async function processPayment(event) {

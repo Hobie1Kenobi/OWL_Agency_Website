@@ -34,7 +34,7 @@ const legalResearchHowToSchema = {
       '@type': 'HowToStep',
       name: 'Run the paralegal pipeline',
       text: 'Submit research questions and download memos, briefs, motions, and CSV reports.',
-      url: SITE + '/legal-research-workspace.html'
+      url: SITE + '/verify'
     }
   ]
 };
@@ -48,7 +48,14 @@ const localBusinessSchema = {
   logo: SITE + '/assets/img/favicon.svg',
   image: SITE + '/assets/img/blog/legal-research-automation.jpg',
   telephone: '+1-985-790-1830',
-  email: 'sales@owl-ai-agency.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Ingleside',
+    addressRegion: 'TX',
+    postalCode: '78362',
+    addressCountry: 'US'
+  },
+  email: 'hobiecunningham@owl-ai-agency.com',
   priceRange: '$$$',
   areaServed: 'Worldwide',
   sameAs: [
@@ -91,7 +98,7 @@ const speakableSchema = {
     '@type': 'SpeakableSpecification',
     cssSelector: ['.speakable', 'h1', '.section-title h2']
   },
-  url: SITE + '/legal-research.html'
+  url: SITE + '/legal-research'
 };
 
 function injectStructuredData() {
@@ -102,7 +109,7 @@ function injectStructuredData() {
     applicableSchemas.push(localBusinessSchema);
   }
 
-  if (path === '/legal-research.html') {
+  if (path === '/legal-research.html' || path === '/legal-research') {
     applicableSchemas.push(legalResearchHowToSchema);
     applicableSchemas.push(speakableSchema);
   }

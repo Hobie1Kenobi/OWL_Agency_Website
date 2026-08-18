@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="canonical" href="https://owl-ai-agency.com/verify"/>
+  <title>Verify a Legal Citation — Free Check | OWL AI Agency</title>
+  <meta name="description" content="Paste a citation or a paragraph. OWL runs five verification checks: existence, citation format, holding support, verification path, and a human review flag. No signup."/>
+  <meta property="og:title" content="Verify a Legal Citation — Free Check | OWL AI Agency"/>
+  <meta property="og:description" content="Paste a citation or a paragraph. OWL runs five verification checks. No signup, no card."/>
+  <meta property="og:url" content="https://owl-ai-agency.com/verify"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="OWL AI Agency"/>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg"/>
+  <link rel="alternate icon" type="image/png" href="assets/img/favicon.png"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <link href="assets/css/style.css" rel="stylesheet"/>
+  <link href="assets/css/verify.css" rel="stylesheet"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "OWL Citation Verification",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://owl-ai-agency.com/verify",
+    "description": "Citation verification layer for legal research. OWL checks citations against public legal sources so a human reviewer can decide what to file.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free single citation check. No account required."
+    },
+    "provider": {
+      "@type": "Person",
+      "name": "OWL AI Agency",
+      "email": "hobiecunningham@owl-ai-agency.com",
+      "telephone": "+1-985-790-1830"
+    }
+  }
+  </script>
+</head>
+<body>
+<header class="fixed-top header-inner-pages" id="header">
+  <div class="container d-flex align-items-center">
+    <h1 class="logo me-auto"><a href="/"><span class="owl-logo">OWL</span> AI Agency</a></h1>
+    <nav class="navbar" id="navbar">
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link active" href="/verify">Verify</a></li>
+        <li><a class="nav-link" href="/legal-research">How it works</a></li>
+        <li><a class="nav-link" href="/pricing">Pricing</a></li>
+        <li><a class="nav-link" href="/blog/">Blog</a></li>
+        <li><a class="nav-link" href="/about">About</a></li>
+        <li><a class="nav-link" href="/contact">Contact</a></li>
+        <li><a class="getstarted" href="#verify-form">Verify free</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+  </div>
+</header>
+
+<section class="verify-hero">
+  <div class="container">
+    <p class="mb-2"><span class="badge bg-light text-dark">No signup · No card · First check free</span></p>
+    <h1>Verify a citation before you file it</h1>
+    <p class="lead mb-0">Legal AI should not just answer. It should verify. Paste a citation or a paragraph that contains citations. OWL runs five checks and shows the verification path — including explicit failure when a cite is missing, ambiguous, or the source is down.</p>
+  </div>
+</section>
+
+<main id="main" class="py-4">
+  <div class="container">
+    <section class="verify-panel" aria-labelledby="paste-heading">
+      <h2 id="paste-heading" class="h4 mb-3">Paste a citation or a paragraph</h2>
+      <form id="verify-form">
+        <label for="citation-input">Citation text</label>
+        <textarea class="form-control" id="citation-input" name="citation" rows="6" required placeholder="Example: Carpenter v. United States, 585 U.S. 946 (2018)"></textarea>
+        <div class="verify-actions">
+          <!-- analytics: verify_started / verify_completed fire from verify-page.js -->
+          <button type="submit" class="btn btn-primary" id="verify-submit" data-owl-label="verify_started">Run five checks</button>
+          <button type="button" class="btn btn-outline-primary" data-verify-prefill="carpenter">Try Carpenter v. United States</button>
+        </div>
+        <p class="small text-muted mt-3 mb-1">Also try the three failure states so you can see they are not silent:</p>
+        <div class="verify-prefills">
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="not_found">Citation not found</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="ambiguous">Ambiguous citation</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="source_unavailable">Source unavailable</button>
+        </div>
+      </form>
+      <div id="verify-status" class="verify-status" hidden role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="verify-results" class="mt-4" hidden aria-live="polite"></section>
+
+    <section id="verify-convert" class="verify-convert mt-4" hidden>
+      <h2 class="h4">After you review these checks</h2>
+      <p>The free check covers one citation. A full brief or memo needs a document-level pass. Pricing is framed against the cost of one bad citation, not hours saved.</p>
+      <a class="btn btn-primary me-2 mb-2" href="/contact">Verify a full brief</a>
+      <a class="btn btn-outline-primary mb-2" href="/pricing?from=verify">See pricing</a>
+    </section>
+
+    <section class="mt-5">
+      <h2 class="h4">The five checks</h2>
+      <div class="row g-3">
+        <div class="col-md"><p class="mb-0"><strong>Existence.</strong> Does this case exist in the reporter?</p></div>
+        <div class="col-md"><p class="mb-0"><strong>Citation format.</strong> Is the cite well-formed and does it resolve?</p></div>
+        <div class="col-md"><p class="mb-0"><strong>Holding support.</strong> Does the case stand for the proposition?</p></div>
+        <div class="col-md"><p class="mb-0"><strong>Verification path.</strong> What was checked, against what source?</p></div>
+        <div class="col-md"><p class="mb-0"><strong>Human review flag.</strong> Where does a person still have to look?</p></div>
+      </div>
+      <p class="small text-muted mt-3 mb-0">OWL is a verification layer, not an AI lawyer, a paralegal replacement, or a Westlaw competitor. This page does not publish unsourced accuracy percentages.</p>
+    </section>
+  </div>
+</main>
+
+<footer id="footer" class="mt-5">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 footer-contact">
+          <h3>OWL AI Agency</h3>
+          <p>
+            Ingleside, TX 78362<br/>
+            United States<br/><br/>
+            <strong>Phone:</strong> <a href="tel:+19857901830">(985) 790-1830</a><br/>
+            <strong>Email:</strong> <a href="mailto:hobiecunningham@owl-ai-agency.com">hobiecunningham@owl-ai-agency.com</a>
+          </p>
+        </div>
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/about">About</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/verify">Verify</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/pricing">Pricing</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-6 col-md-6 footer-links">
+          <h4>Product</h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="/verify">Citation verification</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/legal-research">How it works</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/blog/">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom clearfix py-4">
+    <div class="copyright">&copy; <strong>OWL AI Agency</strong>. All Rights Reserved</div>
+    <div class="credits">OWL is a verification tool, not legal advice, and does not create an attorney-client relationship. Human review of all outputs is required.</div>
+  </div>
+</footer>
+
+<a href="#header" class="back-to-top d-flex align-items-center justify-content-center" aria-label="Back to top"><i class="bi bi-arrow-up-short"></i></a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/ms-uet-tag.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script src="assets/js/legal-research-config.js"></script>
+<script src="assets/js/verify-api.js"></script>
+<script src="assets/js/verify-page.js"></script>
+</body>
+</html>
