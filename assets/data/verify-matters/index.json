@@ -1,0 +1,25 @@
+{
+  "matters": [
+    {
+      "id": "carpenter",
+      "file": "carpenter.json",
+      "title": "Carpenter CSLI excerpt",
+      "short_label": "Carpenter (clean + review)",
+      "blurb": "Fourth Amendment SAMPLE brief excerpt. Most checks pass; one holding-support flag remains for a person."
+    },
+    {
+      "id": "mixed-reliability",
+      "file": "mixed-reliability.json",
+      "title": "Mixed-reliability motion",
+      "short_label": "Mixed reliability (landmine)",
+      "blurb": "SAMPLE motion that looks fine until verification: a hallucination, a real case cited for the wrong proposition, an ambiguous short form, and a source that is down."
+    },
+    {
+      "id": "statute-case-mix",
+      "file": "statute-case-mix.json",
+      "title": "Statute and case mix",
+      "short_label": "Statute + case mix",
+      "blurb": "SAMPLE excerpt with a U.S. Code section, a criminal rule, and cases. The Table of Authorities includes Statutes / Rules."
+    }
+  ]
+}

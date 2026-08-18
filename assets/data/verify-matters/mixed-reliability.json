@@ -1,0 +1,509 @@
+{
+  "id": "mixed-reliability",
+  "title": "SAMPLE — Mixed-reliability motion excerpt",
+  "matter_name": "SAMPLE — Motion to suppress location evidence (AI-draft lookalike)",
+  "practice_area": "Criminal procedure / Fourth Amendment",
+  "warning_banner": "SAMPLE motion excerpt. Not a real filing. Written to look like an AI-assisted draft a desk might receive. OWL is a verification layer — it does not draft your brief. Human review of every output is required.",
+  "default_selected": "carpenter-misused",
+  "detect_tokens": ["Harmon v. Northern Circuit"],
+  "excerpt": "SAMPLE — NOT A REAL FILING\nUnited States District Court, [Sample District]\n\nDEFENDANT'S MOTION TO SUPPRESS LOCATION EVIDENCE (EXCERPT)\n\nThe Fourth Amendment protects people, not places. Katz v. United States, 389 U.S. 347 (1967). An officer may briefly stop a person on reasonable suspicion of crime and frisk for weapons when the officer reasonably believes the person is armed and dangerous. Terry v. Ohio, 392 U.S. 1 (1968).\n\nHistorical cell-site location information is a carrier business record. It may therefore be obtained without a warrant under the third-party doctrine. Carpenter v. United States, 585 U.S. 946 (2018). Trial courts must also exclude any research produced by a language model unless counsel files a certification of human authorship. Harmon v. Northern Circuit, 112 F.4th 441 (9th Cir. 2024). Id. at 12.\n\nAdditional support for a warrant exception appears in Delgado v. MetroPCS, 288 F. Supp. 3d 441 (S.D.N.Y. 2017), which is not in the public reporter set used for this check. Counsel also relies on Smith, 123 F.3d at 4.\n",
+  "citations": [
+    {
+      "id": "katz",
+      "span": "Katz v. United States, 389 U.S. 347 (1967)",
+      "raw": "Katz v. United States, 389 U.S. 347 (1967)",
+      "normalized": "Katz v. United States, 389 U.S. 347 (1967)",
+      "court": "Supreme Court of the United States",
+      "year": 1967,
+      "toa_group": "us_supreme_court",
+      "error": null,
+      "errorMessage": null,
+      "proposition": "The Fourth Amendment protects people, not places.",
+      "checks": [
+        {
+          "id": "existence",
+          "label": "Existence",
+          "status": "pass",
+          "detail": "Katz v. United States exists in the U.S. Reports.",
+          "checked": "389 U.S. 347",
+          "against": "Cornell LII / CourtListener citation form",
+          "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/389/347"
+        },
+        {
+          "id": "citation_format",
+          "label": "Citation format",
+          "status": "pass",
+          "detail": "Reporter form resolves: volume, U.S., page, and year.",
+          "checked": "Katz v. United States, 389 U.S. 347 (1967)",
+          "against": "Bluebook-style U.S. reporter citation",
+          "sourceUrl": "https://www.courtlistener.com/c/U.S./389/347/"
+        },
+        {
+          "id": "holding_support",
+          "label": "Holding support",
+          "status": "pass",
+          "detail": "The SAMPLE sentence is consistent with the recorded Katz principle: the Fourth Amendment protects people, not places.",
+          "checked": "The Fourth Amendment protects people, not places.",
+          "against": "Recorded Katz principle already in OWL public-source demo data",
+          "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/389/347"
+        },
+        {
+          "id": "verification_path",
+          "label": "Verification path",
+          "status": "pass",
+          "detail": "Checked 389 U.S. 347 against Cornell LII and CourtListener citation form.",
+          "checked": "Katz v. United States, 389 U.S. 347 (1967)",
+          "against": "Cornell LII, CourtListener, Justia",
+          "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/389/347"
+        },
+        {
+          "id": "human_review_flag",
+          "label": "Human review flag",
+          "status": "needs-review",
+          "detail": "A person still confirms the pin cite before filing. OWL is a verification tool, not legal advice.",
+          "checked": "Whether a human still needs to look at this output",
+          "against": "Filing accountability — the signer of the brief remains responsible",
+          "sourceUrl": null
+        }
+      ],
+      "verification_path": [
+        {
+          "source": "Cornell LII",
+          "url": "https://www.law.cornell.edu/supremecourt/text/389/347",
+          "what": "Public opinion page for 389 U.S. 347."
+        },
+        {
+          "source": "CourtListener",
+          "url": "https://www.courtlistener.com/c/U.S./389/347/",
+          "what": "Reporter citation lookup."
+        },
+        {
+          "source": "Justia",
+          "url": "https://supreme.justia.com/cases/federal/us/389/347/",
+          "what": "Public U.S. Reports volume/page page."
+        }
+      ]
+    },
+    {
+      "id": "terry",
+      "span": "Terry v. Ohio, 392 U.S. 1 (1968)",
+      "raw": "Terry v. Ohio, 392 U.S. 1 (1968)",
+      "normalized": "Terry v. Ohio, 392 U.S. 1 (1968)",
+      "court": "Supreme Court of the United States",
+      "year": 1968,
+      "toa_group": "us_supreme_court",
+      "error": null,
+      "errorMessage": null,
+      "proposition": "An officer may briefly stop a person on reasonable suspicion of crime and frisk for weapons when the officer reasonably believes the person is armed and dangerous.",
+      "checks": [
+        {
+          "id": "existence",
+          "label": "Existence",
+          "status": "pass",
+          "detail": "Terry v. Ohio exists in the U.S. Reports.",
+          "checked": "392 U.S. 1",
+          "against": "Cornell LII / CourtListener citation form",
+          "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/392/1"
+        },
+        {
+          "id": "citation_format",
+          "label": "Citation format",
+          "status": "pass",
+          "detail": "Reporter form resolves: volume, U.S., page, and year.",
+          "checked": "Terry v. Ohio, 392 U.S. 1 (1968)",
+          "against": "Bluebook-style U.S. reporter citation",
+          "sourceUrl": "https://www.courtlistener.com/c/U.S./392/1/"
+        },
+        {
+          "id": "holding_support",
+          "label": "Holding support",
+          "status": "pass",
+          "detail": "The SAMPLE sentence is consistent with the uncontroversial Terry stop-and-frisk holding. No fabricated quotation is used.",
+          "checked": "Stop on reasonable suspicion; frisk when the officer reasonably believes the person is armed and dangerous.",
+          "against": "Public Terry opinion (392 U.S. 1)",
+          "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/392/1"
+        },
+        {
+          "id": "verification_path",
+          "label": "Verification path",
+          "status": "pass",
+          "detail": "Checked 392 U.S. 1 against Cornell LII, CourtListener citation form, and Justia.",
+          "checked": "Terry v. Ohio, 392 U.S. 1 (1968)",
+          "against": "Cornell LII, CourtListener, Justia",
+          "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/392/1"
+        },
+        {
+          "id": "human_review_flag",
+          "label": "Human review flag",
+          "status": "needs-review",
+          "detail": "A person still confirms that a stop-and-frisk rule is not being used as a CSLI warrant exception.",
+          "checked": "Whether a human still needs to look at this output",
+          "against": "Filing accountability — the signer of the brief remains responsible",
+          "sourceUrl": null
+        }
+      ],
+      "verification_path": [
+        {
+          "source": "Cornell LII",
+          "url": "https://www.law.cornell.edu/supremecourt/text/392/1",
+          "what": "Public opinion page for 392 U.S. 1."
+        },
+        {
+          "source": "CourtListener",
+          "url": "https://www.courtlistener.com/c/U.S./392/1/",
+          "what": "Reporter citation lookup for 392 U.S. 1."
+        },
+        {
+          "source": "Justia",
+          "url": "https://supreme.justia.com/cases/federal/us/392/1/",
+          "what": "Public U.S. Reports volume/page page."
+        }
+      ]
+    },
+    {
+      "id": "carpenter-misused",
+      "span": "Carpenter v. United States, 585 U.S. 946 (2018)",
+      "raw": "Carpenter v. United States, 585 U.S. 946 (2018)",
+      "normalized": "Carpenter v. United States, 585 U.S. 946 (2018)",
+      "court": "Supreme Court of the United States",
+      "year": 2018,
+      "toa_group": "us_supreme_court",
+      "error": null,
+      "errorMessage": null,
+      "proposition": "Historical cell-site location information is a carrier business record. It may therefore be obtained without a warrant under the third-party doctrine.",
+      "checks": [
+        {
+          "id": "existence",
+          "label": "Existence",
+          "status": "pass",
+          "detail": "The case exists. Carpenter v. United States, 585 U.S. 946 (2018), is in the U.S. Reports.",
+          "checked": "585 U.S. 946",
+          "against": "Cornell LII, CourtListener, supremecourt.gov",
+          "sourceUrl": "https://www.law.cornell.edu/supremecourt/text/16-402"
+        },
+        {
+          "id": "citation_format",
+          "label": "Citation format",
+          "status": "pass",
+          "detail": "Reporter form resolves. A well-formed cite can still be attached to the wrong proposition.",
+          "checked": "Carpenter v. United States, 585 U.S. 946 (2018)",
+          "against": "Bluebook-style U.S. reporter citation",
+          "sourceUrl": "https://www.courtlistener.com/c/U.S./585/946/"
+        },
+        {
+          "id": "holding_support",
+          "label": "Holding support",
+          "status": "fail",
+          "detail": "The SAMPLE cites Carpenter for the proposition that historical CSLI may be obtained without a warrant as a third-party business record. That is not the recorded holding. The recorded holding is that acquisition of seven days or more of historical cell-site records is a Fourth Amendment search; police generally must obtain a warrant supported by probable cause.",
+          "checked": "CSLI may be obtained without a warrant under the third-party doctrine",
+          "against": "Recorded Carpenter holding already in OWL public-source demo data",
+          "sourceUrl": "https://www.supremecourt.gov/opinions/17pdf/16-402_h315.pdf"
+        },
+        {
+          "id": "verification_path",
+          "label": "Verification path",
+          "status": "pass",
+          "detail": "The opinion was retrieved. Existence passed. Holding support failed after comparing the SAMPLE proposition to the recorded holding.",
+          "checked": "Carpenter v. United States, 585 U.S. 946 (2018)",
+          "against": "Cornell LII, CourtListener, supremecourt.gov slip opinion",
+          "sourceUrl": "https://www.courtlistener.com/opinion/4379486/carpenter-v-united-states/"
+        },
+        {
+          "id": "human_review_flag",
+          "label": "Human review flag",
+          "status": "needs-review",
+          "detail": "Human must review before filing. A real case cited for the opposite proposition is a landmine: it will not be caught by an existence-only check.",
+          "checked": "Whether a human still needs to look at this output",
+          "against": "Filing accountability — the signer of the brief remains responsible",
+          "sourceUrl": null
+        }
+      ],
+      "verification_path": [
+        {
+          "source": "Supreme Court of the United States",
+          "url": "https://www.supremecourt.gov/opinions/17pdf/16-402_h315.pdf",
+          "what": "Slip opinion compared to the SAMPLE proposition. The proposition does not match the recorded holding."
+        },
+        {
+          "source": "CourtListener",
+          "url": "https://www.courtlistener.com/opinion/4379486/carpenter-v-united-states/",
+          "what": "Public opinion record confirmed the case exists."
+        },
+        {
+          "source": "Cornell LII",
+          "url": "https://www.law.cornell.edu/supremecourt/text/16-402",
+          "what": "Public opinion text used for holding-support comparison."
+        }
+      ]
+    },
+    {
+      "id": "harmon-hallucinated",
+      "span": "Harmon v. Northern Circuit, 112 F.4th 441 (9th Cir. 2024)",
+      "raw": "Harmon v. Northern Circuit, 112 F.4th 441 (9th Cir. 2024)",
+      "normalized": "Harmon v. Northern Circuit, 112 F.4th 441 (9th Cir. 2024)",
+      "court": "United States Court of Appeals for the Ninth Circuit (as cited)",
+      "year": 2024,
+      "toa_group": "courts_of_appeals",
+      "error": "not_found",
+      "errorMessage": "Citation not found: this reporter cite did not resolve in the public sources this demo checks. Invented or mistyped citations fail explicitly.",
+      "proposition": "Trial courts must also exclude any research produced by a language model unless counsel files a certification of human authorship.",
+      "checks": [
+        {
+          "id": "existence",
+          "label": "Existence",
+          "status": "fail",
+          "detail": "No reporter match. Harmon v. Northern Circuit, 112 F.4th 441 does not exist in the public reporter set used for this check.",
+          "checked": "112 F.4th 441",
+          "against": "CourtListener citation form / public F.4th set used by this demo",
+          "sourceUrl": null
+        },
+        {
+          "id": "citation_format",
+          "label": "Citation format",
+          "status": "pass",
+          "detail": "The string looks like a reporter citation (volume, F.4th, page, court, year). A well-formed cite can still name a case that does not exist.",
+          "checked": "Harmon v. Northern Circuit, 112 F.4th 441 (9th Cir. 2024)",
+          "against": "Bluebook-style F.4th citation",
+          "sourceUrl": null
+        },
+        {
+          "id": "holding_support",
+          "label": "Holding support",
+          "status": "fail",
+          "detail": "No opinion was found, so the surrounding proposition is unsupported by this cite.",
+          "checked": "Duty to exclude language-model research unless counsel files a certification",
+          "against": "No retrieved holding",
+          "sourceUrl": null
+        },
+        {
+          "id": "verification_path",
+          "label": "Verification path",
+          "status": "fail",
+          "detail": "Checked 112 F.4th 441 against CourtListener citation form and the public reporter set used by this demo. Result: no reporter match / does not exist.",
+          "checked": "112 F.4th 441",
+          "against": "CourtListener, public F.4th identifiers used in this demo",
+          "sourceUrl": null
+        },
+        {
+          "id": "human_review_flag",
+          "label": "Human review flag",
+          "status": "needs-review",
+          "detail": "Human must review before filing. A citation that does not exist must not be filed. Confirm whether this was a hallucination, a typo, or an unpublished disposition.",
+          "checked": "Whether a human still needs to look at this output",
+          "against": "Filing accountability — the signer of the brief remains responsible",
+          "sourceUrl": null
+        }
+      ],
+      "verification_path": [
+        {
+          "source": "CourtListener",
+          "url": "https://www.courtlistener.com/?type=o&q=%22Harmon+v.+Northern+Circuit%22",
+          "what": "Opinion search for Harmon v. Northern Circuit. No reporter match / does not exist in the public set used for this demo."
+        },
+        {
+          "source": "Public F.4th reporter set",
+          "url": null,
+          "what": "112 F.4th 441 did not resolve. Labeled does not exist — not a silent pass."
+        }
+      ]
+    },
+    {
+      "id": "id-short-form",
+      "span": "Id. at 12",
+      "raw": "Id. at 12",
+      "normalized": "Id. at 12",
+      "court": null,
+      "year": null,
+      "toa_group": "unresolved",
+      "error": "ambiguous",
+      "errorMessage": "Ambiguous citation: this short form does not uniquely identify an opinion. The preceding full cite in this SAMPLE is a citation that did not exist, so Id. cannot be resolved.",
+      "proposition": "Id. at 12 follows the Harmon citation in the SAMPLE.",
+      "checks": [
+        {
+          "id": "existence",
+          "label": "Existence",
+          "status": "needs-review",
+          "detail": "Cannot confirm existence until the short form uniquely identifies one decision.",
+          "checked": "Id. at 12",
+          "against": "No uniquely identified opinion",
+          "sourceUrl": null
+        },
+        {
+          "id": "citation_format",
+          "label": "Citation format",
+          "status": "fail",
+          "detail": "Id. without a reliable antecedent is not enough to resolve against a reporter. Here the antecedent itself failed existence.",
+          "checked": "Id. at 12",
+          "against": "Bluebook short-form rules (antecedent must be clear)",
+          "sourceUrl": null
+        },
+        {
+          "id": "holding_support",
+          "label": "Holding support",
+          "status": "fail",
+          "detail": "Holding support cannot be evaluated against an unresolved citation.",
+          "checked": "Id. at 12",
+          "against": "No uniquely identified opinion",
+          "sourceUrl": null
+        },
+        {
+          "id": "verification_path",
+          "label": "Verification path",
+          "status": "needs-review",
+          "detail": "No verification path until the cite resolves to one source.",
+          "checked": "Id. at 12",
+          "against": "No unique public source",
+          "sourceUrl": null
+        },
+        {
+          "id": "human_review_flag",
+          "label": "Human review flag",
+          "status": "needs-review",
+          "detail": "Human must review before filing. Expand Id. to a full reporter cite, or delete it.",
+          "checked": "Whether a human still needs to look at this output",
+          "against": "Filing accountability — the signer of the brief remains responsible",
+          "sourceUrl": null
+        }
+      ],
+      "verification_path": [
+        {
+          "source": "None — unresolved short form",
+          "url": null,
+          "what": "Id. at 12 was not checked against a public opinion because it does not uniquely identify one."
+        }
+      ]
+    },
+    {
+      "id": "delgado-unavailable",
+      "span": "Delgado v. MetroPCS, 288 F. Supp. 3d 441 (S.D.N.Y. 2017)",
+      "raw": "Delgado v. MetroPCS, 288 F. Supp. 3d 441 (S.D.N.Y. 2017)",
+      "normalized": "Delgado v. MetroPCS, 288 F. Supp. 3d 441 (S.D.N.Y. 2017)",
+      "court": "United States District Court for the Southern District of New York (as cited)",
+      "year": 2017,
+      "toa_group": "district_courts",
+      "error": "source_unavailable",
+      "errorMessage": "Source unavailable: the public legal source for this citation could not be reached. The check did not silently pass.",
+      "proposition": "Additional support for a warrant exception appears in this district opinion.",
+      "checks": [
+        {
+          "id": "existence",
+          "label": "Existence",
+          "status": "needs-review",
+          "detail": "Existence could not be confirmed because the reporter text is not in the public corpus used for this check (paywalled / F. Supp. 3d not retrieved).",
+          "checked": "288 F. Supp. 3d 441",
+          "against": "Public F. Supp. 3d corpus used by this demo (unreachable for this cite)",
+          "sourceUrl": null
+        },
+        {
+          "id": "citation_format",
+          "label": "Citation format",
+          "status": "pass",
+          "detail": "The citation is well-formed (volume, F. Supp. 3d, page, court, year).",
+          "checked": "Delgado v. MetroPCS, 288 F. Supp. 3d 441 (S.D.N.Y. 2017)",
+          "against": "Bluebook-style federal supplement form",
+          "sourceUrl": null
+        },
+        {
+          "id": "holding_support",
+          "label": "Holding support",
+          "status": "needs-review",
+          "detail": "Holding support was not evaluated because the opinion text was unavailable.",
+          "checked": "Additional support for a warrant exception",
+          "against": "Opinion text not retrieved",
+          "sourceUrl": null
+        },
+        {
+          "id": "verification_path",
+          "label": "Verification path",
+          "status": "fail",
+          "detail": "Verification path stopped: source returned unavailable. What was checked: this citation. Against: the public F. Supp. 3d record used by this demo. Result: no document.",
+          "checked": "288 F. Supp. 3d 441",
+          "against": "Public F. Supp. 3d record / CourtListener (unavailable in this run)",
+          "sourceUrl": null
+        },
+        {
+          "id": "human_review_flag",
+          "label": "Human review flag",
+          "status": "needs-review",
+          "detail": "Human must review before filing. When a source is down or paywalled, a person must retrieve the opinion from another reporter before relying on the cite.",
+          "checked": "Whether a human still needs to look at this output",
+          "against": "Filing accountability — the signer of the brief remains responsible",
+          "sourceUrl": null
+        }
+      ],
+      "verification_path": [
+        {
+          "source": "CourtListener",
+          "url": null,
+          "what": "F. Supp. 3d lookup was not available in the public corpus used for this run. Labeled source unavailable — not a silent pass."
+        }
+      ]
+    },
+    {
+      "id": "smith-ambiguous",
+      "span": "Smith, 123 F.3d at 4",
+      "raw": "Smith, 123 F.3d at 4",
+      "normalized": "Smith, 123 F.3d at 4",
+      "court": null,
+      "year": null,
+      "toa_group": "unresolved",
+      "error": "ambiguous",
+      "errorMessage": "Ambiguous citation: this fragment does not include enough of the case name, a volume/page pair that uniquely resolves, or a prior full cite in this SAMPLE.",
+      "proposition": "Counsel also relies on Smith, 123 F.3d at 4.",
+      "checks": [
+        {
+          "id": "existence",
+          "label": "Existence",
+          "status": "needs-review",
+          "detail": "Cannot confirm existence. Smith plus 123 F.3d at 4 does not uniquely identify one decision, and no prior full Smith F.3d cite appears in this SAMPLE.",
+          "checked": "Smith, 123 F.3d at 4",
+          "against": "Public reporter set used by this demo",
+          "sourceUrl": null
+        },
+        {
+          "id": "citation_format",
+          "label": "Citation format",
+          "status": "fail",
+          "detail": "Short form without a unique case name and without a prior full citation is not enough to resolve against a reporter.",
+          "checked": "Smith, 123 F.3d at 4",
+          "against": "Bluebook-style volume / reporter / page with identifiable parties",
+          "sourceUrl": null
+        },
+        {
+          "id": "holding_support",
+          "label": "Holding support",
+          "status": "fail",
+          "detail": "Holding support cannot be evaluated against an unresolved citation.",
+          "checked": "Surrounding proposition",
+          "against": "No uniquely identified opinion",
+          "sourceUrl": null
+        },
+        {
+          "id": "verification_path",
+          "label": "Verification path",
+          "status": "needs-review",
+          "detail": "No verification path until the cite resolves to one source.",
+          "checked": "Smith, 123 F.3d at 4",
+          "against": "No unique public source",
+          "sourceUrl": null
+        },
+        {
+          "id": "human_review_flag",
+          "label": "Human review flag",
+          "status": "needs-review",
+          "detail": "Human must review before filing. Expand this short form to a full reporter cite (parties, volume, reporter, page, court, year).",
+          "checked": "Whether a human still needs to look at this output",
+          "against": "Filing accountability — the signer of the brief remains responsible",
+          "sourceUrl": null
+        }
+      ],
+      "verification_path": [
+        {
+          "source": "None — unresolved short form",
+          "url": null,
+          "what": "Smith, 123 F.3d at 4 was not checked against a public opinion because it does not uniquely identify one. This is not Smith v. Maryland, 442 U.S. 735 (1979)."
+        }
+      ]
+    }
+  ]
+}

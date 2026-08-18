@@ -9,12 +9,27 @@
  *   {
  *     "mode": "live" | "mock",
  *     "input": string,
+ *     "excerpt": string,
+ *     "matter": {
+ *       "id": string,
+ *       "title": string,
+ *       "matter_name": string,
+ *       "practice_area": string,
+ *       "warning_banner": string,
+ *       "default_selected": string | null
+ *     } | null,
  *     "citations": [{
+ *       "id": string,
+ *       "span": string,
  *       "raw": string,
  *       "normalized": string,
+ *       "court": string | null,
+ *       "year": number | null,
+ *       "toa_group": "us_supreme_court" | "courts_of_appeals" | "district_courts" | "statutes_rules" | "unresolved",
  *       "error": null | "not_found" | "ambiguous" | "source_unavailable",
  *       "errorMessage": string | null,
  *       "proposition": string | null,
+ *       "verification_path": [{ "source": string, "url": string | null, "what": string }],
  *       "checks": [{
  *         "id": "existence" | "citation_format" | "holding_support" | "verification_path" | "human_review_flag",
  *         "label": string,
@@ -24,7 +39,9 @@
  *         "against": string,
  *         "sourceUrl": string | null
  *       }]
- *     }]
+ *     }],
+ *     "toa": [{ "id": string, "label": string, "entries": [{ "citationId": string, "cite": string, "court": string | null, "year": number | null }] }],
+ *     "audit": [{ "citationId": string, "cite": string, "overall": "pass" | "fail" | "needs-review", "error": string | null, "checks": object[] }]
  *   }
  *
  * Failure states are always explicit on the citation object (never silent):
@@ -47,6 +64,17 @@
     { id: 'human_review_flag', label: 'Human review flag' }
   ];
 
+  var TOA_GROUPS = [
+    { id: 'us_supreme_court', label: 'U.S. Supreme Court' },
+    { id: 'courts_of_appeals', label: 'Courts of Appeals' },
+    { id: 'district_courts', label: 'District Courts' },
+    { id: 'statutes_rules', label: 'Statutes / Rules' },
+    { id: 'unresolved', label: 'Unresolved / short form' }
+  ];
+
+  var MATTER_BASE = 'assets/data/verify-matters/';
+  var packCache = { index: null, byId: {}, loading: null };
+
   var CARPENTER_PREFILL =
     'The Government\'s acquisition of historical cell-site location information is a Fourth Amendment search requiring a warrant. Carpenter v. United States, 585 U.S. 946 (2018).';
 
@@ -66,6 +94,15 @@
         { name: 'Cornell LII', url: 'https://www.law.cornell.edu/supremecourt/text/16-402' },
         { name: 'CourtListener', url: 'https://www.courtlistener.com/opinion/4379486/carpenter-v-united-states/' },
         { name: 'Oyez', url: 'https://www.oyez.org/cases/2017/16-402' }
+      ]
+    },
+    '392 U.S. 1': {
+      name: 'Terry v. Ohio',
+      citation: 'Terry v. Ohio, 392 U.S. 1 (1968)',
+      holding: 'An officer may briefly stop a person on reasonable suspicion of crime and frisk for weapons when the officer reasonably believes the person is armed and dangerous.',
+      sources: [
+        { name: 'Cornell LII', url: 'https://www.law.cornell.edu/supremecourt/text/392/1' },
+        { name: 'CourtListener', url: 'https://www.courtlistener.com/c/U.S./392/1/' }
       ]
     },
     '389 U.S. 347': {
@@ -131,6 +168,178 @@
       detail || 'A person must review this result before the citation is used in a filing. OWL is a verification tool, not legal advice.',
       { checked: 'Whether a human still needs to look at this output', against: 'Filing accountability — the signer of the brief remains responsible' }
     );
+  }
+
+  function fetchJson(path) {
+    return fetch(path, { headers: { Accept: 'application/json' } }).then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status + ' for ' + path);
+      return res.json();
+    });
+  }
+
+  function inferToaGroup(citation) {
+    if (citation.toa_group) return citation.toa_group;
+    if (citation.error === 'ambiguous') return 'unresolved';
+    var blob = ((citation.normalized || citation.raw || '') + ' ' + (citation.reporter || '')).toLowerCase();
+    if (/u\.s\.c\.|fed\.\s*r\.|u\.s\.\s*const/.test(blob)) return 'statutes_rules';
+    if (/f\.\s*supp/.test(blob)) return 'district_courts';
+    if (/f\.(?:2d|3d|4th)/.test(blob)) return 'courts_of_appeals';
+    if (/\bu\.s\./.test(blob)) return 'us_supreme_court';
+    return 'unresolved';
+  }
+
+  function overallStatus(citation) {
+    var substantive = (citation.checks || []).filter(function (item) {
+      return item.id !== 'human_review_flag';
+    });
+    if (citation.error === 'not_found' || substantive.some(function (item) { return item.status === 'fail'; })) {
+      return 'fail';
+    }
+    if (
+      citation.error === 'ambiguous' ||
+      citation.error === 'source_unavailable' ||
+      substantive.some(function (item) { return item.status === 'needs-review'; })
+    ) {
+      return 'needs-review';
+    }
+    return 'pass';
+  }
+
+  function isFlagged(citation) {
+    return overallStatus(citation) !== 'pass';
+  }
+
+  function slugId(value, index) {
+    var base = String(value || 'cite')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '')
+      .slice(0, 40);
+    return (base || 'cite') + '-' + index;
+  }
+
+  function ensureCitationShape(citation, index) {
+    var copy = citation || {};
+    copy.id = copy.id || slugId(copy.normalized || copy.raw, index);
+    copy.span = copy.span || copy.raw || copy.normalized || '';
+    copy.toa_group = inferToaGroup(copy);
+    if (!copy.verification_path || !copy.verification_path.length) {
+      var pathCheck = (copy.checks || []).filter(function (item) { return item.id === 'verification_path'; })[0];
+      copy.verification_path = [];
+      if (pathCheck) {
+        copy.verification_path.push({
+          source: pathCheck.against || 'Public source set used by this demo',
+          url: pathCheck.sourceUrl || null,
+          what: pathCheck.detail || pathCheck.checked || ''
+        });
+      }
+    }
+    return copy;
+  }
+
+  function buildToa(citations) {
+    var groups = TOA_GROUPS.map(function (group) {
+      return { id: group.id, label: group.label, entries: [] };
+    });
+    var byId = {};
+    groups.forEach(function (group) { byId[group.id] = group; });
+    (citations || []).forEach(function (citation) {
+      var group = byId[inferToaGroup(citation)] || byId.unresolved;
+      group.entries.push({
+        citationId: citation.id,
+        cite: citation.normalized || citation.raw,
+        court: citation.court || null,
+        year: citation.year || null,
+        overall: overallStatus(citation)
+      });
+    });
+    return groups.filter(function (group) { return group.entries.length; });
+  }
+
+  function buildAudit(citations) {
+    return (citations || []).map(function (citation) {
+      return {
+        citationId: citation.id,
+        cite: citation.normalized || citation.raw,
+        overall: overallStatus(citation),
+        error: citation.error || null,
+        flagged: isFlagged(citation),
+        checks: citation.checks || []
+      };
+    });
+  }
+
+  function matterToPayload(pack) {
+    var citations = (pack.citations || []).map(ensureCitationShape);
+    return {
+      mode: 'mock',
+      input: pack.excerpt || '',
+      excerpt: pack.excerpt || '',
+      matter: {
+        id: pack.id,
+        title: pack.title,
+        matter_name: pack.matter_name || pack.title,
+        practice_area: pack.practice_area || '',
+        warning_banner: pack.warning_banner || '',
+        default_selected: pack.default_selected || (citations[0] && citations[0].id) || null
+      },
+      citations: citations,
+      toa: pack.toa && pack.toa.length ? pack.toa : buildToa(citations),
+      audit: buildAudit(citations)
+    };
+  }
+
+  function prefetchMatters() {
+    if (packCache.loading) return packCache.loading;
+    packCache.loading = fetchJson(MATTER_BASE + 'index.json').then(function (index) {
+      packCache.index = index;
+      var matters = (index && index.matters) || [];
+      return Promise.all(matters.map(function (meta) {
+        return fetchJson(MATTER_BASE + meta.file).then(function (pack) {
+          packCache.byId[pack.id || meta.id] = pack;
+          return pack;
+        }).catch(function () {
+          return null;
+        });
+      }));
+    }).catch(function () {
+      packCache.loading = null;
+      return [];
+    });
+    return packCache.loading;
+  }
+
+  function listMatters() {
+    return prefetchMatters().then(function () {
+      return packCache.index || { matters: [] };
+    });
+  }
+
+  function loadMatter(id) {
+    return prefetchMatters().then(function () {
+      var pack = packCache.byId[id];
+      if (!pack) throw new Error('Unknown sample matter: ' + id);
+      return matterToPayload(pack);
+    });
+  }
+
+  function detectMatter(text) {
+    var trimmed = String(text || '');
+    var ids = Object.keys(packCache.byId);
+    for (var i = 0; i < ids.length; i++) {
+      var pack = packCache.byId[ids[i]];
+      var tokens = pack.detect_tokens || [];
+      if (!tokens.length) continue;
+      var matched = true;
+      for (var t = 0; t < tokens.length; t++) {
+        if (trimmed.indexOf(tokens[t]) === -1) {
+          matched = false;
+          break;
+        }
+      }
+      if (matched) return pack;
+    }
+    return null;
   }
 
   function parseCitations(text) {
@@ -269,7 +478,18 @@
     var proposition = sourceText || '';
     var holdingHint = record.holding.toLowerCase();
     var holdingSupport;
-    if (/carpenter/i.test(record.name) && /cell-site|cslI|fourth amendment search|warrant/i.test(proposition)) {
+    var carpenterWrong =
+      /carpenter/i.test(record.name) &&
+      /without a warrant|no warrant is required|need not obtain a warrant|third-party doctrine/i.test(proposition) &&
+      !/generally must obtain a warrant|seven days or more/i.test(proposition);
+    if (carpenterWrong) {
+      holdingSupport = check(
+        'holding_support',
+        'fail',
+        'The case exists, but the surrounding proposition does not match the recorded holding. Carpenter does not authorize warrantless collection of historical CSLI as a third-party business record.',
+        { checked: proposition.slice(0, 280), against: record.holding, sourceUrl: record.sources[0].url }
+      );
+    } else if (/carpenter/i.test(record.name) && /cell-site|csli|fourth amendment search|warrant/i.test(proposition)) {
       holdingSupport = check(
         'holding_support',
         'pass',
@@ -333,10 +553,15 @@
         return evaluateParsed(item, trimmed);
       });
     }
+    citations = citations.map(ensureCitationShape);
     return {
       mode: 'mock',
       input: trimmed,
-      citations: citations
+      excerpt: trimmed,
+      matter: null,
+      citations: citations,
+      toa: buildToa(citations),
+      audit: buildAudit(citations)
     };
   }
 
@@ -363,26 +588,48 @@
       if (!data || !Array.isArray(data.citations)) throw new Error('Live verify returned no citations array');
       data.mode = 'live';
       data.input = text;
+      data.excerpt = data.excerpt || text;
+      data.citations = data.citations.map(ensureCitationShape);
+      data.toa = data.toa && data.toa.length ? data.toa : buildToa(data.citations);
+      data.audit = data.audit && data.audit.length ? data.audit : buildAudit(data.citations);
+      if (typeof data.matter === 'undefined') data.matter = null;
       return data;
+    });
+  }
+
+  function mockDelay(payload) {
+    return new Promise(function (resolve) {
+      window.setTimeout(function () {
+        resolve(payload);
+      }, 280);
     });
   }
 
   function verify(text) {
     var trimmed = String(text || '').trim();
-    return tryLive(trimmed).catch(function () {
-      return new Promise(function (resolve) {
-        window.setTimeout(function () {
-          resolve(mockVerify(trimmed));
-        }, 280);
+    return prefetchMatters().then(function () {
+      var pack = detectMatter(trimmed);
+      if (pack) return mockDelay(matterToPayload(pack));
+      return tryLive(trimmed).catch(function () {
+        return mockDelay(mockVerify(trimmed));
       });
     });
   }
+
+  prefetchMatters();
 
   window.OWLVerifyAPI = {
     CARPENTER_PREFILL: CARPENTER_PREFILL,
     FIXTURES: FIXTURES,
     CHECK_META: CHECK_META,
+    TOA_GROUPS: TOA_GROUPS,
     verify: verify,
-    mockVerify: mockVerify
+    mockVerify: mockVerify,
+    listMatters: listMatters,
+    loadMatter: loadMatter,
+    overallStatus: overallStatus,
+    isFlagged: isFlagged,
+    buildToa: buildToa,
+    buildAudit: buildAudit
   };
 })(window);
