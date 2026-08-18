@@ -1,11 +1,43 @@
 /**
  * OWL analytics. Fires Microsoft UET custom events (tag 97179628).
- * To add GA4 later: set window.OWL_GA4_ID = 'G-XXXXXXXX' before this file and load gtag.js — do not invent an ID.
+ * GA4 measurement ID is public by design. Loads gtag.js once when OWL_GA4_ID is set.
+ * Do not also paste the Google HTML snippet on the same page (double-counts).
  */
 (function (window, document) {
   'use strict';
 
+  if (window.OWLAnalytics) return;
+
+  if (!window.OWL_GA4_ID) {
+    window.OWL_GA4_ID = 'G-Z6GYW6ZHNX';
+  }
+
   window.uetq = window.uetq || [];
+
+  function ensureGtag(id) {
+    if (!id) return;
+    if (typeof window.gtag === 'function') return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+    window.gtag('js', new Date());
+    window.gtag('config', id);
+    if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) return;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+    var first = document.getElementsByTagName('script')[0];
+    if (first && first.parentNode) {
+      first.parentNode.insertBefore(script, first);
+    } else if (document.head) {
+      document.head.appendChild(script);
+    } else {
+      document.documentElement.appendChild(script);
+    }
+  }
+
+  ensureGtag(window.OWL_GA4_ID);
 
   function track(name, params) {
     var payload = params || {};

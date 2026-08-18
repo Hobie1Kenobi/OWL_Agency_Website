@@ -24,7 +24,7 @@ Open `http://localhost:8000/`. GitHub Pages serves `file.html` at `/file`; navig
 
 ## Analytics
 
-Microsoft UET tag `97179628` is loaded via `assets/js/ms-uet-tag.js`. Custom events are in `assets/js/analytics.js` (`verify_started`, `verify_completed`, `pricing_view_from_demo`, `contact_form_submit`, `pricing_cta_click`). No GA4 measurement ID is shipped. To add GA4 later, set `window.OWL_GA4_ID` and load `gtag.js` — do not invent an ID.
+Microsoft UET tag `97179628` is loaded via `assets/js/ms-uet-tag.js`. `assets/js/analytics.js` sets `window.OWL_GA4_ID` to `G-Z6GYW6ZHNX`, injects gtag.js once, and dual-writes custom events to UET and GA4 (`verify_started`, `verify_completed`, `pricing_view_from_demo`, `contact_form_submit`, `pricing_cta_click`). Do not also paste the Google HTML snippet on the same page.
 
 ## Repository notes
 
