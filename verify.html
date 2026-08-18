@@ -79,7 +79,8 @@
         <label for="citation-input">Citation text</label>
         <textarea class="form-control" id="citation-input" name="citation" rows="6" required placeholder="Example: Carpenter v. United States, 585 U.S. 946 (2018)"></textarea>
         <div class="verify-actions">
-          <button type="submit" class="btn btn-primary" id="verify-submit">Run five checks</button>
+          <!-- analytics: verify_started / verify_completed fire from verify-page.js -->
+          <button type="submit" class="btn btn-primary" id="verify-submit" data-owl-label="verify_started">Run five checks</button>
           <button type="button" class="btn btn-outline-primary" data-verify-prefill="carpenter">Try Carpenter v. United States</button>
         </div>
         <p class="small text-muted mt-3 mb-1">Also try the three failure states so you can see they are not silent:</p>
@@ -158,6 +159,8 @@
 <a href="#header" class="back-to-top d-flex align-items-center justify-content-center" aria-label="Back to top"><i class="bi bi-arrow-up-short"></i></a>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/ms-uet-tag.js"></script>
+<script src="assets/js/analytics.js"></script>
 <script src="assets/js/legal-research-config.js"></script>
 <script src="assets/js/verify-api.js"></script>
 <script src="assets/js/verify-page.js"></script>

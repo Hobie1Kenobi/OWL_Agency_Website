@@ -238,7 +238,7 @@
 <li><i class="bx bx-check"></i> No account or credit card</li>
 <li><i class="bx bx-check"></i> Carpenter v. United States working example</li>
 </ul>
-<a class="buy-btn" href="/pricing">See pricing</a>
+<a class="buy-btn" href="/pricing" data-owl-event="pricing_cta_click" data-owl-tier="free">See pricing</a>
 </div>
 </div>
 <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
@@ -251,7 +251,7 @@
 <li><i class="bx bx-check"></i> Citation verification across the document</li>
 <li><i class="bx bx-check"></i> No monthly commitment</li>
 </ul>
-<a class="buy-btn" href="/pricing">See pricing</a>
+<a class="buy-btn" href="/pricing" data-owl-event="pricing_cta_click" data-owl-tier="per_document">See pricing</a>
 </div>
 </div>
 <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
@@ -264,11 +264,11 @@
 <li><i class="bx bx-check"></i> Verification audit log</li>
 <li><i class="bx bx-check"></i> Monthly firm access</li>
 </ul>
-<a class="buy-btn" href="/pricing">See pricing</a>
+<a class="buy-btn" href="/pricing" data-owl-event="pricing_cta_click" data-owl-tier="firm">See pricing</a>
 </div>
 </div>
 </div>
-<p class="text-center mt-4">Enterprise / API access is quoted on request. <a href="/pricing">Full pricing</a>.</p>
+<p class="text-center mt-4">Enterprise / API access is quoted on request. <a href="/pricing" data-owl-event="pricing_cta_click" data-owl-tier="enterprise">Full pricing</a>.</p>
 </div>
 </section><!-- End Pricing Section -->
 <!-- ======= Contact Section ======= -->
@@ -301,7 +301,7 @@
 </div>
 </div>
 <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-<form class="php-email-form" id="home-contact-mailto" action="mailto:hobiecunningham@owl-ai-agency.com" method="get">
+<form class="php-email-form" id="home-contact-mailto" action="mailto:hobiecunningham@owl-ai-agency.com" method="get" data-owl-event="contact_form_submit">
 <div class="row">
 <div class="form-group col-md-6">
 <label for="name">Your Name</label>
@@ -388,6 +388,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+<!-- analytics: contact_form_submit on homepage form; pricing_cta_click on tier buttons; UET already in head -->
+<script src="assets/js/analytics.js"></script>
 
 <script>
 (function () {

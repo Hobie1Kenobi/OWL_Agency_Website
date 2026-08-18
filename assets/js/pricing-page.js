@@ -29,6 +29,7 @@
       if (!tier) return '';
       var featured = key === 'firm' ? ' featured' : '';
       var delay = (index + 1) * 100;
+      var tierTag = key === 'perDocument' ? 'per_document' : key;
       var features = (tier.features || []).map(function (item) {
         return '<li><i class="bx bx-check"></i> ' + escapeHtml(item) + '</li>';
       }).join('');
@@ -39,7 +40,7 @@
             '<h4>' + escapeHtml(tier.priceLabel) + cadenceSuffix(tier) + '</h4>' +
             '<p>' + escapeHtml(tier.summary) + '</p>' +
             '<ul>' + features + '</ul>' +
-            '<a class="buy-btn" href="' + escapeHtml(tier.ctaHref) + '">' + escapeHtml(tier.ctaLabel) + '</a>' +
+            '<a class="buy-btn" href="' + escapeHtml(tier.ctaHref) + '" data-owl-event="pricing_cta_click" data-owl-tier="' + escapeHtml(tierTag) + '">' + escapeHtml(tier.ctaLabel) + '</a>' +
           '</div>' +
         '</div>'
       );

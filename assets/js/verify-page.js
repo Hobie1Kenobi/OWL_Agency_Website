@@ -115,9 +115,17 @@
     }
     setStatus('info', 'Running five checks…');
     if (convertEl) convertEl.hidden = true;
+    if (window.OWLAnalytics) window.OWLAnalytics.track('verify_started', { event_label: 'verify_demo' });
     api.verify(text).then(function (payload) {
       setStatus('ok', payload.mode === 'live' ? 'Verification complete (live).' : 'Verification complete (demo). Review every check before filing.');
       renderResults(payload);
+      if (window.OWLAnalytics) {
+        window.OWLAnalytics.track('verify_completed', {
+          event_label: 'verify_demo',
+          citation_count: payload.citations ? payload.citations.length : 0,
+          mode: payload.mode || 'mock'
+        });
+      }
       if (resultsEl) resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }).catch(function () {
       setStatus('fail', 'Verification could not run. The failure is shown here rather than ignored. Try again, or email hobiecunningham@owl-ai-agency.com.');
