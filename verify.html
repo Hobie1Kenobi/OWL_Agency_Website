@@ -4,10 +4,10 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="canonical" href="https://owl-ai-agency.com/verify"/>
-  <title>Verify a Legal Citation — Free Check | OWL AI Agency</title>
-  <meta name="description" content="Paste a citation or a paragraph. OWL runs five verification checks: existence, citation format, holding support, verification path, and a human review flag. No signup."/>
-  <meta property="og:title" content="Verify a Legal Citation — Free Check | OWL AI Agency"/>
-  <meta property="og:description" content="Paste a citation or a paragraph. OWL runs five verification checks. No signup, no card."/>
+  <title>Citation Verification Workspace — Free Check | OWL AI Agency</title>
+  <meta name="description" content="Paste a citation or load a SAMPLE brief excerpt. OWL runs five verification checks, builds a Table of Authorities, and flags what a person must review before filing. No signup."/>
+  <meta property="og:title" content="Citation Verification Workspace — Free Check | OWL AI Agency"/>
+  <meta property="og:description" content="Legal AI should not just answer. It should verify. Paste a citation or load a SAMPLE matter. Five checks, Table of Authorities, downloadable audit."/>
   <meta property="og:url" content="https://owl-ai-agency.com/verify"/>
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="OWL AI Agency"/>
@@ -32,7 +32,7 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD",
-      "description": "Free single citation check. No account required."
+      "description": "Free citation check and sample verification workspace. No account required."
     },
     "provider": {
       "@type": "Person",
@@ -66,38 +66,81 @@
 <section class="verify-hero">
   <div class="container">
     <p class="mb-2"><span class="badge bg-light text-dark">No signup · No card · First check free</span></p>
-    <h1>Verify a citation before you file it</h1>
-    <p class="lead mb-0">Legal AI should not just answer. It should verify. Paste a citation or a paragraph that contains citations. OWL runs five checks and shows the verification path — including explicit failure when a cite is missing, ambiguous, or the source is down.</p>
+    <h1>Verify citations before you file them</h1>
+    <p class="lead mb-0">Legal AI should not just answer. It should verify. Paste a citation, or load a SAMPLE brief excerpt with clickable cites, five checks, a Table of Authorities, and a downloadable verification report. Failures are explicit: missing, wrong proposition, ambiguous, or source down.</p>
   </div>
 </section>
 
 <main id="main" class="py-4">
   <div class="container">
     <section class="verify-panel" aria-labelledby="paste-heading">
-      <h2 id="paste-heading" class="h4 mb-3">Paste a citation or a paragraph</h2>
-      <form id="verify-form">
-        <label for="citation-input">Citation text</label>
-        <textarea class="form-control" id="citation-input" name="citation" rows="6" required placeholder="Example: Carpenter v. United States, 585 U.S. 946 (2018)"></textarea>
-        <div class="verify-actions">
-          <!-- analytics: verify_started / verify_completed fire from verify-page.js -->
-          <button type="submit" class="btn btn-primary" id="verify-submit" data-owl-label="verify_started">Run five checks</button>
-          <button type="button" class="btn btn-outline-primary" data-verify-prefill="carpenter">Try Carpenter v. United States</button>
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <h2 id="paste-heading" class="h4 mb-3">Paste a citation or a paragraph</h2>
+          <form id="verify-form">
+            <label for="citation-input">Citation text</label>
+            <textarea class="form-control" id="citation-input" name="citation" rows="8" required placeholder="Example: Carpenter v. United States, 585 U.S. 946 (2018)"></textarea>
+            <div class="verify-actions">
+              <!-- analytics: verify_started / verify_completed fire from verify-page.js -->
+              <button type="submit" class="btn btn-primary" id="verify-submit" data-owl-label="verify_started">Run five checks</button>
+              <button type="button" class="btn btn-outline-primary" data-verify-prefill="carpenter">Try Carpenter v. United States</button>
+            </div>
+          </form>
         </div>
-        <p class="small text-muted mt-3 mb-1">Also try the three failure states so you can see they are not silent:</p>
-        <div class="verify-prefills">
-          <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="not_found">Citation not found</button>
-          <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="ambiguous">Ambiguous citation</button>
-          <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="source_unavailable">Source unavailable</button>
+        <div class="col-lg-5">
+          <h2 class="h4 mb-3" id="sample-heading">Load a sample matter</h2>
+          <p class="small text-muted">SAMPLE excerpts, not real filings. Each pack runs the same five checks a person would want on a working copy.</p>
+          <div id="verify-matter-buttons" class="verify-actions" aria-labelledby="sample-heading"></div>
+          <p class="small text-muted mt-3 mb-1">Paste-mode failure states (not silent):</p>
+          <div class="verify-prefills">
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="not_found">Citation not found</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="ambiguous">Ambiguous citation</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="source_unavailable">Source unavailable</button>
+          </div>
         </div>
-      </form>
+      </div>
       <div id="verify-status" class="verify-status" hidden role="status" aria-live="polite"></div>
     </section>
 
     <section id="verify-results" class="mt-4" hidden aria-live="polite"></section>
 
+    <section id="verify-workspace" class="verify-workspace mt-4" hidden>
+      <p class="verify-mode" id="verify-mode-note"></p>
+      <div id="verify-matter-banner" class="verify-banner" hidden></div>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <h2 class="h5">Working excerpt</h2>
+          <p class="small text-muted">Click a highlighted citation to open its five checks. Color is pass, fail, or needs review.</p>
+          <div id="verify-excerpt" class="verify-excerpt"></div>
+        </div>
+        <div class="col-lg-6">
+          <h2 class="h5">Five checks</h2>
+          <p class="small text-muted">Existence, citation format, holding support, verification path, human review flag.</p>
+          <div id="verify-cite-detail"></div>
+        </div>
+      </div>
+      <div class="row g-4 mt-1">
+        <div class="col-lg-7">
+          <h2 class="h5">Table of Authorities</h2>
+          <p class="small text-muted">Grouped the way litigators expect. Click a row to select the same cite.</p>
+          <div id="verify-toa"></div>
+        </div>
+        <div class="col-lg-5">
+          <h2 class="h5">Human review queue</h2>
+          <div id="verify-queue"></div>
+        </div>
+      </div>
+      <div class="verify-downloads mt-4">
+        <h2 class="h5">Court-document outputs</h2>
+        <p class="small text-muted mb-3">Generated from this result set. SAMPLE watermarks stay on. HTML download — no fake PDF library.</p>
+        <button type="button" class="btn btn-outline-primary me-2 mb-2" id="verify-download-report">Download verification report</button>
+        <button type="button" class="btn btn-outline-secondary mb-2" id="verify-download-flagged">Download flagged authorities memorandum</button>
+      </div>
+    </section>
+
     <section id="verify-convert" class="verify-convert mt-4" hidden>
-      <h2 class="h4">After you review these checks</h2>
-      <p>The free check covers one citation. A full brief or memo needs a document-level pass. Pricing is framed against the cost of one bad citation, not hours saved.</p>
+      <h2 class="h4">One bad citation can be the filing</h2>
+      <p>The free check covers a paste or a SAMPLE excerpt. A full brief or memo needs a document-level pass. Pricing is framed against the cost of one bad citation, not hours saved.</p>
       <a class="btn btn-primary me-2 mb-2" href="/contact">Verify a full brief</a>
       <a class="btn btn-outline-primary mb-2" href="/pricing?from=verify">See pricing</a>
     </section>
@@ -163,6 +206,7 @@
 <script src="assets/js/analytics.js"></script>
 <script src="assets/js/legal-research-config.js"></script>
 <script src="assets/js/verify-api.js"></script>
+<script src="assets/js/verify-workspace.js"></script>
 <script src="assets/js/verify-page.js"></script>
 </body>
 </html>
