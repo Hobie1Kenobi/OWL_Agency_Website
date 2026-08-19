@@ -1,0 +1,10 @@
+{
+  "id": "miranda",
+  "title": "SAMPLE — Miranda warnings excerpt",
+  "matter_name": "SAMPLE — Custodial interrogation excerpt (Miranda line)",
+  "practice_area": "Criminal procedure / Fifth Amendment",
+  "warning_banner": "SAMPLE excerpt. Not a real filing. Not legal advice. OWL is a verification layer, not an AI lawyer. Human review of every output is required.",
+  "detect_tokens": ["Miranda v. Arizona", "Dickerson v. United States"],
+  "expected_flags": [],
+  "excerpt": "SAMPLE — NOT A REAL FILING\nUnited States District Court, [Sample Jurisdiction]\n\nMEMORANDUM IN SUPPORT OF MOTION TO SUPPRESS STATEMENTS\n(SAMPLE excerpt for citation verification only. Not legal advice. Not a court filing.)\n\nI. Custodial interrogation requires the Miranda warnings.\n\nThe privilege against compelled self-incrimination applies in the stationhouse, not only at trial. A person taken into custody and interrogated must be warned of the right to remain silent and the right to counsel. Miranda v. Arizona, 384 U.S. 436 (1966). The Court had already begun to police interrogation without counsel in Escobedo v. Illinois, 378 U.S. 478 (1964). The right to appointed counsel in serious prosecutions is separately secured. Gideon v. Wainwright, 372 U.S. 335 (1963).\n\nCongress later attempted a totality-of-the-circumstances substitute for the warnings. 18 U.S.C. § 3501. The Court held that Miranda announced a constitutional rule that Congress may not overrule legislatively. Dickerson v. United States, 530 U.S. 428 (2000). Later cases address subsequent statements after an unwarned admission. Oregon v. Elstad, 470 U.S. 298 (1985). Invocation of counsel during interrogation also has a specific follow-up rule. Edwards v. Arizona, 451 U.S. 477 (1981).\n\nInitial appearance procedure is addressed in Fed. R. Crim. P. 5. The privilege itself is U.S. Const. amend. V.\n"
+}

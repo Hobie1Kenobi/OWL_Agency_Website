@@ -3,23 +3,37 @@
     {
       "id": "carpenter",
       "file": "carpenter.json",
-      "title": "Carpenter CSLI excerpt",
-      "short_label": "Carpenter (clean + review)",
-      "blurb": "Fourth Amendment SAMPLE brief excerpt. Most checks pass; one holding-support flag remains for a person."
+      "title": "Carpenter CSLI excerpt (tainted SAMPLE)",
+      "short_label": "Carpenter v. United States",
+      "blurb": "SAMPLE Fourth Amendment excerpt with live-checkable real cites plus a hallucination, a wrong holding, an ambiguous short form, and a docket outside the public corpus."
     },
     {
-      "id": "mixed-reliability",
-      "file": "mixed-reliability.json",
-      "title": "Mixed-reliability motion",
-      "short_label": "Mixed reliability (landmine)",
-      "blurb": "SAMPLE motion that looks fine until verification: a hallucination, a real case cited for the wrong proposition, an ambiguous short form, and a source that is down."
+      "id": "riley",
+      "file": "riley.json",
+      "title": "Riley cell-phone search excerpt",
+      "short_label": "Riley v. California",
+      "blurb": "SAMPLE search-incident-to-arrest excerpt built from Riley and related public opinions."
     },
     {
-      "id": "statute-case-mix",
-      "file": "statute-case-mix.json",
-      "title": "Statute and case mix",
-      "short_label": "Statute + case mix",
-      "blurb": "SAMPLE excerpt with a U.S. Code section, a criminal rule, and cases. The Table of Authorities includes Statutes / Rules."
+      "id": "miranda",
+      "file": "miranda.json",
+      "title": "Miranda warnings excerpt",
+      "short_label": "Miranda v. Arizona",
+      "blurb": "SAMPLE custodial-interrogation excerpt built from Miranda and related public opinions."
+    },
+    {
+      "id": "gideon",
+      "file": "gideon.json",
+      "title": "Gideon right-to-counsel excerpt",
+      "short_label": "Gideon v. Wainwright",
+      "blurb": "SAMPLE appointed-counsel excerpt built from Gideon and related public opinions."
+    },
+    {
+      "id": "katz",
+      "file": "katz.json",
+      "title": "Katz reasonable-expectation excerpt",
+      "short_label": "Katz v. United States",
+      "blurb": "SAMPLE electronic-surveillance excerpt built from Katz and related public opinions."
     }
   ]
 }

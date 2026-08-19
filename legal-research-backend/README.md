@@ -82,6 +82,7 @@ Render free tier sleeps after 15 min idle. Use [cron-job.org](https://cron-job.o
 |--------|------|-------------|
 | GET | `/health` | Health check |
 | GET | `/api/sources` | List public legal data systems |
+| POST | `/api/verify/citations` | Live citation verification (`{ "text", "matter_id?" }`) against Cornell LII, Oyez, CourtListener, Justia, GovInfo, and supremecourt.gov |
 | GET | `/api/cases` | Available demo cases |
 | POST | `/api/intake` | Submit legal research intake form |
 | GET | `/api/intake/{id}` | Look up intake by reference number |

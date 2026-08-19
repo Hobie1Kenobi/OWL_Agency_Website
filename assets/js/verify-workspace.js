@@ -20,9 +20,35 @@
   }
 
   function statusLabel(status) {
-    if (status === 'pass') return 'Pass';
+    if (status === 'pass' || status === 'ok') return 'Pass';
     if (status === 'fail') return 'Fail';
+    if (status === 'timeout') return 'Timed out';
+    if (status === 'blocked') return 'Blocked';
+    if (status === 'no_match') return 'No match';
+    if (status === 'error') return 'Error';
     return 'Needs review';
+  }
+
+  function renderSourceChips(sources) {
+    if (!sources || !sources.length) {
+      return '<p class="small text-muted mb-0">No source-family status was returned for this run.</p>';
+    }
+    return (
+      '<ul class="verify-source-chips">' +
+        sources.map(function (source) {
+          var cls = source.status === 'ok' ? 'is-ok' : 'is-down';
+          var extra = source.http_status
+            ? ' HTTP ' + source.http_status
+            : (source.error ? ' ' + source.error : '');
+          return (
+            '<li class="verify-chip ' + cls + '">' +
+              '<span>' + escapeHtml(source.name || source.id) + '</span>' +
+              '<span class="verify-chip-status">' + escapeHtml(statusLabel(source.status)) + extra + '</span>' +
+            '</li>'
+          );
+        }).join('') +
+      '</ul>'
+    );
   }
 
   function citationById(id) {
@@ -196,7 +222,7 @@
       return '<p class="mb-0">No existence, format, holding-support, or source failures in this SAMPLE. A person still reviews every cite before filing — the human-review flag remains on each card.</p>';
     }
     return (
-      '<p class="small text-muted">These are the cites a paralegal would hand an attorney: fails and holding/source issues. Human must review before filing.</p>' +
+          <p class="small text-muted mb-0">These are the cites a person should review before filing: fails and holding/source issues. Human must review before filing. OWL is not a paralegal replacement.</p>
       '<ul class="verify-queue-list">' +
         flagged.map(function (citation) {
           var overall = api.overallStatus(citation);
@@ -331,9 +357,17 @@
     var queueEl = document.getElementById('verify-queue');
     var modeEl = document.getElementById('verify-mode-note');
     if (modeEl) {
-      modeEl.innerHTML = payload.mode === 'live'
-        ? 'Live verification endpoint.'
-        : 'Demo verification on the documented mock contract. TODO: connect live endpoint — <code>/api/verify/citations</code> is not on the Render backend yet.';
+      if (payload.mode === 'live') {
+        modeEl.textContent = 'Live verification against public sources. Failures below are from this run, not a canned demo file.';
+      } else if (payload.mode === 'offline-preview') {
+        modeEl.innerHTML = '<strong>Offline sample preview</strong> — not a live source check. Public databases were not queried.';
+      } else {
+        modeEl.textContent = 'Verification result. Confirm the mode above before relying on these checks.';
+      }
+    }
+    var chipsEl = document.getElementById('verify-source-chips');
+    if (chipsEl) {
+      chipsEl.innerHTML = renderSourceChips(payload.sources_queried || []);
     }
     if (banner) {
       if (payload.matter && payload.matter.warning_banner) {

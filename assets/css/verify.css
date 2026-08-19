@@ -48,9 +48,53 @@
   margin-top: 1rem;
 }
 
-.verify-actions .btn,
-.verify-prefills .btn {
+.verify-actions .btn.is-selected {
+  background: #37517e;
+  color: #fff;
+  border-color: #37517e;
+}
+
+.verify-source-chips-wrap {
+  margin-bottom: 1.25rem;
+}
+
+.verify-source-chips {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.verify-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
   min-height: 44px;
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  background: #f8f9fa;
+  font-size: 0.8rem;
+  line-height: 1.25;
+}
+
+.verify-chip.is-ok {
+  border-color: #198754;
+  background: #eef8f1;
+}
+
+.verify-chip.is-down {
+  border-color: #c58b00;
+  background: #fff9ec;
+}
+
+.verify-chip-status {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
 }
 
 .verify-prefills {

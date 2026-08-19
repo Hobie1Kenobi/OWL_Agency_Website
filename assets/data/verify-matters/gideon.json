@@ -1,0 +1,10 @@
+{
+  "id": "gideon",
+  "title": "SAMPLE — Gideon right-to-counsel excerpt",
+  "matter_name": "SAMPLE — Appointed counsel excerpt (Gideon line)",
+  "practice_area": "Criminal procedure / Sixth Amendment",
+  "warning_banner": "SAMPLE excerpt. Not a real filing. Not legal advice. OWL is a verification layer, not an AI lawyer. Human review of every output is required.",
+  "detect_tokens": ["Gideon v. Wainwright", "Strickland v. Washington"],
+  "expected_flags": [],
+  "excerpt": "SAMPLE — NOT A REAL FILING\nUnited States District Court, [Sample Jurisdiction]\n\nMEMORANDUM IN SUPPORT OF MOTION FOR APPOINTED COUNSEL\n(SAMPLE excerpt for citation verification only. Not legal advice. Not a court filing.)\n\nI. The Sixth Amendment requires appointed counsel in this prosecution.\n\nThe right to counsel in a capital case tried in a state court was recognized long before the modern incorporation cases. Powell v. Alabama, 287 U.S. 45 (1932). Federal felony defendants had a corresponding appointed-counsel rule. Johnson v. Zerbst, 304 U.S. 458 (1938). The Court later declined, for a time, to require appointed counsel in every serious state prosecution. Betts v. Brady, 316 U.S. 455 (1942).\n\nThat special-circumstances approach was overruled. The Sixth Amendment right to counsel is fundamental and applicable to the States. Gideon v. Wainwright, 372 U.S. 335 (1963). The right extends to misdemeanor prosecutions that result in actual imprisonment. Argersinger v. Hamlin, 407 U.S. 25 (1972). Ineffective assistance is measured against an objective standard of reasonableness and prejudice. Strickland v. Washington, 466 U.S. 668 (1984).\n\nAppointment of counsel in federal criminal cases is also addressed by statute. 18 U.S.C. § 3006A. The procedural counterpart is Fed. R. Crim. P. 44. The constitutional text is U.S. Const. amend. VI.\n"
+}
