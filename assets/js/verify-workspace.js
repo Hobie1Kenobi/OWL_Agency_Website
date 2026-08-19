@@ -154,7 +154,7 @@
         '<br/><span>Against:</span> ' + escapeHtml(check.against || '—') + '</p>';
     }
     var link = check.sourceUrl
-      ? '<p class="verify-source"><a href="' + escapeHtml(check.sourceUrl) + '" rel="noopener noreferrer">Open public source</a></p>'
+      ? '<p class="verify-source"><a href="' + escapeHtml(check.sourceUrl) + '" target="_blank" rel="noopener noreferrer">Open public source</a></p>'
       : '';
     return (
       '<li class="verify-check is-' + escapeHtml(check.status) + '">' +
@@ -180,8 +180,9 @@
           if (!step || typeof step !== 'object') {
             return '<li><span>' + escapeHtml(step) + '</span></li>';
           }
-          var source = step.url
-            ? '<a href="' + escapeHtml(step.url) + '" rel="noopener noreferrer">' + escapeHtml(step.source || 'Public source') + '</a>'
+          var href = step.url;
+          var source = href
+            ? '<a href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(step.source || 'Public source') + '</a>'
             : escapeHtml(step.source || 'Public source');
           return (
             '<li>' +
@@ -203,6 +204,16 @@
     if (citation.court) meta.push(escapeHtml(citation.court));
     if (citation.year) meta.push(escapeHtml(String(citation.year)));
     var overall = api.overallStatus(citation);
+    var authority = citation.authority_url || citation.authorityUrl || null;
+    var actions = '<div class="verify-cite-actions">';
+    if (authority) {
+      actions +=
+        '<a class="btn btn-sm btn-outline-primary" href="' + escapeHtml(authority) +
+        '" target="_blank" rel="noopener noreferrer">Open source</a>';
+    }
+    actions +=
+      '<button type="button" class="btn btn-sm btn-outline-secondary" data-copy-cite="' +
+      escapeHtml(heading) + '">Copy cite</button></div>';
     return (
       '<article class="verify-card mb-0" aria-labelledby="selected-cite-heading">' +
         '<div class="verify-check-head">' +
@@ -210,11 +221,12 @@
           '<span class="verify-pill">' + escapeHtml(statusLabel(overall)) + '</span>' +
         '</div>' +
         (meta.length ? '<p class="verify-raw">' + meta.join(' · ') + '</p>' : '') +
+        actions +
         (citation.proposition ? '<p class="verify-proposition"><span>Proposition checked:</span> ' + escapeHtml(citation.proposition) + '</p>' : '') +
         errorBanner(citation) +
         '<ol class="verify-checks">' + asArray(citation.checks).map(renderCheck).join('') + '</ol>' +
         '<details class="verify-path-panel mt-3"' + (overall === 'fail' ? ' open' : '') + '>' +
-          '<summary>Verification path</summary>' +
+          '<summary>Sources checked</summary>' +
           renderPathSteps(citation) +
           '<p class="small text-muted mt-2 mb-0">Public sources are listed as what was checked against. OWL is not a citator product.</p>' +
         '</details>' +
@@ -238,6 +250,9 @@
               '<button type="button" class="verify-toa-link" data-cite-id="' + escapeHtml(entry.citationId) + '">' +
                 escapeHtml(entry.cite || 'Citation') +
               '</button>' +
+              (entry.url
+                ? ' <a class="verify-toa-open" href="' + escapeHtml(entry.url) + '" target="_blank" rel="noopener noreferrer">Open</a>'
+                : '') +
             '</td>' +
             '<td>' + escapeHtml(entry.court || '—') + '</td>' +
             '<td>' + escapeHtml(entry.year ? String(entry.year) : '—') + '</td>' +
@@ -435,6 +450,16 @@
     }
     if (toaEl) toaEl.innerHTML = renderToa(payload);
     if (queueEl) queueEl.innerHTML = renderQueue(payload);
+    pinpointSelected();
+  }
+
+  function pinpointSelected() {
+    var excerptEl = document.getElementById('verify-excerpt');
+    if (!excerptEl || !state.selectedId || typeof excerptEl.querySelector !== 'function') return;
+    var btn = excerptEl.querySelector('[data-cite-id="' + String(state.selectedId).replace(/"/g, '') + '"]');
+    if (btn && typeof btn.scrollIntoView === 'function') {
+      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   }
 
   function selectCite(id, scrollDetail) {
@@ -451,11 +476,16 @@
     if (payload.matter && payload.matter.default_selected && citationById(payload.matter.default_selected)) {
       return payload.matter.default_selected;
     }
-    var flagged = asArray(payload.citations).filter(function (citation) {
+    var list = asArray(payload.citations);
+    var fails = list.filter(function (citation) {
+      return citation && typeof citation === 'object' && api.overallStatus(citation) === 'fail';
+    });
+    if (fails.length) return fails[0].id;
+    var flagged = list.filter(function (citation) {
       return citation && typeof citation === 'object' && api.isFlagged(citation);
     });
     if (flagged.length) return flagged[0].id;
-    var first = asArray(payload.citations)[0];
+    var first = list[0];
     return first && first.id ? first.id : null;
   }
 
@@ -480,6 +510,24 @@
   }
 
   root.addEventListener('click', function (event) {
+    var copyBtn = event.target.closest('[data-copy-cite]');
+    if (copyBtn && root.contains(copyBtn)) {
+      event.preventDefault();
+      var text = copyBtn.getAttribute('data-copy-cite') || '';
+      var resetLabel = function () {
+        copyBtn.textContent = 'Copy cite';
+      };
+      var copied = function () {
+        copyBtn.textContent = 'Copied';
+        window.setTimeout(resetLabel, 1600);
+      };
+      if (window.navigator && window.navigator.clipboard && window.navigator.clipboard.writeText) {
+        window.navigator.clipboard.writeText(text).then(copied).catch(resetLabel);
+      } else {
+        copied();
+      }
+      return;
+    }
     var button = event.target.closest('[data-cite-id]');
     if (!button || !root.contains(button)) return;
     selectCite(button.getAttribute('data-cite-id'), true);

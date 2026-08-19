@@ -97,6 +97,12 @@ assertContains('five-check panel present', makeEl('verify-cite-detail').innerHTM
 assertContains('TOA lists Riley', makeEl('verify-toa').innerHTML, 'Riley v. California');
 assertContains('source chips present', makeEl('verify-source-chips').innerHTML, 'Cornell LII');
 assertContains('human-review queue lists Wurie', makeEl('verify-queue').innerHTML, 'Wurie');
+assertContains('source list is labeled Sources checked', makeEl('verify-cite-detail').innerHTML, 'Sources checked');
+assertContains('Wurie open-source control is present', makeEl('verify-cite-detail').innerHTML, 'Open source');
+assertContains('copy cite control is present', makeEl('verify-cite-detail').innerHTML, 'Copy cite');
+assertContains('authority links open in a new tab', makeEl('verify-cite-detail').innerHTML, 'target="_blank"');
+assertContains('Wurie links to a CourtListener opinion page', makeEl('verify-cite-detail').innerHTML, '/opinion/870435/united-states-v-wurie/');
+assertContains('TOA includes an Open control', makeEl('verify-toa').innerHTML, 'verify-toa-open');
 
 var messy = JSON.parse(JSON.stringify(fixture));
 messy.citations.push({ id: 'broken-row', raw: 'Broken v. Cite, 1 U.S. 1 (1800)' });

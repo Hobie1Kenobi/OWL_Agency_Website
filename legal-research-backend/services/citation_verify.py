@@ -1,4 +1,4 @@
-"""Live citation verification against the six public legal source families."""
+"""Live citation verification against public legal source families."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ import logging
 import os
 import re
 from typing import Any
-from urllib.parse import quote
+from urllib.parse import quote, urlencode
 
 import httpx
 from bs4 import BeautifulSoup
@@ -348,13 +348,14 @@ CASE_CATALOG: dict[str, dict[str, Any]] = {
         "name": "United States v. Carpenter",
         "citation": "United States v. Carpenter, 819 F.3d 880 (6th Cir. 2016)",
         "year": 2016,
-        "courtlistener_page": "https://www.courtlistener.com/c/F.3d/819/880/",
+        "openjurist": "https://openjurist.org/819/f3d/880",
     },
     "728 F.3d 1": {
         "name": "United States v. Wurie",
         "citation": "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)",
         "year": 2013,
-        "courtlistener_page": "https://www.courtlistener.com/c/F.3d/728/1/",
+        "courtlistener_page": "https://www.courtlistener.com/opinion/870435/united-states-v-wurie/",
+        "openjurist": "https://openjurist.org/728/f3d/1",
     },
 }
 
@@ -366,18 +367,156 @@ def _slug(value: str, index: int) -> str:
     return f"{base or 'cite'}-{index}"
 
 
-def _cl_reporter_slug(reporter: str) -> str:
-    text = reporter.replace(" ", "")
-    text = text.replace("S.Ct.", "S.Ct.")
-    if reporter.lower().startswith("s."):
-        return "S.Ct."
-    if "supp" in reporter.lower():
-        return re.sub(r"\s+", "", reporter).replace("Supp.", "Supp.")
-    return text
+CL_API_SEARCH = "https://www.courtlistener.com/api/rest/v4/search/"
+CL_ORIGIN = "https://www.courtlistener.com"
+OPENJURIST_REPORTER_SLUGS = {
+    "f3d": "f3d",
+    "f2d": "f2d",
+    "f4th": "f4th",
+    "us": "us",
+    "sct": "sct",
+}
+AUTHORITY_URL_ORDER = (
+    "cornell_lii",
+    "supremecourt_gov",
+    "courtlistener",
+    "openjurist",
+    "justia",
+    "oyez",
+    "govinfo",
+)
+CIRCUIT_AUTHORITY_URL_ORDER = (
+    "courtlistener",
+    "openjurist",
+    "justia",
+    "cornell_lii",
+)
 
 
 def _catalog_for(cite: dict[str, Any]) -> dict[str, Any]:
     return CASE_CATALOG.get(cite.get("key") or "", {})
+
+
+def _normalize_cite_key(value: str) -> str:
+    text = re.sub(r"\s+", " ", (value or "").strip())
+    text = text.replace("S.Ct.", "S. Ct.").replace("s. ct.", "S. Ct.")
+    return text.lower()
+
+
+def _openjurist_reporter_slug(reporter: str) -> str | None:
+    compact = re.sub(r"[.\s]", "", reporter or "").lower()
+    return OPENJURIST_REPORTER_SLUGS.get(compact)
+
+
+def openjurist_opinion_url(cite: dict[str, Any]) -> str | None:
+    if cite.get("kind") != "case":
+        return None
+    slug = _openjurist_reporter_slug(cite.get("reporter") or "")
+    volume = cite.get("volume")
+    page = cite.get("page")
+    if not (slug and volume and page):
+        return None
+    return f"https://openjurist.org/{volume}/{slug}/{page}"
+
+
+def _is_scotus_reporter(reporter: str) -> bool:
+    blob = (reporter or "").lower()
+    return "u.s." in blob or "s. ct" in blob or blob.replace(" ", "") == "s.ct."
+
+
+def source_covers(source_id: str, cite: dict[str, Any]) -> bool:
+    kind = cite.get("kind")
+    reporter = cite.get("reporter") or ""
+    if source_id == "oyez":
+        return kind == "case" and _is_scotus_reporter(reporter)
+    if source_id == "supremecourt_gov":
+        return kind == "case" and _is_scotus_reporter(reporter)
+    if source_id == "govinfo":
+        return kind == "statute"
+    if source_id == "openjurist":
+        return kind == "case" and bool(_openjurist_reporter_slug(reporter))
+    if source_id == "courtlistener":
+        return kind in {"case", "docket"}
+    if source_id == "justia":
+        if kind == "statute":
+            return True
+        return kind == "case" and _is_scotus_reporter(reporter)
+    if source_id == "cornell_lii":
+        if kind in {"statute", "rule", "constitution"}:
+            return True
+        return kind == "case" and _is_scotus_reporter(reporter)
+    return True
+
+
+def cl_result_matches(cite: dict[str, Any], result: dict[str, Any]) -> bool:
+    want = _normalize_cite_key(cite.get("key") or "")
+    if not want:
+        return False
+    for raw in result.get("citation") or []:
+        if _normalize_cite_key(str(raw)) == want:
+            return True
+    return False
+
+
+def _party_score(cite: dict[str, Any], case_name: str) -> int:
+    parties = (cite.get("parties") or _catalog_for(cite).get("name") or "").lower()
+    name = (case_name or "").lower()
+    if not parties or not name:
+        return 0
+    if parties in name or name in parties:
+        return 4
+    chunks = [part.strip() for part in re.split(r"\s+v\.?\s+", parties) if part.strip()]
+    score = 0
+    skip = {"united", "states", "inc", "llc", "ltd", "co", "corp"}
+    for chunk in chunks:
+        last = re.sub(r"[^a-z0-9]+", "", chunk.split()[-1] if chunk.split() else "")
+        if last and last not in skip and last in name:
+            score += 1
+    return score
+
+
+def _cl_excerpt(result: dict[str, Any]) -> str:
+    syllabus = (result.get("syllabus") or "").strip()
+    if len(syllabus) > 80:
+        return syllabus[:1500]
+    snippets = []
+    for opinion in result.get("opinions") or []:
+        if isinstance(opinion, dict) and opinion.get("snippet"):
+            snippets.append(str(opinion["snippet"]).strip())
+    blob = "\n".join(snippets).strip()
+    return blob[:1500]
+
+
+def _cl_headers(token: str | None = None) -> dict[str, str]:
+    headers = {
+        "User-Agent": "OWL-Legal-Research-Demo/1.0 (+https://owl-ai-agency.com/verify)",
+        "Accept": "application/json",
+    }
+    if token:
+        headers["Authorization"] = f"Token {token}"
+    return headers
+
+
+def _best_authority_url(cite: dict[str, Any], hits: list[dict[str, Any]]) -> str | None:
+    order = CIRCUIT_AUTHORITY_URL_ORDER if infer_toa_group(cite) in {"courts_of_appeals", "district_courts"} else AUTHORITY_URL_ORDER
+    by_id = {item.get("id"): item for item in hits if item.get("url")}
+    cl = by_id.get("courtlistener")
+    oj = by_id.get("openjurist")
+    if infer_toa_group(cite) in {"courts_of_appeals", "district_courts"}:
+        if cl and cl.get("url"):
+            score = cl.get("party_score")
+            if score is None or score > 0:
+                return cl["url"]
+            if oj and oj.get("url"):
+                return oj["url"]
+            return cl["url"]
+        if oj and oj.get("url"):
+            return oj["url"]
+    for source_id in order:
+        item = by_id.get(source_id)
+        if item and item.get("url"):
+            return item["url"]
+    return next((item.get("url") for item in hits if item.get("url")), None)
 
 
 def _html_excerpt(html: str, limit: int = 1500) -> str:
@@ -423,7 +562,7 @@ def _status_from_probe(probe: dict[str, Any], matched: bool) -> str:
         return "timeout"
     if error == "blocked" or http_status == 403:
         return "blocked"
-    if http_status == 404 or error == "empty":
+    if error == "no_match" or http_status == 404 or error == "empty":
         return "no_match"
     if probe.get("ok") and not matched:
         return "no_match"
@@ -438,21 +577,36 @@ def _result(
     *,
     matched: bool,
     excerpt: str = "",
+    covers: bool = True,
+    url: str | None = None,
+    link_ok: bool = False,
 ) -> dict[str, Any]:
     meta = SOURCE_BY_ID.get(source_id) or {"id": source_id, "name": source_id}
+    resolved = url if url is not None else (probe.get("url") or probe.get("requested_url"))
+    usable = bool(matched or link_ok)
     return {
         "id": source_id,
         "name": meta["name"],
         "status": _status_from_probe(probe, matched),
         "http_status": probe.get("http_status"),
         "error": None if matched else probe.get("error"),
-        "url": probe.get("url") or probe.get("requested_url"),
+        "url": resolved if usable else None,
         "matched": matched,
         "excerpt": excerpt[:1500] if matched else "",
+        "covers": covers,
+        "link_ok": usable,
     }
 
 
-def _empty_result(source_id: str, url: str, error: str, status: str = "error") -> dict[str, Any]:
+def _empty_result(
+    source_id: str,
+    url: str,
+    error: str,
+    status: str = "error",
+    *,
+    covers: bool = True,
+    link_ok: bool = False,
+) -> dict[str, Any]:
     meta = SOURCE_BY_ID.get(source_id) or {"id": source_id, "name": source_id}
     return {
         "id": source_id,
@@ -460,9 +614,11 @@ def _empty_result(source_id: str, url: str, error: str, status: str = "error") -
         "status": status,
         "http_status": None,
         "error": error,
-        "url": url,
+        "url": url if link_ok else None,
         "matched": False,
         "excerpt": "",
+        "covers": covers,
+        "link_ok": link_ok,
     }
 
 
@@ -530,10 +686,27 @@ async def query_cornell(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict
             matched = len(excerpt) > 80
         else:
             matched = _content_matches(cite, excerpt) or len(excerpt) > 200
-    return _result("cornell_lii", probe, matched=matched, excerpt=excerpt)
+    return _result(
+        "cornell_lii",
+        probe,
+        matched=matched,
+        excerpt=excerpt,
+        covers=source_covers("cornell_lii", cite),
+        url=url if matched else None,
+        link_ok=matched,
+    )
 
 
 async def query_oyez(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[str, Any]:
+    covers = source_covers("oyez", cite)
+    if not covers:
+        return _empty_result(
+            "oyez",
+            "",
+            "Oyez hosts Supreme Court records, not this reporter",
+            "no_match",
+            covers=False,
+        )
     catalog = _catalog_for(cite)
     oyez = catalog.get("oyez")
     if oyez:
@@ -545,18 +718,65 @@ async def query_oyez(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[st
             name = catalog.get("name", "")
             if name and name.split()[0].lower() not in excerpt.lower() and "docket" not in excerpt.lower():
                 matched = len(excerpt) > 40
-        return _result("oyez", probe, matched=matched, excerpt=excerpt)
+        return _result("oyez", probe, matched=matched, excerpt=excerpt, covers=covers)
     query = cite.get("parties") or cite.get("raw") or cite.get("key") or ""
     url = f"https://www.oyez.org/search?q={quote(query)}"
     probe = await probe_url(client, url, min_bytes=200)
     matched = bool(probe.get("ok")) and _content_matches(cite, probe.get("text") or "")
-    return _result("oyez", probe, matched=matched, excerpt=_html_excerpt(probe.get("text") or "") if matched else "")
+    return _result(
+        "oyez",
+        probe,
+        matched=matched,
+        excerpt=_html_excerpt(probe.get("text") or "") if matched else "",
+        covers=covers,
+    )
+
+
+async def _cl_search_json(
+    client: httpx.AsyncClient,
+    params: dict[str, str],
+    token: str | None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    api_url = CL_API_SEARCH + "?" + urlencode(params)
+    try:
+        response = await client.get(api_url, headers=_cl_headers(token), follow_redirects=True)
+        data = response.json() if response.status_code == 200 else {}
+        probe = {
+            "ok": response.status_code == 200,
+            "http_status": response.status_code,
+            "url": CL_API_SEARCH,
+            "requested_url": api_url,
+            "text": "",
+            "error": None if response.status_code < 400 else f"HTTP {response.status_code}",
+            "is_pdf": False,
+        }
+        if response.status_code == 403:
+            probe["error"] = "blocked"
+        return probe, data if isinstance(data, dict) else {}
+    except httpx.HTTPError as exc:
+        return {
+            "ok": False,
+            "http_status": None,
+            "url": CL_API_SEARCH,
+            "requested_url": api_url,
+            "text": "",
+            "error": str(exc)[:180],
+            "is_pdf": False,
+        }, {}
+
+
+def _pick_cl_match(cite: dict[str, Any], results: list[Any]) -> dict[str, Any] | None:
+    matches = [row for row in results if isinstance(row, dict) and cl_result_matches(cite, row)]
+    if not matches:
+        return None
+    return max(matches, key=lambda row: _party_score(cite, row.get("caseName") or ""))
 
 
 async def query_courtlistener(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[str, Any]:
     catalog = _catalog_for(cite)
-    urls: list[str] = []
+    covers = source_covers("courtlistener", cite)
     token = os.getenv("COURTLISTENER_API_TOKEN") or os.getenv("COURTLISTENER_TOKEN")
+
     if catalog.get("courtlistener_pdf"):
         pdf_probe = await probe_url(
             client,
@@ -565,78 +785,159 @@ async def query_courtlistener(client: httpx.AsyncClient, cite: dict[str, Any]) -
             min_bytes=8_000,
         )
         if pdf_probe.get("ok") and pdf_probe.get("is_pdf"):
-            pdf_probe["url"] = catalog.get("courtlistener_page") or pdf_probe.get("url")
-            return _result("courtlistener", pdf_probe, matched=True, excerpt="")
-    if catalog.get("courtlistener_page"):
-        urls.append(catalog["courtlistener_page"])
-    if cite.get("kind") == "case" and cite.get("volume") and cite.get("page"):
-        slug = _cl_reporter_slug(cite.get("reporter") or "U.S.")
-        urls.append(
-            f"https://www.courtlistener.com/c/{slug}/{cite['volume']}/{cite['page']}/"
-        )
-    if cite.get("kind") == "docket":
-        urls.append(
-            f"https://www.courtlistener.com/?q={quote(cite.get('raw') or '')}&type=o"
-        )
-
-    if token and cite.get("key"):
-        api_url = (
-            "https://www.courtlistener.com/api/rest/v4/search/"
-            f"?type=o&q={quote(cite.get('key') or '')}"
-        )
-        try:
-            response = await client.get(
-                api_url,
-                headers={
-                    "Authorization": f"Token {token}",
-                    "Accept": "application/json",
-                    "User-Agent": "OWL-Legal-Research-Demo/1.0 (+https://owl-ai-agency.com/verify)",
-                },
-                follow_redirects=True,
+            page = catalog.get("courtlistener_page") or pdf_probe.get("url")
+            return _result(
+                "courtlistener",
+                pdf_probe,
+                matched=True,
+                excerpt="",
+                covers=covers,
+                url=page,
+                link_ok=True,
             )
-            data = response.json() if response.status_code == 200 else {}
-            count = 0
-            if isinstance(data, dict):
-                count = int(data.get("count") or 0) or len(data.get("results") or [])
-            probe = {
-                "ok": response.status_code == 200 and count > 0,
-                "http_status": response.status_code,
-                "url": api_url.split("?")[0],
-                "requested_url": api_url.split("?")[0],
-                "text": "",
-                "error": None if response.status_code < 400 else f"HTTP {response.status_code}",
-                "is_pdf": False,
-            }
-            if probe["ok"]:
-                return _result("courtlistener", probe, matched=True, excerpt="")
-        except httpx.HTTPError:
-            pass
 
-    if not urls:
+    if not covers:
         return _empty_result(
             "courtlistener",
-            "https://www.courtlistener.com/",
-            "no citation-specific CourtListener URL",
+            "",
+            "CourtListener is not queried for this citation type",
             "no_match",
+            covers=False,
         )
-    probe = await _first_ok(client, urls)
-    matched = bool(probe.get("ok")) and (
-        "/c/" in (probe.get("url") or "")
-        or "/opinion/" in (probe.get("url") or "")
-        or _content_matches(cite, probe.get("text") or "")
+
+    key = cite.get("key") or ""
+    results: list[Any] = []
+    probe: dict[str, Any] = {
+        "ok": False,
+        "http_status": None,
+        "url": CL_API_SEARCH,
+        "requested_url": CL_API_SEARCH,
+        "text": "",
+        "error": "no_url",
+        "is_pdf": False,
+    }
+
+    if cite.get("kind") == "case" and key:
+        probe, data = await _cl_search_json(client, {"type": "o", "citation": key}, token)
+        results = data.get("results") or []
+        match = _pick_cl_match(cite, results)
+        if probe.get("http_status") == 200 and not match:
+            probe, data = await _cl_search_json(client, {"type": "o", "q": f'"{key}"'}, token)
+            results = data.get("results") or []
+            match = _pick_cl_match(cite, results)
+        if probe.get("http_status") == 200 and not match and (cite.get("parties") or catalog.get("name")):
+            query = f"{cite.get('parties') or catalog.get('name')} {key}"
+            probe, data = await _cl_search_json(client, {"type": "o", "q": query}, token)
+            results = data.get("results") or []
+            match = _pick_cl_match(cite, results)
+        if match and match.get("absolute_url"):
+            opinion_url = CL_ORIGIN + match["absolute_url"]
+            excerpt = _cl_excerpt(match)
+            probe["ok"] = True
+            probe["url"] = opinion_url
+            result = _result(
+                "courtlistener",
+                probe,
+                matched=True,
+                excerpt=excerpt,
+                covers=covers,
+                url=opinion_url,
+                link_ok=True,
+            )
+            result["party_score"] = _party_score(cite, match.get("caseName") or "")
+            return result
+        if probe.get("http_status") == 200:
+            probe["ok"] = False
+            probe["error"] = "no_match"
+            return _result("courtlistener", probe, matched=False, covers=covers, url=None)
+
+    if cite.get("kind") == "docket":
+        probe, data = await _cl_search_json(
+            client,
+            {"type": "o", "q": cite.get("raw") or cite.get("key") or ""},
+            token,
+        )
+        results = data.get("results") or []
+        if probe.get("ok") and results:
+            row = results[0] if isinstance(results[0], dict) else {}
+            if _content_matches(cite, json_dump_name(row)) or _party_score(cite, row.get("caseName") or "") > 0:
+                opinion_url = CL_ORIGIN + (row.get("absolute_url") or "")
+                if row.get("absolute_url"):
+                    return _result(
+                        "courtlistener",
+                        probe,
+                        matched=True,
+                        excerpt=_cl_excerpt(row),
+                        covers=covers,
+                        url=opinion_url,
+                        link_ok=True,
+                    )
+        if probe.get("http_status") == 200:
+            probe["ok"] = False
+            probe["error"] = "no_match"
+            return _result("courtlistener", probe, matched=False, covers=covers, url=None)
+
+    if probe.get("error") == "blocked" or probe.get("http_status") == 403:
+        return _result("courtlistener", probe, matched=False, covers=covers, url=None)
+    return _empty_result(
+        "courtlistener",
+        "",
+        probe.get("error") or "no citation-specific CourtListener result",
+        "no_match" if probe.get("http_status") == 200 else ("blocked" if probe.get("error") == "blocked" else "error"),
+        covers=covers,
     )
-    excerpt = _html_excerpt(probe.get("text") or "") if matched else ""
-    return _result("courtlistener", probe, matched=matched, excerpt=excerpt)
+
+
+def json_dump_name(row: dict[str, Any]) -> str:
+    return " ".join(
+        str(row.get(field) or "")
+        for field in ("caseName", "caseNameFull", "docketNumber")
+    )
+
+
+async def query_openjurist(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[str, Any]:
+    covers = source_covers("openjurist", cite)
+    url = openjurist_opinion_url(cite)
+    if not url:
+        return _empty_result(
+            "openjurist",
+            "",
+            "OpenJurist is not queried for this reporter",
+            "no_match",
+            covers=False,
+        )
+    probe = await probe_url(client, url, min_bytes=800)
+    blob = probe.get("text") or ""
+    excerpt = _html_excerpt(blob) if probe.get("ok") else ""
+    title_ok = False
+    if probe.get("ok") and blob:
+        lower = blob.lower()
+        parties = (cite.get("parties") or _catalog_for(cite).get("name") or "").lower()
+        key = (cite.get("key") or "").lower()
+        title_ok = bool(key and key in lower) or (
+            parties and " v." in parties and parties.split(" v.")[0].split()[-1] in lower
+        )
+    matched = bool(probe.get("ok")) and (title_ok or _content_matches(cite, excerpt) or len(excerpt) > 400)
+    return _result(
+        "openjurist",
+        probe,
+        matched=matched,
+        excerpt=excerpt,
+        covers=covers,
+        url=url if matched else None,
+        link_ok=matched,
+    )
 
 
 async def query_justia(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[str, Any]:
+    covers = source_covers("justia", cite)
     catalog = _catalog_for(cite)
     urls: list[str] = []
     if catalog.get("justia"):
         primary = catalog["justia"]
         urls.append(primary)
         urls.append("https://web.archive.org/web/2023/" + primary)
-    elif cite.get("kind") == "case" and "u.s." in (cite.get("reporter") or "").lower():
+    elif cite.get("kind") == "case" and _is_scotus_reporter(cite.get("reporter") or ""):
         primary = (
             f"https://supreme.justia.com/cases/federal/us/{cite.get('volume')}/{cite.get('page')}/"
         )
@@ -646,8 +947,16 @@ async def query_justia(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[
         urls.append(
             f"https://law.justia.com/codes/us/{cite['title']}/{cite['title']}usc{cite['section']}.html"
         )
-    else:
+    elif cite.get("kind") == "case":
         urls.append(f"https://law.justia.com/search?query={quote(cite.get('raw') or cite.get('key') or '')}")
+    else:
+        return _empty_result(
+            "justia",
+            "",
+            "Justia is not queried for this citation type",
+            "no_match",
+            covers=False,
+        )
 
     probe = await _first_ok(client, urls)
     excerpt = _html_excerpt(probe.get("text") or "") if probe.get("ok") else ""
@@ -658,35 +967,36 @@ async def query_justia(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[
     )
     if "search?" in (probe.get("requested_url") or "") and not _content_matches(cite, excerpt):
         matched = False
-    return _result("justia", probe, matched=matched, excerpt=excerpt)
+    return _result("justia", probe, matched=matched, excerpt=excerpt, covers=covers)
 
 
 async def query_govinfo(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[str, Any]:
-    if cite.get("kind") == "statute":
-        title, section = cite["title"], cite["section"]
-        urls = [
-            (
-                f"https://www.govinfo.gov/app/details/USCODE-2018-title{title}/"
-                f"USCODE-2018-title{title}-sec{section}"
-            ),
-            (
-                f"https://www.govinfo.gov/app/details/USCODE-2017-title{title}/"
-                f"USCODE-2017-title{title}-sec{section}"
-            ),
-        ]
-        probe = await _first_ok(client, urls, min_bytes=100)
-        matched = bool(probe.get("ok"))
-        return _result("govinfo", probe, matched=matched, excerpt="")
-
-    query = cite.get("key") or cite.get("raw") or ""
-    url = f"https://www.govinfo.gov/app/search?query={quote(query)}"
-    probe = await probe_url(client, url, min_bytes=50)
-    text = probe.get("text") or ""
-    matched = bool(probe.get("ok")) and _content_matches(cite, text)
-    return _result("govinfo", probe, matched=matched, excerpt=text[:400] if matched else "")
+    if cite.get("kind") != "statute":
+        return _empty_result(
+            "govinfo",
+            "",
+            "GovInfo is queried for statutes, not this citation type",
+            "no_match",
+            covers=False,
+        )
+    title, section = cite["title"], cite["section"]
+    urls = [
+        (
+            f"https://www.govinfo.gov/app/details/USCODE-2018-title{title}/"
+            f"USCODE-2018-title{title}-sec{section}"
+        ),
+        (
+            f"https://www.govinfo.gov/app/details/USCODE-2017-title{title}/"
+            f"USCODE-2017-title{title}-sec{section}"
+        ),
+    ]
+    probe = await _first_ok(client, urls, min_bytes=100)
+    matched = bool(probe.get("ok"))
+    return _result("govinfo", probe, matched=matched, excerpt="", covers=True)
 
 
 async def query_scotus(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[str, Any]:
+    covers = source_covers("supremecourt_gov", cite)
     catalog = _catalog_for(cite)
     if catalog.get("scotus_pdf"):
         probe = await probe_url(
@@ -696,7 +1006,15 @@ async def query_scotus(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[
             min_bytes=8_000,
         )
         matched = bool(probe.get("ok") and probe.get("is_pdf"))
-        return _result("supremecourt_gov", probe, matched=matched, excerpt="")
+        return _result("supremecourt_gov", probe, matched=matched, excerpt="", covers=covers)
+    if not covers:
+        return _empty_result(
+            "supremecourt_gov",
+            "",
+            "supremecourt.gov hosts slip opinions, not this reporter",
+            "no_match",
+            covers=False,
+        )
     oyez = catalog.get("oyez")
     if oyez and "-" in str(oyez[1]):
         docket = oyez[1]
@@ -706,12 +1024,13 @@ async def query_scotus(client: httpx.AsyncClient, cite: dict[str, Any]) -> dict[
         )
         probe = await probe_url(client, url, min_bytes=200)
         matched = bool(probe.get("ok")) and _content_matches(cite, probe.get("text") or "")
-        return _result("supremecourt_gov", probe, matched=matched, excerpt="")
+        return _result("supremecourt_gov", probe, matched=matched, excerpt="", covers=covers)
     return _empty_result(
         "supremecourt_gov",
-        "https://www.supremecourt.gov/opinions/opinions.aspx",
+        "",
         "no public slip-opinion URL for this citation",
         "no_match",
+        covers=covers,
     )
 
 
@@ -719,6 +1038,7 @@ SOURCE_QUERIES = (
     ("cornell_lii", query_cornell),
     ("oyez", query_oyez),
     ("courtlistener", query_courtlistener),
+    ("openjurist", query_openjurist),
     ("justia", query_justia),
     ("govinfo", query_govinfo),
     ("supremecourt_gov", query_scotus),
@@ -867,6 +1187,28 @@ def _human_review(detail: str) -> dict[str, Any]:
     )
 
 
+def _queried_names(source_results: list[dict[str, Any]]) -> str:
+    names = [item.get("name") or item.get("id") for item in source_results]
+    return ", ".join(str(name) for name in names if name)
+
+
+def _path_step(item: dict[str, Any]) -> dict[str, Any]:
+    if item.get("matched"):
+        what = "Returned a matching document."
+    elif not item.get("covers", True):
+        what = item.get("error") or "Outside this source's corpus."
+    else:
+        what = item.get("error") or item.get("status") or "No matching document"
+    url = item.get("url") if (item.get("matched") or item.get("link_ok")) else None
+    return {
+        "source": item.get("name") or item.get("id"),
+        "url": url,
+        "what": what,
+        "status": item.get("status"),
+        "http_status": item.get("http_status"),
+    }
+
+
 def _sources_reachable(source_results: list[dict[str, Any]]) -> bool:
     for item in source_results:
         if item.get("matched") or item.get("status") in {"ok", "no_match"}:
@@ -878,25 +1220,15 @@ def _sources_reachable(source_results: list[dict[str, Any]]) -> bool:
 
 def evaluate_citation(cite: dict[str, Any], source_results: list[dict[str, Any]], index: int) -> dict[str, Any]:
     hits = [item for item in source_results if item.get("matched")]
-    reachable = _sources_reachable(source_results)
-    path_steps = []
-    for item in source_results:
-        what = "Returned a matching document." if item.get("matched") else (
-            item.get("error") or item.get("status") or "No matching document"
-        )
-        path_steps.append(
-            {
-                "source": item.get("name") or item.get("id"),
-                "url": item.get("url") if item.get("matched") or item.get("http_status") else item.get("url"),
-                "what": what,
-                "status": item.get("status"),
-                "http_status": item.get("http_status"),
-            }
-        )
+    covering = [item for item in source_results if item.get("covers", True)]
+    reachable = _sources_reachable(covering if covering else source_results)
+    path_steps = [_path_step(item) for item in source_results]
+    authority_url = _best_authority_url(cite, hits)
 
     error = None
     error_message = None
     format_status, format_detail = _format_status(cite)
+    queried = _queried_names(source_results)
 
     if cite.get("kind") == "ambiguous":
         error = "ambiguous"
@@ -928,13 +1260,13 @@ def evaluate_citation(cite: dict[str, Any], source_results: list[dict[str, Any]]
         error_message = (
             "Source unavailable in the public corpus this check uses: magistrate/district docket numbers "
             "are not hosted as U.S. Reports, Cornell LII SCOTUS pages, Oyez, Justia SCOTUS, GovInfo statutes, "
-            "or supremecourt.gov slip opinions. The check did not silently pass."
+            "or supremecourt.gov slip opinions. CourtListener was queried when reachable. The check did not silently pass."
         )
         existence = _check(
             "existence",
             "needs-review",
-            "Existence could not be confirmed in the six public source families queried this run.",
-            {"checked": cite.get("raw"), "against": "Cornell LII, Oyez, CourtListener, Justia, GovInfo, supremecourt.gov"},
+            "Existence could not be confirmed in the public sources queried this run.",
+            {"checked": cite.get("raw"), "against": queried},
         )
         holding = _check(
             "holding_support",
@@ -945,21 +1277,21 @@ def evaluate_citation(cite: dict[str, Any], source_results: list[dict[str, Any]]
         path = _check(
             "verification_path",
             "fail",
-            "Verification path stopped: none of the six public sources returned this docket.",
-            {"checked": cite.get("raw"), "against": "Six public source families", "sourceUrl": None},
+            "Verification path stopped: none of the public sources returned this docket.",
+            {"checked": cite.get("raw"), "against": queried, "sourceUrl": None},
         )
         human = _human_review("When a source is outside the public corpus, a person must retrieve the document before relying on the cite.")
     elif not hits and not reachable:
         error = "source_unavailable"
         error_message = (
-            "Source unavailable: the public legal sources queried this run timed out, blocked the request, "
+            "Source unavailable: the public legal sources that cover this citation timed out, blocked the request, "
             "or returned errors. Existence was not treated as a silent pass or as proof the cite is fake."
         )
         existence = _check(
             "existence",
             "needs-review",
-            "Existence could not be confirmed because no public source returned a usable response.",
-            {"checked": cite.get("key") or cite.get("raw"), "against": "Six public source families (unreachable this run)"},
+            "Existence could not be confirmed because no covering public source returned a usable response.",
+            {"checked": cite.get("key") or cite.get("raw"), "against": queried + " (covering sources unreachable this run)"},
         )
         holding = _check(
             "holding_support",
@@ -970,21 +1302,21 @@ def evaluate_citation(cite: dict[str, Any], source_results: list[dict[str, Any]]
         path = _check(
             "verification_path",
             "fail",
-            "Verification path stopped: sources timed out, blocked, or errored.",
-            {"checked": cite.get("key") or cite.get("raw"), "against": "Six public source families"},
+            "Verification path stopped: covering sources timed out, blocked, or errored.",
+            {"checked": cite.get("key") or cite.get("raw"), "against": queried},
         )
         human = _human_review("When sources are down, a person must retrieve the opinion from another reporter before relying on the cite.")
     elif not hits:
         error = "not_found"
         error_message = (
-            "Citation not found: this reporter cite did not resolve in the public sources queried this run. "
-            "Invented or mistyped citations fail explicitly."
+            "Citation not found: this reporter cite did not resolve in the public sources that cover this "
+            "citation type. Invented or mistyped citations fail explicitly."
         )
         existence = _check(
             "existence",
             "fail",
-            "No matching decision or statute in the public sources that returned data this run.",
-            {"checked": cite.get("key") or cite.get("raw"), "against": "Cornell LII, Oyez, CourtListener, Justia, GovInfo, supremecourt.gov"},
+            "No matching decision or statute in the public sources that cover this citation and returned data this run.",
+            {"checked": cite.get("key") or cite.get("raw"), "against": queried},
         )
         holding = _check(
             "holding_support",
@@ -992,31 +1324,32 @@ def evaluate_citation(cite: dict[str, Any], source_results: list[dict[str, Any]]
             "No opinion was found, so the surrounding proposition is unsupported by this cite.",
             {"checked": cite.get("proposition") or "Surrounding proposition", "against": "No retrieved holding"},
         )
-        tried = ", ".join(item.get("name") or item.get("id") for item in source_results)
         path = _check(
             "verification_path",
             "fail",
-            f"Checked {cite.get('key') or cite.get('raw')} against {tried}. No record returned.",
-            {"checked": cite.get("key") or cite.get("raw"), "against": tried},
+            f"Checked {cite.get('key') or cite.get('raw')} against {queried}. No record returned.",
+            {"checked": cite.get("key") or cite.get("raw"), "against": queried},
         )
         human = _human_review(
             "A citation that does not exist must not be filed. A person should confirm whether this was a hallucination, a typo, or an unpublished disposition."
         )
     else:
         names = [item["name"] for item in hits]
-        primary = hits[0]
+        primary = next((item for item in hits if item.get("url") == authority_url), hits[0])
         existence = _check(
             "existence",
             "pass",
             f"{catalog_name(cite)} exists in at least one public source that returned HTTP 200 this run.",
-            {"checked": cite.get("key") or cite.get("raw"), "against": primary["name"], "sourceUrl": primary.get("url")},
+            {"checked": cite.get("key") or cite.get("raw"), "against": primary["name"], "sourceUrl": authority_url or primary.get("url")},
         )
         holding = _holding_support(cite, hits)
+        if authority_url and not holding.get("sourceUrl"):
+            holding["sourceUrl"] = authority_url
         path = _check(
             "verification_path",
             "pass",
-            "Checked against the six public source families. URLs below are the ones that actually returned a document.",
-            {"checked": cite.get("key") or cite.get("raw"), "against": ", ".join(names), "sourceUrl": primary.get("url")},
+            "Checked against the public sources listed below. Linked URLs are ones that returned a document or a resolved opinion page.",
+            {"checked": cite.get("key") or cite.get("raw"), "against": ", ".join(names), "sourceUrl": authority_url or primary.get("url")},
         )
         human = _human_review(
             "Even a passing existence check requires a person to confirm the pin cite, subsequent history, and that the proposition is not overstated before filing. OWL is not a citator product."
@@ -1050,6 +1383,7 @@ def evaluate_citation(cite: dict[str, Any], source_results: list[dict[str, Any]]
         "error": error,
         "errorMessage": error_message,
         "proposition": cite.get("proposition"),
+        "authority_url": authority_url,
         "verification_path": path_steps,
         "checks": checks,
         "sources": source_results,
@@ -1083,6 +1417,7 @@ def build_toa(citations: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "court": citation.get("court"),
                 "year": citation.get("year"),
                 "overall": overall_status(citation),
+                "url": citation.get("authority_url"),
             }
         )
     return [group for group in groups if group["entries"]]
@@ -1214,8 +1549,11 @@ async def verify_citations(text: str, matter_id: str | None = None) -> dict[str,
             "warning_banner": meta["warning_banner"],
             "default_selected": citations[0]["id"] if citations else None,
         }
+        fails = [item["id"] for item in citations if overall_status(item) == "fail"]
         flagged = [item["id"] for item in citations if overall_status(item) != "pass"]
-        if flagged:
+        if fails:
+            matter["default_selected"] = fails[0]
+        elif flagged:
             matter["default_selected"] = flagged[0]
 
     log.info(

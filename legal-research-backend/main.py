@@ -92,7 +92,7 @@ async def get_sources():
 
 @app.post("/api/verify/citations")
 async def verify_citations_endpoint(payload: VerifyCitationsRequest):
-    """Live citation checks against the six public legal source families."""
+    """Live citation checks against the public legal sources listed in sources_queried."""
     return await verify_citations(payload.text, payload.matter_id)
 
 

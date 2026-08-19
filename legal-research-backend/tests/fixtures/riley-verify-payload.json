@@ -56,16 +56,19 @@
       "court": "1st Cir.",
       "year": 2013,
       "toa_group": "courts_of_appeals",
-      "error": "not_found",
-      "errorMessage": "Citation not found in the public sources queried this run.",
+      "error": null,
+      "authority_url": "https://www.courtlistener.com/opinion/870435/united-states-v-wurie/",
       "proposition": "The First Circuit reached the same conclusion for a flip phone seized at arrest.",
-      "verification_path": [{ "source": "CourtListener", "what": "No record returned", "url": "https://www.courtlistener.com/c/F.3d/728/1/" }],
+      "verification_path": [
+        { "source": "CourtListener / Free Law Project", "what": "Returned a matching document.", "url": "https://www.courtlistener.com/opinion/870435/united-states-v-wurie/", "status": "ok", "http_status": 200 },
+        { "source": "OpenJurist", "what": "Returned a matching document.", "url": "https://openjurist.org/728/f3d/1", "status": "ok", "http_status": 200 }
+      ],
       "checks": [
-        { "id": "existence", "label": "Existence", "status": "fail", "detail": "No matching decision in the public sources that returned data this run.", "checked": "728 F.3d 1", "against": "Cornell LII, Oyez, CourtListener, Justia, GovInfo, supremecourt.gov" },
+        { "id": "existence", "label": "Existence", "status": "pass", "detail": "Found in a public source.", "checked": "728 F.3d 1", "against": "CourtListener / Free Law Project", "sourceUrl": "https://www.courtlistener.com/opinion/870435/united-states-v-wurie/" },
         { "id": "citation_format", "label": "Citation format", "status": "pass", "detail": "Reporter cite is complete.", "checked": "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)", "against": "Bluebook-style volume / reporter / page" },
-        { "id": "holding_support", "label": "Holding support", "status": "fail", "detail": "No opinion was found, so the surrounding proposition is unsupported by this cite.", "checked": "flip phone seized at arrest", "against": "No retrieved holding" },
-        { "id": "verification_path", "label": "Verification path", "status": "fail", "detail": "No record returned.", "checked": "728 F.3d 1", "against": "six public source families" },
-        { "id": "human_review_flag", "label": "Human review flag", "status": "needs-review", "detail": "A citation that does not exist must not be filed." }
+        { "id": "holding_support", "label": "Holding support", "status": "needs-review", "detail": "Person must confirm the proposition.", "checked": "flip phone seized at arrest", "against": "Fetched public source text", "sourceUrl": "https://www.courtlistener.com/opinion/870435/united-states-v-wurie/" },
+        { "id": "verification_path", "label": "Verification path", "status": "pass", "detail": "Public source returned a document.", "checked": "728 F.3d 1", "against": "CourtListener / Free Law Project, OpenJurist" },
+        { "id": "human_review_flag", "label": "Human review flag", "status": "needs-review", "detail": "A person must review this result before filing." }
       ]
     },
     {
@@ -101,7 +104,7 @@
       "id": "courts_of_appeals",
       "label": "Courts of Appeals",
       "entries": [
-        { "citationId": "united-states-v-wurie-728-f-3d-1-1st-cir-5", "cite": "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)", "court": "1st Cir.", "year": 2013, "overall": "fail" }
+        { "citationId": "united-states-v-wurie-728-f-3d-1-1st-cir-5", "cite": "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)", "court": "1st Cir.", "year": 2013, "overall": "needs-review", "url": "https://www.courtlistener.com/opinion/870435/united-states-v-wurie/" }
       ]
     },
     {
@@ -115,7 +118,8 @@
   "sources_queried": [
     { "id": "cornell_lii", "name": "Cornell LII", "status": "ok" },
     { "id": "oyez", "name": "Oyez", "status": "ok" },
-    { "id": "courtlistener", "name": "CourtListener", "status": "no_match" },
+    { "id": "courtlistener", "name": "CourtListener", "status": "ok" },
+    { "id": "openjurist", "name": "OpenJurist", "status": "ok" },
     { "id": "justia", "name": "Justia", "status": "ok" },
     { "id": "govinfo", "name": "GovInfo", "status": "no_match" },
     { "id": "supremecourt_gov", "name": "supremecourt.gov", "status": "ok" }

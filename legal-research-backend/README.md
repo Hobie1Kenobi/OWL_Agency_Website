@@ -17,7 +17,8 @@ Multi-agent paralegal API for the **Carpenter v. United States** demo.
 
 - **Cornell LII** — opinions, U.S. Code, rules
 - **Oyez** — SCOTUS metadata (public JSON API)
-- **CourtListener** — public opinion pages (Free Law Project)
+- **CourtListener** — REST citation search (`/api/rest/v4/search/`). HTML pages are often blocked from server IPs; the JSON API is the live retrieval path. Optional `COURTLISTENER_API_TOKEN`.
+- **OpenJurist** — federal reporter pages (`openjurist.org/{volume}/{reporter}/{page}`)
 - **Justia** — case summaries
 - **GovInfo** — federal statutes
 - **SupremeCourt.gov** — slip opinions
