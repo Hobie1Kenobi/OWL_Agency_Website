@@ -1,3 +1,4 @@
+import json
 import unittest
 
 from services.citation_parser import infer_toa_group, parse_citations
@@ -38,6 +39,25 @@ class CitationParserTests(unittest.TestCase):
         self.assertEqual(kinds["442 U.S."], "ambiguous")
         carpenter = next(item for item in found if item["key"] == "585 U.S. 946")
         self.assertIn("without a warrant", carpenter["proposition"] or "")
+
+    def test_riley_excerpt_spans_are_the_cite_not_the_sentence(self):
+        from pathlib import Path
+
+        pack_path = Path(__file__).resolve().parents[2] / "assets" / "data" / "verify-matters" / "riley.json"
+        pack = json.loads(pack_path.read_text(encoding="utf-8"))
+        found = parse_citations(pack["excerpt"])
+        keys = {item["key"] for item in found}
+        self.assertIn("395 U.S. 752", keys)
+        self.assertIn("573 U.S. 373", keys)
+        self.assertIn("728 F.3d 1", keys)
+        self.assertIn("Fed. R. Crim. P. 41", keys)
+        chimel = next(item for item in found if item["key"] == "395 U.S. 752")
+        self.assertEqual(chimel["span"], "Chimel v. California, 395 U.S. 752 (1969)")
+        self.assertNotIn("specifically established", chimel["span"])
+        riley = next(item for item in found if item["key"] == "573 U.S. 373")
+        self.assertEqual(riley["span"], "Riley v. California, 573 U.S. 373 (2014)")
+        wurie = next(item for item in found if item["key"] == "728 F.3d 1")
+        self.assertEqual(wurie["span"], "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)")
 
     def test_toa_groups(self):
         found = parse_citations(CARPENTER_EXCERPT)

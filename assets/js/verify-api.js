@@ -73,8 +73,50 @@
     return 'unresolved';
   }
 
+  function asCheckList(checks) {
+    if (Array.isArray(checks)) {
+      return checks.map(coerceCheck).filter(Boolean);
+    }
+    if (typeof checks === 'string' && checks) {
+      return [coerceCheck(checks)];
+    }
+    if (checks && typeof checks === 'object') {
+      return Object.keys(checks).map(function (key) {
+        var item = checks[key];
+        if (item && typeof item === 'object' && !item.id) item.id = key;
+        return coerceCheck(item == null ? key : item);
+      }).filter(Boolean);
+    }
+    return [];
+  }
+
+  function coerceCheck(check) {
+    if (check && typeof check === 'object') {
+      return {
+        id: check.id || 'unknown',
+        label: check.label || check.id || 'Check',
+        status: check.status || 'needs-review',
+        detail: check.detail == null ? '' : String(check.detail),
+        checked: check.checked == null ? '' : String(check.checked),
+        against: check.against == null ? '' : String(check.against),
+        sourceUrl: check.sourceUrl || null
+      };
+    }
+    if (check == null || check === '') return null;
+    return {
+      id: 'unknown',
+      label: 'Check',
+      status: 'needs-review',
+      detail: String(check),
+      checked: '',
+      against: '',
+      sourceUrl: null
+    };
+  }
+
   function overallStatus(citation) {
-    var substantive = (citation.checks || []).filter(function (item) {
+    if (!citation || typeof citation !== 'object') return 'needs-review';
+    var substantive = asCheckList(citation.checks).filter(function (item) {
       return item.id !== 'human_review_flag';
     });
     if (citation.error === 'not_found' || substantive.some(function (item) { return item.status === 'fail'; })) {
@@ -103,13 +145,50 @@
     return (base || 'cite') + '-' + index;
   }
 
+  function reviewOnlyChecks(detail) {
+    var message = detail || 'This citation row was incomplete and needs human review.';
+    return [
+      check('existence', 'needs-review', message, {}),
+      check('citation_format', 'needs-review', message, {}),
+      check('holding_support', 'needs-review', message, {}),
+      check('verification_path', 'needs-review', message, {}),
+      humanReview(message)
+    ];
+  }
+
   function ensureCitationShape(citation, index) {
-    var copy = citation || {};
+    if (!citation || typeof citation !== 'object') {
+      return ensureCitationShape({
+        raw: citation == null ? '' : String(citation),
+        error: 'source_unavailable',
+        errorMessage: 'This citation row was malformed and was sent to human review instead of failing the workspace.'
+      }, index);
+    }
+    var copy = {};
+    Object.keys(citation).forEach(function (key) {
+      copy[key] = citation[key];
+    });
+    var text = copy.normalized || copy.raw || copy.span || copy.citation || '';
+    if (!text) {
+      copy.error = copy.error || 'source_unavailable';
+      copy.errorMessage = copy.errorMessage || 'Citation text was missing; flagged for human review.';
+      text = 'Citation missing text';
+    }
+    copy.raw = copy.raw || copy.citation || text;
+    copy.normalized = copy.normalized || copy.raw || text;
     copy.id = copy.id || slugId(copy.normalized || copy.raw, index);
     copy.span = copy.span || copy.raw || copy.normalized || '';
     copy.toa_group = inferToaGroup(copy);
-    if (!copy.verification_path || !copy.verification_path.length) {
-      copy.verification_path = [];
+    if (!Array.isArray(copy.verification_path)) {
+      copy.verification_path = copy.verification_path ? [].concat(copy.verification_path) : [];
+    }
+    copy.checks = asCheckList(copy.checks);
+    if (!copy.checks.length) {
+      copy.checks = reviewOnlyChecks(
+        copy.errorMessage || 'Checks were missing for this cite; flagged for human review.'
+      );
+      copy.error = copy.error || 'source_unavailable';
+      copy.errorMessage = copy.errorMessage || 'Checks were missing for this cite; flagged for human review.';
     }
     return copy;
   }
@@ -194,16 +273,20 @@
   }
 
   function normalizeLivePayload(data, text, matterId) {
-    if (!data || !Array.isArray(data.citations)) {
+    if (!data || (data.citations == null)) {
+      throw new Error('Live verify returned no citations array');
+    }
+    var rawList = Array.isArray(data.citations) ? data.citations : [data.citations];
+    if (!rawList.length) {
       throw new Error('Live verify returned no citations array');
     }
     data.mode = 'live';
     data.input = text;
-    data.excerpt = data.excerpt || text;
-    data.citations = data.citations.map(ensureCitationShape);
-    data.toa = data.toa && data.toa.length ? data.toa : buildToa(data.citations);
-    data.audit = data.audit && data.audit.length ? data.audit : buildAudit(data.citations);
-    data.sources_queried = data.sources_queried || [];
+    data.excerpt = data.excerpt || text || '';
+    data.citations = rawList.map(ensureCitationShape);
+    data.toa = Array.isArray(data.toa) && data.toa.length ? data.toa : buildToa(data.citations);
+    data.audit = Array.isArray(data.audit) && data.audit.length ? data.audit : buildAudit(data.citations);
+    data.sources_queried = Array.isArray(data.sources_queried) ? data.sources_queried : [];
     if (typeof data.matter === 'undefined' || data.matter === null) {
       var pack = packCache.byId[matterId];
       data.matter = pack ? {
@@ -322,6 +405,7 @@
     isFlagged: isFlagged,
     buildToa: buildToa,
     buildAudit: buildAudit,
+    ensureCitationShape: ensureCitationShape,
     sourcesDown: sourcesDown
   };
 })(window);

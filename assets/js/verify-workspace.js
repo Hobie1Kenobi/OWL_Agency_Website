@@ -19,6 +19,30 @@
       .replace(/"/g, '&quot;');
   }
 
+  function asArray(value) {
+    if (Array.isArray(value)) return value;
+    if (value == null || value === '') return [];
+    if (typeof value === 'object') {
+      if (Array.isArray(value.groups)) return value.groups;
+      if (Array.isArray(value.entries)) return [value];
+      return Object.keys(value).map(function (key) { return value[key]; });
+    }
+    return [];
+  }
+
+  function asCheck(check) {
+    if (check && typeof check === 'object') return check;
+    return {
+      id: 'unknown',
+      label: 'Check',
+      status: 'needs-review',
+      detail: check == null ? 'This check was malformed and needs human review.' : String(check),
+      checked: '',
+      against: '',
+      sourceUrl: null
+    };
+  }
+
   function statusLabel(status) {
     if (status === 'pass' || status === 'ok') return 'Pass';
     if (status === 'fail') return 'Fail';
@@ -30,12 +54,16 @@
   }
 
   function renderSourceChips(sources) {
-    if (!sources || !sources.length) {
+    var list = asArray(sources);
+    if (!list.length) {
       return '<p class="small text-muted mb-0">No source-family status was returned for this run.</p>';
     }
     return (
       '<ul class="verify-source-chips">' +
-        sources.map(function (source) {
+        list.map(function (source) {
+          if (!source || typeof source !== 'object') {
+            return '<li class="verify-chip is-down"><span>Unknown source</span><span class="verify-chip-status">Needs review</span></li>';
+          }
           var cls = source.status === 'ok' ? 'is-ok' : 'is-down';
           var extra = source.http_status
             ? ' HTTP ' + source.http_status
@@ -52,9 +80,9 @@
   }
 
   function citationById(id) {
-    var list = (state.payload && state.payload.citations) || [];
+    var list = asArray(state.payload && state.payload.citations);
     for (var i = 0; i < list.length; i++) {
-      if (list[i].id === id) return list[i];
+      if (list[i] && list[i].id === id) return list[i];
     }
     return null;
   }
@@ -77,11 +105,20 @@
   function highlightExcerpt(excerpt, citations) {
     var text = excerpt || '';
     var hits = [];
-    (citations || []).forEach(function (citation) {
-      var span = citation.span || citation.raw || citation.normalized;
-      if (!span) return;
-      var start = text.indexOf(span);
-      if (start === -1) return;
+    asArray(citations).forEach(function (citation) {
+      if (!citation || typeof citation !== 'object') return;
+      var candidates = [citation.normalized, citation.raw, citation.span].filter(Boolean);
+      candidates.sort(function (a, b) { return a.length - b.length; });
+      var span = '';
+      var start = -1;
+      for (var i = 0; i < candidates.length; i++) {
+        start = text.indexOf(candidates[i]);
+        if (start !== -1) {
+          span = candidates[i];
+          break;
+        }
+      }
+      if (start === -1 || !span || !citation.id) return;
       hits.push({ start: start, end: start + span.length, citation: citation });
     });
     hits.sort(function (a, b) { return a.start - b.start; });
@@ -109,6 +146,7 @@
   }
 
   function renderCheck(check) {
+    check = asCheck(check);
     var path = '';
     if (check.checked || check.against) {
       path =
@@ -132,13 +170,16 @@
   }
 
   function renderPathSteps(citation) {
-    var steps = citation.verification_path || [];
+    var steps = asArray(citation && citation.verification_path);
     if (!steps.length) {
       return '<p class="small text-muted mb-0">No verification-path steps were recorded for this cite.</p>';
     }
     return (
       '<ol class="verify-path-steps">' +
         steps.map(function (step) {
+          if (!step || typeof step !== 'object') {
+            return '<li><span>' + escapeHtml(step) + '</span></li>';
+          }
           var source = step.url
             ? '<a href="' + escapeHtml(step.url) + '" rel="noopener noreferrer">' + escapeHtml(step.source || 'Public source') + '</a>'
             : escapeHtml(step.source || 'Public source');
@@ -171,7 +212,7 @@
         (meta.length ? '<p class="verify-raw">' + meta.join(' · ') + '</p>' : '') +
         (citation.proposition ? '<p class="verify-proposition"><span>Proposition checked:</span> ' + escapeHtml(citation.proposition) + '</p>' : '') +
         errorBanner(citation) +
-        '<ol class="verify-checks">' + (citation.checks || []).map(renderCheck).join('') + '</ol>' +
+        '<ol class="verify-checks">' + asArray(citation.checks).map(renderCheck).join('') + '</ol>' +
         '<details class="verify-path-panel mt-3"' + (overall === 'fail' ? ' open' : '') + '>' +
           '<summary>Verification path</summary>' +
           renderPathSteps(citation) +
@@ -182,18 +223,20 @@
   }
 
   function renderToa(payload) {
-    var groups = payload.toa || [];
+    var groups = asArray(payload && payload.toa);
     if (!groups.length) {
       return '<p class="text-muted mb-0">No Table of Authorities could be built from this result set.</p>';
     }
     return groups.map(function (group) {
-      var rows = (group.entries || []).map(function (entry) {
+      if (!group || typeof group !== 'object') return '';
+      var rows = asArray(group.entries).map(function (entry) {
+        if (!entry || typeof entry !== 'object') return '';
         var selected = entry.citationId === state.selectedId;
         return (
           '<tr class="' + (selected ? 'is-selected' : '') + '">' +
             '<td>' +
               '<button type="button" class="verify-toa-link" data-cite-id="' + escapeHtml(entry.citationId) + '">' +
-                escapeHtml(entry.cite) +
+                escapeHtml(entry.cite || 'Citation') +
               '</button>' +
             '</td>' +
             '<td>' + escapeHtml(entry.court || '—') + '</td>' +
@@ -217,12 +260,14 @@
   }
 
   function renderQueue(payload) {
-    var flagged = (payload.citations || []).filter(api.isFlagged);
+    var flagged = asArray(payload && payload.citations).filter(function (citation) {
+      return citation && typeof citation === 'object' && api.isFlagged(citation);
+    });
     if (!flagged.length) {
       return '<p class="mb-0">No existence, format, holding-support, or source failures in this SAMPLE. A person still reviews every cite before filing — the human-review flag remains on each card.</p>';
     }
     return (
-          <p class="small text-muted mb-0">These are the cites a person should review before filing: fails and holding/source issues. Human must review before filing. OWL is not a paralegal replacement.</p>
+      '<p class="small text-muted mb-0">These are the cites a person should review before filing: fails and holding/source issues. Human must review before filing. OWL is not a paralegal replacement.</p>' +
       '<ul class="verify-queue-list">' +
         flagged.map(function (citation) {
           var overall = api.overallStatus(citation);
@@ -233,7 +278,7 @@
                 (selected ? ' is-selected' : '') +
                 '" data-cite-id="' + escapeHtml(citation.id) + '">' +
                 '<span class="verify-pill">' + escapeHtml(statusLabel(overall)) + '</span>' +
-                '<span>' + escapeHtml(citation.normalized || citation.raw) + '</span>' +
+                '<span>' + escapeHtml(citation.normalized || citation.raw || 'Citation') + '</span>' +
               '</button>' +
             '</li>'
           );
@@ -279,7 +324,8 @@
   }
 
   function checkRows(citation) {
-    return (citation.checks || []).map(function (check) {
+    return asArray(citation && citation.checks).map(function (check) {
+      check = asCheck(check);
       return (
         '<tr>' +
           '<td>' + escapeHtml(check.label) + '</td>' +
@@ -291,7 +337,8 @@
   }
 
   function buildReportHtml(payload) {
-    var blocks = (payload.citations || []).map(function (citation) {
+    var blocks = asArray(payload.citations).map(function (citation) {
+      if (!citation || typeof citation !== 'object') return '';
       var overall = api.overallStatus(citation);
       var cls = overall === 'pass' ? 'pass' : overall === 'fail' ? 'fail' : 'review';
       return (
@@ -309,7 +356,9 @@
   }
 
   function buildFlaggedHtml(payload) {
-    var flagged = (payload.citations || []).filter(api.isFlagged);
+    var flagged = asArray(payload.citations).filter(function (citation) {
+      return citation && typeof citation === 'object' && api.isFlagged(citation);
+    });
     var body;
     if (!flagged.length) {
       body = '<p>No flagged authorities in this SAMPLE beyond the standing instruction that a person reviews every cite before filing.</p>';
@@ -367,7 +416,7 @@
     }
     var chipsEl = document.getElementById('verify-source-chips');
     if (chipsEl) {
-      chipsEl.innerHTML = renderSourceChips(payload.sources_queried || []);
+      chipsEl.innerHTML = renderSourceChips(payload.sources_queried);
     }
     if (banner) {
       if (payload.matter && payload.matter.warning_banner) {
@@ -379,7 +428,7 @@
       }
     }
     if (excerptEl) {
-      excerptEl.innerHTML = highlightExcerpt(payload.excerpt || payload.input || '', payload.citations || []);
+      excerptEl.innerHTML = highlightExcerpt(payload.excerpt || payload.input || '', payload.citations);
     }
     if (detailEl) {
       detailEl.innerHTML = renderDetail(citationById(state.selectedId));
@@ -402,22 +451,32 @@
     if (payload.matter && payload.matter.default_selected && citationById(payload.matter.default_selected)) {
       return payload.matter.default_selected;
     }
-    var flagged = (payload.citations || []).filter(api.isFlagged);
+    var flagged = asArray(payload.citations).filter(function (citation) {
+      return citation && typeof citation === 'object' && api.isFlagged(citation);
+    });
     if (flagged.length) return flagged[0].id;
-    return payload.citations && payload.citations[0] ? payload.citations[0].id : null;
+    var first = asArray(payload.citations)[0];
+    return first && first.id ? first.id : null;
   }
 
   function render(payload) {
-    state.payload = payload;
-    state.selectedId = null;
-    if (!payload || !payload.citations || !payload.citations.length) {
-      root.hidden = true;
+    try {
+      state.payload = payload;
+      state.selectedId = null;
+      if (!payload || !asArray(payload.citations).length) {
+        root.hidden = true;
+        return false;
+      }
+      root.hidden = false;
+      state.selectedId = defaultSelected(payload);
+      paint();
+      return true;
+    } catch (err) {
+      try {
+        root.hidden = true;
+      } catch (hideErr) {}
       return false;
     }
-    root.hidden = false;
-    state.selectedId = defaultSelected(payload);
-    paint();
-    return true;
   }
 
   root.addEventListener('click', function (event) {

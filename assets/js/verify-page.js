@@ -74,7 +74,12 @@
       showEmptyFailure('No verification result was returned. The check did not fail silently — try again or contact OWL.');
       return;
     }
-    var rendered = workspace ? workspace.render(payload) : false;
+    var rendered = false;
+    try {
+      rendered = workspace ? workspace.render(payload) : false;
+    } catch (err) {
+      rendered = false;
+    }
     if (!rendered && resultsEl) {
       resultsEl.hidden = false;
       resultsEl.innerHTML = '<div class="verify-error" role="alert">The workspace could not render this result. The check did not fail silently.</div>';
