@@ -149,7 +149,7 @@
     setBusy(true);
     lastFailure = null;
     if (offlineBtn) offlineBtn.hidden = true;
-    setStatus('info', 'Checking Cornell LII, CourtListener, Oyez, Justia, GovInfo, Supreme Court…');
+    setStatus('info', 'Checking Cornell LII, CourtListener, OpenJurist, Oyez, Justia, GovInfo, Supreme Court…');
     if (convertEl) convertEl.hidden = true;
     startAnalytics(selectedMatterId || 'verify_live');
     api.verify(text, selectedMatterId).then(handlePayload).catch(handleFailure).then(function () {

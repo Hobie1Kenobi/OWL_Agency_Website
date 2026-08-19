@@ -4,7 +4,11 @@ Public legal data connectors — no API keys required.
 Sources used:
   - Cornell LII (law.cornell.edu) — opinions, U.S. Code, Constitution
   - Oyez (oyez.org / api.oyez.org) — Supreme Court metadata
-  - CourtListener (storage.courtlistener.com) — public opinion PDFs
+  - CourtListener REST API (www.courtlistener.com/api/rest/v4/search/) —
+    citation lookup for F.3d / F.2d / F.4th / U.S. / F. Supp. HTML pages
+    are WAF-blocked from datacenter IPs; the JSON API is the live path.
+    Optional COURTLISTENER_API_TOKEN / COURTLISTENER_TOKEN raises rate limits.
+  - OpenJurist (openjurist.org/{vol}/{reporter}/{page}) — federal reporter pages
   - Justia (supreme.justia.com) — case summaries (Wayback mirror fallback)
   - GovInfo (govinfo.gov) — federal statutes
   - Supreme Court (supremecourt.gov) — official slip opinions
@@ -63,6 +67,13 @@ PUBLIC_LEGAL_SOURCES = [
         "url": "https://www.courtlistener.com",
         "requires_api_key": False,
         "data_types": ["opinions", "dockets", "citations"],
+    },
+    {
+        "id": "openjurist",
+        "name": "OpenJurist",
+        "url": "https://openjurist.org",
+        "requires_api_key": False,
+        "data_types": ["opinions", "federal_reporter"],
     },
     {
         "id": "justia",

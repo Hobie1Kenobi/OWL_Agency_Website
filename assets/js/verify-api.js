@@ -178,6 +178,7 @@
     copy.normalized = copy.normalized || copy.raw || text;
     copy.id = copy.id || slugId(copy.normalized || copy.raw, index);
     copy.span = copy.span || copy.raw || copy.normalized || '';
+    copy.authority_url = copy.authority_url || copy.authorityUrl || null;
     copy.toa_group = inferToaGroup(copy);
     if (!Array.isArray(copy.verification_path)) {
       copy.verification_path = copy.verification_path ? [].concat(copy.verification_path) : [];
@@ -206,7 +207,8 @@
         cite: citation.normalized || citation.raw,
         court: citation.court || null,
         year: citation.year || null,
-        overall: overallStatus(citation)
+        overall: overallStatus(citation),
+        url: citation.authority_url || citation.authorityUrl || null
       });
     });
     return groups.filter(function (group) { return group.entries.length; });
