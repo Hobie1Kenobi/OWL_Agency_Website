@@ -113,6 +113,67 @@ async def _get(
     return None
 
 
+async def probe_url(
+    client: httpx.AsyncClient,
+    url: str,
+    *,
+    accept: str | None = None,
+    min_bytes: int = 200,
+) -> dict[str, Any]:
+    """Fetch a URL and return status details (never raises)."""
+    headers = _default_headers(accept) if accept else _default_headers()
+    try:
+        response = await client.get(url, headers=headers, follow_redirects=True)
+        content_type = response.headers.get("content-type", "")
+        is_pdf = "pdf" in content_type.lower() or response.content[:4] == b"%PDF"
+        ok = response.status_code == 200 and len(response.content) >= min_bytes
+        text = ""
+        if ok and not is_pdf:
+            text = response.text
+        error = None
+        if response.status_code == 403:
+            error = "blocked"
+        elif response.status_code >= 400:
+            error = f"HTTP {response.status_code}"
+        elif not ok:
+            error = "empty"
+        return {
+            "ok": ok,
+            "http_status": response.status_code,
+            "url": str(response.url),
+            "requested_url": url,
+            "text": text,
+            "bytes": len(response.content),
+            "content_type": content_type,
+            "is_pdf": is_pdf,
+            "error": error,
+        }
+    except httpx.TimeoutException:
+        return {
+            "ok": False,
+            "http_status": None,
+            "url": url,
+            "requested_url": url,
+            "text": "",
+            "bytes": 0,
+            "content_type": "",
+            "is_pdf": False,
+            "error": "timeout",
+        }
+    except httpx.HTTPError as exc:
+        return {
+            "ok": False,
+            "http_status": None,
+            "url": url,
+            "requested_url": url,
+            "text": "",
+            "bytes": 0,
+            "content_type": "",
+            "is_pdf": False,
+            "error": str(exc)[:180],
+        }
+
+
 def _extract_html_text(soup: BeautifulSoup, *selectors: str) -> str:
     for selector in selectors:
         node = soup.select_one(selector)

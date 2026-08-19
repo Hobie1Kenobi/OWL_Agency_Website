@@ -21,6 +21,8 @@ from data import load_case
 from models.demo_lead import DemoLeadResponse, DemoLeadSubmit
 from models.intake import IntakeResponse, LegalResearchIntake
 from models.project import PaymentConfirmRequest, PaymentIntentRequest, ResearchQueryRequest
+from models.verify import VerifyCitationsRequest
+from services.citation_verify import verify_citations
 from services.demo_lead_service import submit_demo_lead
 from services.intake_service import get_intake, submit_intake
 from services.legal_sources import list_public_sources
@@ -86,6 +88,12 @@ async def get_tier_detail(plan: str):
 @app.get("/api/sources")
 async def get_sources():
     return {"sources": list_public_sources()}
+
+
+@app.post("/api/verify/citations")
+async def verify_citations_endpoint(payload: VerifyCitationsRequest):
+    """Live citation checks against the six public legal source families."""
+    return await verify_citations(payload.text, payload.matter_id)
 
 
 @app.get("/api/cases")

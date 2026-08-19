@@ -1,0 +1,10 @@
+{
+  "id": "katz",
+  "title": "SAMPLE — Katz reasonable-expectation excerpt",
+  "matter_name": "SAMPLE — Electronic surveillance excerpt (Katz line)",
+  "practice_area": "Criminal procedure / Fourth Amendment",
+  "warning_banner": "SAMPLE excerpt. Not a real filing. Not legal advice. OWL is a verification layer, not an AI lawyer. Human review of every output is required.",
+  "detect_tokens": ["Katz v. United States", "Kyllo v. United States"],
+  "expected_flags": [],
+  "excerpt": "SAMPLE — NOT A REAL FILING\nUnited States District Court, [Sample Jurisdiction]\n\nMEMORANDUM IN SUPPORT OF MOTION TO SUPPRESS ELECTRONIC SURVEILLANCE\n(SAMPLE excerpt for citation verification only. Not legal advice. Not a court filing.)\n\nI. The Fourth Amendment protects people, not places.\n\nEarly telephone-wiretap law treated the absence of a physical trespass as decisive. Olmstead v. United States, 277 U.S. 438 (1928). Later cases still asked whether the government had occupied a constitutionally protected area. Silverman v. United States, 365 U.S. 505 (1961).\n\nThat property-only approach does not decide this SAMPLE. The Fourth Amendment protects people, not places. Katz v. United States, 389 U.S. 347 (1967). A person who occupies a telephone booth and shuts the door may have a reasonable expectation of privacy in the conversation even if the booth is in public view.\n\nLater cases test the limits of that expectation. A conversation with a false friend who is wired for sound may fall outside Katz. United States v. White, 401 U.S. 745 (1971). Sense-enhancing technology that reveals details of a home that would otherwise require physical intrusion can be a search. Kyllo v. United States, 533 U.S. 27 (2001). Numbers dialed to a telephone company raised a third-party question. Smith v. Maryland, 442 U.S. 735 (1979).\n\nInterception of wire communications is also addressed by statute. 18 U.S.C. § 2511. Warrant practice remains governed in part by Fed. R. Crim. P. 41. The constitutional baseline is U.S. Const. amend. IV.\n"
+}

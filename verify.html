@@ -134,7 +134,7 @@
   <div class="container">
     <p class="mb-2"><span class="badge bg-light text-dark">No signup · No card · First check free</span></p>
     <h1>Verify citations before you file them</h1>
-    <p class="lead mb-0">Legal AI should not just answer. It should verify. Paste a citation, or load a SAMPLE brief excerpt with clickable cites, five checks, a Table of Authorities, and a downloadable verification report. Failures are explicit: missing, wrong proposition, ambiguous, or source down.</p>
+    <p class="lead mb-0">Legal AI should not just answer. It should verify. Load one of five SAMPLE matters, or paste a citation. OWL queries public legal sources and runs five checks, a Table of Authorities, and a human-review flag. Failures are explicit. Verification is not legal advice.</p>
   </div>
 </section>
 
@@ -149,21 +149,16 @@
             <textarea class="form-control" id="citation-input" name="citation" rows="8" required placeholder="Example: Carpenter v. United States, 585 U.S. 946 (2018)"></textarea>
             <div class="verify-actions">
               <!-- analytics: verify_started / verify_completed fire from verify-page.js -->
-              <button type="submit" class="btn btn-primary" id="verify-submit" data-owl-label="verify_started">Run five checks</button>
-              <button type="button" class="btn btn-outline-primary" data-verify-prefill="carpenter">Try Carpenter v. United States</button>
+              <button type="submit" class="btn btn-primary" id="verify-submit" data-owl-label="verify_started">Run verification</button>
+              <button type="button" class="btn btn-outline-secondary" id="verify-offline-preview" hidden>Offline sample preview (not live)</button>
             </div>
           </form>
         </div>
         <div class="col-lg-5">
-          <h2 class="h4 mb-3" id="sample-heading">Load a sample matter</h2>
-          <p class="small text-muted">SAMPLE excerpts, not real filings. Each pack runs the same five checks a person would want on a working copy.</p>
+          <h2 class="h4 mb-3" id="sample-heading">Five SAMPLE matters</h2>
+          <p class="small text-muted">Each button loads a SAMPLE excerpt — not a real filing. Select a matter, then run verification. The backend queries public sources; this page does not display a canned mock report as live.</p>
           <div id="verify-matter-buttons" class="verify-actions" aria-labelledby="sample-heading"></div>
-          <p class="small text-muted mt-3 mb-1">Paste-mode failure states (not silent):</p>
-          <div class="verify-prefills">
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="not_found">Citation not found</button>
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="ambiguous">Ambiguous citation</button>
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-verify-prefill="source_unavailable">Source unavailable</button>
-          </div>
+          <p class="small text-muted mt-3 mb-0">Carpenter’s SAMPLE plants a hallucinated cite, a real case used for the wrong holding, an ambiguous short form, and a docket outside the public reporter corpus so one run can show live hits and explicit failures together.</p>
         </div>
       </div>
       <div id="verify-status" class="verify-status" hidden role="status" aria-live="polite"></div>
@@ -172,7 +167,8 @@
     <section id="verify-results" class="mt-4" hidden aria-live="polite"></section>
 
     <section id="verify-workspace" class="verify-workspace mt-4" hidden>
-      <p class="verify-mode" id="verify-mode-note"></p>
+      '<p class="verify-mode" id="verify-mode-note"></p>
+      <div id="verify-source-chips" class="verify-source-chips-wrap" aria-label="Public sources queried"></div>
       <div id="verify-matter-banner" class="verify-banner" hidden></div>
       <div class="row g-4">
         <div class="col-lg-6">

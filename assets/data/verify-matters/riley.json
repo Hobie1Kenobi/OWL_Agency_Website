@@ -1,0 +1,10 @@
+{
+  "id": "riley",
+  "title": "SAMPLE — Riley cell-phone search excerpt",
+  "matter_name": "SAMPLE — Search-incident-to-arrest excerpt (Riley line)",
+  "practice_area": "Criminal procedure / Fourth Amendment",
+  "warning_banner": "SAMPLE excerpt. Not a real filing. Not legal advice. OWL is a verification layer, not an AI lawyer. Human review of every output is required.",
+  "detect_tokens": ["Riley v. California", "United States v. Wurie"],
+  "expected_flags": [],
+  "excerpt": "SAMPLE — NOT A REAL FILING\nUnited States District Court, [Sample Jurisdiction]\n\nMEMORANDUM IN SUPPORT OF MOTION TO SUPPRESS CELL-PHONE EVIDENCE\n(SAMPLE excerpt for citation verification only. Not legal advice. Not a court filing.)\n\nI. A warrant is required to search a cell phone incident to arrest.\n\nA search incident to arrest is a specifically established exception, but it is not unlimited. Chimel v. California, 395 U.S. 752 (1969). A custodial arrest may support a search of the person. United States v. Robinson, 414 U.S. 218 (1973). Vehicle searches incident to arrest are further limited once the arrestee is secured. Arizona v. Gant, 556 U.S. 332 (2009). Luggage and other containers taken from an arrestee's control raise still different questions. United States v. Chadwick, 433 U.S. 1 (1977).\n\nDigital data on a modern cell phone is not just another physical object in a pocket. A warrant is required to search the digital contents of a cell phone incident to arrest. Riley v. California, 573 U.S. 373 (2014). The First Circuit reached the same conclusion for a flip phone seized at arrest. United States v. Wurie, 728 F.3d 1 (1st Cir. 2013).\n\nThe exclusionary rule for federal officers has a long pedigree. Weeks v. United States, 232 U.S. 383 (1914). Warrant practice in criminal cases also implicates Fed. R. Crim. P. 41. The constitutional baseline remains U.S. Const. amend. IV.\n"
+}
