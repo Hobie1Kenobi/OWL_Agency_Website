@@ -1,0 +1,123 @@
+{
+  "mode": "live",
+  "excerpt": "SAMPLE — NOT A REAL FILING\nUnited States District Court, [Sample Jurisdiction]\n\nMEMORANDUM IN SUPPORT OF MOTION TO SUPPRESS CELL-PHONE EVIDENCE\n(SAMPLE excerpt for citation verification only. Not legal advice. Not a court filing.)\n\nI. A warrant is required to search a cell phone incident to arrest.\n\nA search incident to arrest is a specifically established exception, but it is not unlimited. Chimel v. California, 395 U.S. 752 (1969). A custodial arrest may support a search of the person. United States v. Robinson, 414 U.S. 218 (1973). Vehicle searches incident to arrest are further limited once the arrestee is secured. Arizona v. Gant, 556 U.S. 332 (2009). Luggage and other containers taken from an arrestee's control raise still different questions. United States v. Chadwick, 433 U.S. 1 (1977).\n\nDigital data on a modern cell phone is not just another physical object in a pocket. A warrant is required to search the digital contents of a cell phone incident to arrest. Riley v. California, 573 U.S. 373 (2014). The First Circuit reached the same conclusion for a flip phone seized at arrest. United States v. Wurie, 728 F.3d 1 (1st Cir. 2013).\n\nThe exclusionary rule for federal officers has a long pedigree. Weeks v. United States, 232 U.S. 383 (1914). Warrant practice in criminal cases also implicates Fed. R. Crim. P. 41. The constitutional baseline remains U.S. Const. amend. IV.\n",
+  "matter": {
+    "id": "riley",
+    "title": "SAMPLE — Riley cell-phone search excerpt",
+    "matter_name": "SAMPLE — Search-incident-to-arrest excerpt (Riley line)",
+    "practice_area": "Criminal procedure / Fourth Amendment",
+    "warning_banner": "SAMPLE excerpt. Not a real filing. Not legal advice. OWL is a verification layer, not an AI lawyer. Human review of every output is required.",
+    "default_selected": "united-states-v-wurie-728-f-3d-1-1st-cir-5"
+  },
+  "citations": [
+    {
+      "id": "chimel-v-california-395-u-s-752-1969-0",
+      "span": "Chimel v. California, 395 U.S. 752 (1969)",
+      "raw": "Chimel v. California, 395 U.S. 752 (1969)",
+      "normalized": "Chimel v. California, 395 U.S. 752 (1969)",
+      "court": "Supreme Court of the United States",
+      "year": 1969,
+      "toa_group": "us_supreme_court",
+      "error": null,
+      "proposition": "A search incident to arrest is a specifically established exception, but it is not unlimited.",
+      "verification_path": [{ "source": "Cornell LII", "what": "Matched Chimel", "url": "https://www.law.cornell.edu/supremecourt/text/395/752" }],
+      "checks": [
+        { "id": "existence", "label": "Existence", "status": "pass", "detail": "Found in a public source.", "checked": "395 U.S. 752", "against": "Cornell LII" },
+        { "id": "citation_format", "label": "Citation format", "status": "pass", "detail": "Reporter cite is complete.", "checked": "Chimel v. California, 395 U.S. 752 (1969)", "against": "Bluebook-style volume / reporter / page" },
+        { "id": "holding_support", "label": "Holding support", "status": "needs-review", "detail": "Person must confirm the proposition.", "checked": "exception, but it is not unlimited", "against": "Opinion excerpt" },
+        { "id": "verification_path", "label": "Verification path", "status": "pass", "detail": "Public source returned a document.", "checked": "395 U.S. 752", "against": "Cornell LII" },
+        { "id": "human_review_flag", "label": "Human review flag", "status": "needs-review", "detail": "A person must review this result before filing." }
+      ]
+    },
+    {
+      "id": "riley-v-california-573-u-s-373-2014-4",
+      "span": "Riley v. California, 573 U.S. 373 (2014)",
+      "raw": "Riley v. California, 573 U.S. 373 (2014)",
+      "normalized": "Riley v. California, 573 U.S. 373 (2014)",
+      "court": "Supreme Court of the United States",
+      "year": 2014,
+      "toa_group": "us_supreme_court",
+      "error": null,
+      "proposition": "A warrant is required to search the digital contents of a cell phone incident to arrest.",
+      "verification_path": [{ "source": "Oyez", "what": "Matched Riley", "url": "https://www.oyez.org/cases/2013/13-132" }],
+      "checks": [
+        { "id": "existence", "label": "Existence", "status": "pass", "detail": "Found in a public source.", "checked": "573 U.S. 373", "against": "Oyez" },
+        { "id": "citation_format", "label": "Citation format", "status": "pass", "detail": "Reporter cite is complete.", "checked": "Riley v. California, 573 U.S. 373 (2014)", "against": "Bluebook-style volume / reporter / page" },
+        { "id": "holding_support", "label": "Holding support", "status": "needs-review", "detail": "Person must confirm the proposition.", "checked": "warrant is required", "against": "Opinion excerpt" },
+        { "id": "verification_path", "label": "Verification path", "status": "pass", "detail": "Public source returned a document.", "checked": "573 U.S. 373", "against": "Oyez" },
+        { "id": "human_review_flag", "label": "Human review flag", "status": "needs-review", "detail": "A person must review this result before filing." }
+      ]
+    },
+    {
+      "id": "united-states-v-wurie-728-f-3d-1-1st-cir-5",
+      "span": "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)",
+      "raw": "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)",
+      "normalized": "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)",
+      "court": "1st Cir.",
+      "year": 2013,
+      "toa_group": "courts_of_appeals",
+      "error": "not_found",
+      "errorMessage": "Citation not found in the public sources queried this run.",
+      "proposition": "The First Circuit reached the same conclusion for a flip phone seized at arrest.",
+      "verification_path": [{ "source": "CourtListener", "what": "No record returned", "url": "https://www.courtlistener.com/c/F.3d/728/1/" }],
+      "checks": [
+        { "id": "existence", "label": "Existence", "status": "fail", "detail": "No matching decision in the public sources that returned data this run.", "checked": "728 F.3d 1", "against": "Cornell LII, Oyez, CourtListener, Justia, GovInfo, supremecourt.gov" },
+        { "id": "citation_format", "label": "Citation format", "status": "pass", "detail": "Reporter cite is complete.", "checked": "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)", "against": "Bluebook-style volume / reporter / page" },
+        { "id": "holding_support", "label": "Holding support", "status": "fail", "detail": "No opinion was found, so the surrounding proposition is unsupported by this cite.", "checked": "flip phone seized at arrest", "against": "No retrieved holding" },
+        { "id": "verification_path", "label": "Verification path", "status": "fail", "detail": "No record returned.", "checked": "728 F.3d 1", "against": "six public source families" },
+        { "id": "human_review_flag", "label": "Human review flag", "status": "needs-review", "detail": "A citation that does not exist must not be filed." }
+      ]
+    },
+    {
+      "id": "fed-r-crim-p-41-7",
+      "span": "Fed. R. Crim. P. 41",
+      "raw": "Fed. R. Crim. P. 41",
+      "normalized": "Fed. R. Crim. P. 41",
+      "court": "Federal Rules",
+      "year": null,
+      "toa_group": "statutes_rules",
+      "error": null,
+      "proposition": "Warrant practice in criminal cases also implicates Fed. R. Crim. P. 41.",
+      "verification_path": [],
+      "checks": [
+        { "id": "existence", "label": "Existence", "status": "pass", "detail": "Found in a public source.", "checked": "Fed. R. Crim. P. 41", "against": "Cornell LII" },
+        { "id": "citation_format", "label": "Citation format", "status": "pass", "detail": "Rule cite is complete.", "checked": "Fed. R. Crim. P. 41", "against": "FRCP" },
+        { "id": "holding_support", "label": "Holding support", "status": "needs-review", "detail": "Person must confirm the proposition.", "checked": "Warrant practice", "against": "Rule text" },
+        { "id": "verification_path", "label": "Verification path", "status": "pass", "detail": "Public source returned a document.", "checked": "Fed. R. Crim. P. 41", "against": "Cornell LII" },
+        { "id": "human_review_flag", "label": "Human review flag", "status": "needs-review", "detail": "A person must review this result before filing." }
+      ]
+    }
+  ],
+  "toa": [
+    {
+      "id": "us_supreme_court",
+      "label": "U.S. Supreme Court",
+      "entries": [
+        { "citationId": "chimel-v-california-395-u-s-752-1969-0", "cite": "Chimel v. California, 395 U.S. 752 (1969)", "court": "Supreme Court of the United States", "year": 1969, "overall": "needs-review" },
+        { "citationId": "riley-v-california-573-u-s-373-2014-4", "cite": "Riley v. California, 573 U.S. 373 (2014)", "court": "Supreme Court of the United States", "year": 2014, "overall": "needs-review" }
+      ]
+    },
+    {
+      "id": "courts_of_appeals",
+      "label": "Courts of Appeals",
+      "entries": [
+        { "citationId": "united-states-v-wurie-728-f-3d-1-1st-cir-5", "cite": "United States v. Wurie, 728 F.3d 1 (1st Cir. 2013)", "court": "1st Cir.", "year": 2013, "overall": "fail" }
+      ]
+    },
+    {
+      "id": "statutes_rules",
+      "label": "Statutes / Rules",
+      "entries": [
+        { "citationId": "fed-r-crim-p-41-7", "cite": "Fed. R. Crim. P. 41", "court": "Federal Rules", "year": null, "overall": "needs-review" }
+      ]
+    }
+  ],
+  "sources_queried": [
+    { "id": "cornell_lii", "name": "Cornell LII", "status": "ok" },
+    { "id": "oyez", "name": "Oyez", "status": "ok" },
+    { "id": "courtlistener", "name": "CourtListener", "status": "no_match" },
+    { "id": "justia", "name": "Justia", "status": "ok" },
+    { "id": "govinfo", "name": "GovInfo", "status": "no_match" },
+    { "id": "supremecourt_gov", "name": "supremecourt.gov", "status": "ok" }
+  ]
+}

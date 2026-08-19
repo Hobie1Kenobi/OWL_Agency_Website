@@ -5,11 +5,15 @@ from __future__ import annotations
 import re
 from typing import Any
 
+# Capitalized party names only. A looser class that allowed "." and IGNORECASE
+# swallowed the preceding sentence ("to arrest is... Chimel v. California").
+_PARTY = (
+    r"(?:In re\s+)?[A-Z][A-Za-z0-9'&.-]*(?:\s+(?:[A-Z][A-Za-z0-9'&.-]*|of|the|and|for|a|an))*"
+)
 CASE_FULL_RE = re.compile(
-    r"((?:In re\s+)?[A-Za-z][A-Za-z0-9 .,'&-]{0,80}?\s+v\.\s+[A-Za-z][A-Za-z0-9 .,'&-]{0,80}?),\s+"
-    r"(\d+)\s+(U\.S\.|S\.\s*Ct\.|F\.(?:2d|3d|4th)|F\.\s*Supp\.(?:\s*[23]d)?)\s+(\d+)"
+    r"(" + _PARTY + r"\s+v\.\s+" + _PARTY + r"),\s+"
+    r"(\d+)\s+((?i:U\.S\.|S\.\s*Ct\.|F\.(?:2d|3d|4th)|F\.\s*Supp\.(?:\s*[23]d)?))\s+(\d+)"
     r"(?:\s+\((?:([^)]+?)\s+)?(\d{4})\))?",
-    re.IGNORECASE,
 )
 
 REPORTER_RE = re.compile(
@@ -80,6 +84,15 @@ def extract_proposition(text: str, span: str) -> str | None:
     idx = text.find(span)
     if idx == -1:
         return None
+    before = text[:idx]
+    stripped_before = before.rstrip()
+    if stripped_before.endswith("."):
+        period = text.rfind(". ", 0, max(len(stripped_before) - 1, 0))
+        newline = text.rfind("\n", 0, len(stripped_before))
+        start = max(period, newline)
+        start = 0 if start < 0 else start + (2 if period == start else 1)
+        sentence = text[start : len(stripped_before)].strip().strip(".")
+        return re.sub(r"\s+", " ", sentence)[:500] or None
     start = text.rfind("\n", 0, idx)
     period = text.rfind(". ", 0, idx)
     start = max(start, period)
